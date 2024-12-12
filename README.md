@@ -1,0 +1,2 @@
+# Database_Project_Maven
+通过maven创建javaweb项目，包括添加了maven-archetype-webapp，以及配置了tomcat（点击Edit Configuration部署tomcat，再点击Deployment里的加号进行部署）
