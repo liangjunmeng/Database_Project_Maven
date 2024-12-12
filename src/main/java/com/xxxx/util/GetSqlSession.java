@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
-
+/*获得会话*/
 public class GetSqlSession {
 
     public static SqlSession createSqlSession(){
