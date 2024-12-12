@@ -12,7 +12,7 @@ public class Test {
         SqlSession session = GetSqlSession.createSqlSession();
         UserMapper userMapper = session.getMapper(UserMapper.class);
         User user = userMapper.queryuserByName("admin");
-        System.out.println(user);
+        System.out.println(user.getPassword());
 
     }
 
