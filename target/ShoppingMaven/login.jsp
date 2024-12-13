@@ -183,11 +183,11 @@
     <form action="login" method="post" id="loginform">
         <div class="input-group">
             <label for="username">Username</label>
-            <input type="text" id="username" name="username">
+            <input type="text" id="username" name="username" values="${messageModel.getObject().getUsername()}">
         </div>
         <div class="input-group">
             <label for="password">Password</label>
-            <input type="password" id="password" name="password">
+            <input type="password" id="password" name="password" values="${messageModel.getObject().getPassword()}">
         </div>
         <button type="submit" id="loginbtn">Login In</button>
         <div class="register">
@@ -222,8 +222,8 @@
     }
 
     $("#loginbtn").click(function (event) {
-        // 阻止表单提交
-        event.preventDefault();  // 阻止表单的默认提交行为
+        // 阻止表单的默认提交行为
+        event.preventDefault();
         var uname = $("#username").val();
         var upwd = $("#password").val();
 

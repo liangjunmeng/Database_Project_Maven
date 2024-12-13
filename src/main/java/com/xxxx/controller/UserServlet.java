@@ -22,9 +22,11 @@ public class UserServlet extends HttpServlet {
         MessageModel messageModel = userService.userLogin(uname,upwd);
 
         if(messageModel.getCode() == 1){
+            //将消息模型中的用户信息设置到session作用域中，重定向跳转到首页
             request.getSession().setAttribute("user",messageModel.getObject());
             response.sendRedirect("homepages/home.jsp");
         }else{
+            //将消息模型对象设置到request作用域中，请求转发跳转到login.jsp
             request.setAttribute("messageModel",messageModel);
             request.getRequestDispatcher("login.jsp").forward(request,response);
         }
