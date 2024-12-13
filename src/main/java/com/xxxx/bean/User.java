@@ -16,4 +16,16 @@ public class User {
     public String getPassword() {
         return password;
     }
+
+    public void setUserid(Integer userid) {
+        this.userid = userid;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

@@ -180,7 +180,7 @@
 
 <div class="login-container">
     <div class="login-title">Login</div>
-    <form action="/login" method="post" id="loginform">
+    <form action="login" method="post" id="loginform">
         <div class="input-group">
             <label for="username">Username</label>
             <input type="text" id="username" name="username">

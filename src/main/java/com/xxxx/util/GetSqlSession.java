@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
-/*获得会话*/
+/*连接数据库，获得会话*/
 public class GetSqlSession {
 
     public static SqlSession createSqlSession(){
@@ -26,7 +26,7 @@ public class GetSqlSession {
             return null;
         }
     }
-
+    /*测试会话是否获得成功*/
     public static void main(String[] args) {
         System.out.println(createSqlSession());
     }

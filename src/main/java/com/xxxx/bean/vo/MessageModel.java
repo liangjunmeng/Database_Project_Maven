@@ -5,7 +5,7 @@ package com.xxxx.bean.vo;
 * 回显数据（Object对象）
 * */
 public class MessageModel {
-    private Integer code;//状态码
+    private Integer code = 1;//状态码
     private String msg = "成功！";//提示信息
     private Object object;//回显对象
 
