@@ -23,12 +23,17 @@
         WHERE username = #{username}
     </select>
 
-    <!-- 插入用户
-    <insert id="insertUser" parameterType="User">
-        INSERT INTO users (user_name, email)
-        VALUES (#{userName}, #{email})
+    <!-- 插入用户 -->
+    <insert id="insertUser">
+        INSERT INTO UserInfo (userid, username, password)
+        VALUES (#{userid}, #{username}, #{password})
     </insert>
-    -->
+
+    <!-- 查找最大userid，便于给新用户分配id -->
+    <insert id="maxUserid">
+        select max(userid) from UserInfo
+    </insert>
+
     <!-- 更新用户
     <update id="updateUser" parameterType="User">
         UPDATE users

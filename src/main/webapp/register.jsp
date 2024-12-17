@@ -184,7 +184,7 @@
 
 <div class="login-container">
     <div class="login-title">Register</div>
-    <form action="/register" method="post" id="signform">
+    <form action="register" method="post" id="signform">
         <div class="input-group">
             <label for="username">Username</label>
             <input type="text" id="username" name="username" required>

@@ -9,7 +9,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 /*用于获得用户请求并返回响应，其中获得的请求交给service层处理*/
 @WebServlet("/login")
-public class UserServlet extends HttpServlet {
+public class UserLoginServlet extends HttpServlet {
 
 
     private UserService userService = new UserService();
