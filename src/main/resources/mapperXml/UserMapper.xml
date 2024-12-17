@@ -24,9 +24,9 @@
     </select>
 
     <!-- 插入用户
-    <insert id="insertUser" parameterType="User">
-        INSERT INTO users (user_name, email)
-        VALUES (#{userName}, #{email})
+    <insert id="insertUser" parameterType="String">
+        INSERT INTO users (username, password)
+        VALUES (#{username}, #{password})
     </insert>
     -->
     <!-- 更新用户
