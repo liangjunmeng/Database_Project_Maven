@@ -83,7 +83,7 @@ public class UserService {
             }
             u.setUserid(userid);
             userMapper.insertUser(u);
-            session.commit(); //提交事务
+            session.commit(); //提交事务，让数据库得以更新
 
         }
 
