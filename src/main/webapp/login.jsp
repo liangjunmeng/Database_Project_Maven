@@ -183,11 +183,11 @@
     <form action="login" method="post" id="loginform">
         <div class="input-group">
             <label for="username">Username</label>
-            <input type="text" id="username" name="username" values="${messageModel.getObject().getUsername()}">
+            <input type="text" id="username" name="username" value="${messageModel.getObject().getUsername()}">
         </div>
         <div class="input-group">
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" values="${messageModel.getObject().getPassword()}">
+            <input type="password" id="password" name="password" value="${messageModel.getObject().getPassword()}">
         </div>
         <button type="submit" id="loginbtn">Login In</button>
         <div class="register">
