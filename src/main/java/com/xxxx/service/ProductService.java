@@ -13,7 +13,11 @@ public class ProductService {
         MessageModel messageModel = new MessageModel();
         Product p = new Product();
         p.setProductName(pname);
-        p.setProductAmount(Integer.valueOf(pamount));//将字符串转化为数字，因为前端是接收字符串
+        p.setProductAmount(Integer.valueOf(pamount));
+        /*
+        将字符串转化为数字，因为前端ajax将这些数据转换为var，即字符串形式再传给后端，
+        因为前端需要通过检验字符串是否为空判断用户输入的合法性
+        */
         p.setProductPrice(Integer.valueOf(pprice));
         messageModel.setObject(p);
 
