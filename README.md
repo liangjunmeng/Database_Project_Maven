@@ -26,3 +26,8 @@ webapp：前端层，放置各种与前端代码相关的文件，如html、jsp�
 注意事项：
 1.service层在对数据库的更新（修改、删除和插入）操作后要及时将事务提交（session.commit()），否则数据库数据无法更新，更有伸着会导致项目和ssms崩溃！
 2.注意拼写问题，如html中input里的value不要写成values，后端@Param不要写成@param
+3.关于里面的路径说明：
+“./login”表示上级目录加上/login，如/maven/web/register.jsp里如果写了
+跳转到“./login”,那就代表跳转到“/maven/web/login”;
+”../login“表示上上级目录加上/login，如“/maven/login”，以此类推...
+如果只是单纯地写上“login”，等同于“./login”

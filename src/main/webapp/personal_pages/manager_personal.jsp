@@ -76,8 +76,8 @@
 <body>
 <div class="modules-container">
     <div class="row-module">
-        <a href="../manager_personal/product_management.jsp" class="module">商品管理</a>
-        <a href="../manager_personal/permission_management.jsp" class="module">权限管理</a>
+        <a href="../managements_pages/product_management.jsp" class="module">商品管理</a>
+        <a href="../managements_pages/permission_management.jsp" class="module">权限管理</a>
     </div>
     <a href="../settings_pages/settings.jsp" class="module settings-module">设置</a>
 </div>

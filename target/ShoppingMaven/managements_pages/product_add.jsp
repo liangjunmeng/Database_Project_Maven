@@ -1,10 +1,12 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<!DOCTYPE html>
+<%--
+  用于添加商品，包括填写商品名字、数量和单价
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Page</title>
+    <title>添加商品</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -30,7 +32,7 @@
             }
         }
 
-        .login-container {
+        .product-form-container {
             background-color: rgba(255, 255, 255, 0.8);
             padding: 30px;
             border-radius: 8px;
@@ -43,7 +45,7 @@
             text-align: center;
         }
 
-        .login-title {
+        .product-form-title {
             font-size: 30px;
             color: #333;
             margin-bottom: 20px;
@@ -71,7 +73,7 @@
             font-size: 16px;
         }
 
-        .login-container button {
+        .product-form-container button {
             width: 100%;
             padding: 15px;
             border: none;
@@ -84,25 +86,8 @@
             animation: gradientButton 6s ease infinite;
         }
 
-        .login-container button:hover {
+        .product-form-container button:hover {
             animation: gradientButtonHover 0.5s ease forwards;
-        }
-
-        .register {
-            font-size: 16px;
-            text-align: center;
-            margin-top: 20px;
-            color: #337ab7;
-            cursor: pointer;
-        }
-
-        .registerReal {
-            font-size: 16px;
-            text-align: center;
-            margin-top: 20px;
-            color: #337ab7;
-            cursor: pointer;
-            text-decoration: underline;
         }
 
         @keyframes gradientButton {
@@ -127,15 +112,15 @@
         }
 
         /* 弹窗遮罩层 */
-        #overlay {
+        .modal-overlay {
+            display: none;  /* 初始不显示 */
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
-            display: none; /* 初始隐藏 */
-            z-index: 999; /* 层级高于弹窗 */
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);  /* 半透明背景 */
+            z-index: 999;  /* 遮罩层置于内容上方 */
         }
 
         /* 弹窗样式 */
@@ -150,7 +135,7 @@
             border-radius: 8px;
             border: 1px solid rgba(0, 0, 0, 0.2);  /* 边缘 */
             box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
-            z-index: 1000;
+            z-index: 1000;  /* 弹窗置于遮罩层上方 */
             max-width: 250px; /* 弹窗最大宽度 */
             width: 60%; /* 宽度为80% */
         }
@@ -178,27 +163,27 @@
     </style>
 </head>
 <body>
-
-<!-- 遮罩层 -->
-<div id="overlay"></div>
-
-<div class="login-container">
-    <div class="login-title">Register</div>
-    <form id="signform">
+<div class="product-form-container">
+    <div class="product-form-title">商品详情</div>
+    <form id="addingfrom">
         <div class="input-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username">
+            <label for="productName">商品名:</label>
+            <input type="text" id="productName" name="productName">
         </div>
         <div class="input-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password">
+            <label for="productQuantity">商品数量:</label>
+            <input type="number" id="productQuantity" name="productQuantity">
         </div>
-        <button type="button" id="signbtn">Sign Up</button>
-        <div class="register">
-            Already have an account? <a href="login.jsp" class="registerReal">Back to login</a>
+        <div class="input-group">
+            <label for="productPrice">商品单价:</label>
+            <input type="text" id="productPrice" name="productPrice">
         </div>
+        <button type="button" id="addbtn">添加</button>
     </form>
 </div>
+
+<!-- 弹窗遮罩层 -->
+<div id="modalOverlay" class="modal-overlay"></div>
 
 <!-- 弹窗 -->
 <div id="errorModal" class="modal">
@@ -206,66 +191,75 @@
     <button class="close" onclick="closeModal()">&times;</button>  <!-- HTML 实体符号 -->
 </div>
 
+</body>
 <script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript">
+
     // 显示弹窗
     function showModal(message) {
         $("#errorMessage").text(message);
         $("#errorModal").show();  // 显示弹窗
-        $("#overlay").show();  // 显示遮罩层
+        $("#modalOverlay").show();  // 显示遮罩层
     }
 
     // 关闭弹窗
     function closeModal() {
         $("#errorModal").hide();  // 隐藏弹窗
-        $("#overlay").hide();  // 隐藏遮罩层
+        $("#modalOverlay").hide();  // 隐藏遮罩层
     }
 
-    $("#signbtn").click(function (event) {
-        // 阻止表单提交
-        event.preventDefault();  // 阻止表单的默认提交行为
-        var uname = $("#username").val();
-        var upwd = $("#password").val();
-
+    $("#addbtn").click(function (event) {
+        // 阻止表单的默认提交行为
+        event.preventDefault();
+        var pname = $("#productName").val();
+        var pamount = $("#productQuantity").val();
+        var pprice = $("#productPrice").val();
         // 判断用户名是否为空
-        if (isEmpty(uname)) {
-            showModal("Username can't be empty");
+        if (isEmpty(pname)) {
+            showModal("商品名不能为空");
             return;  // 结束函数，避免继续执行提交
         }
 
         // 判断密码是否为空
-        if (isEmpty(upwd)) {
-            showModal("Please enter a password.");
+        if (isEmpty(pamount)) {
+            showModal("商品数量不能为空");
+            return;  // 结束函数，避免继续执行提交
+        }
+
+        // 判断密码是否为空
+        if (isEmpty(pprice)) {
+            showModal("商品单价不为空");
             return;  // 结束函数，避免继续执行提交
         }
 
         // 使用 Ajax 提交表单数据到 Servlet
         $.ajax({
-            url: "register", // Servlet 的 URL
+            url: "../product_adding", // Servlet 的 URL
             type: "POST",
             data: {
-                username: uname,
-                password: upwd
+                productName: pname,
+                productAmount: pamount,
+                productPrice: pprice
             },
             dataType: "json", // 指定返回数据的类型为 JSON
             success: function (response) {
                 // 根据服务器返回的数据进行处理
                 if (response.success) {
-                    // 注册成功，弹窗显示成功消息
+                    // 添加成功，弹窗显示成功消息
                     showModal(response.message);
 
                     // 1.5秒后重定向到首页
                     setTimeout(function () {
-                        window.location.href = "homepages/home.jsp";
+                        window.location.href = "product_management.jsp";
                     }, 1500);
                 } else {
-                    // 注册失败，弹窗显示错误消息
+                    // 添加失败，弹窗显示错误消息
                     showModal(response.message);
                 }
             },
             error: function () {
                 // 网络或服务器错误
-                showModal("An error occurred. Please try again.");
+                showModal("发生了错误，请稍后再尝试！");
             }
         });
     });
@@ -278,6 +272,4 @@
         return false;
     }
 </script>
-
-</body>
 </html>

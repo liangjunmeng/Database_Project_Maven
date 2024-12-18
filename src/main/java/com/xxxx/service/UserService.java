@@ -7,7 +7,6 @@ import com.xxxx.util.GetSqlSession;
 import com.xxxx.util.StringUtil;
 import org.apache.ibatis.session.SqlSession;
 
-import java.util.List;
 
 /*
 * 业务逻辑,判断登录时用户是否存在
@@ -23,7 +22,7 @@ public class UserService {
 
         if(StringUtil.isEmpty(uname) || StringUtil.isEmpty(upwd)){
             messageModel.setCode(0);
-            messageModel.setMsg("Username or password can't be empty.");
+            messageModel.setMsg("Username or password can't be empty！");
             return messageModel;
         }
 
@@ -63,7 +62,7 @@ public class UserService {
 
         if(StringUtil.isEmpty(uname) || StringUtil.isEmpty(upwd)){
             messageModel.setCode(0);
-            messageModel.setMsg("Username or password can't be empty.");
+            messageModel.setMsg("Username or password can't be empty！");
             return messageModel;
         }
 

@@ -79,8 +79,8 @@
 <body>
 <div class="modules-container">
     <div class="row-module">
-        <a href="../user_personal/my_orders.jsp" class="module">我的订单</a>
-        <a href="../user_personal/my_wallet.jsp" class="module">我的钱包</a>
+        <a href="../users_manage_pages/my_orders.jsp" class="module">我的订单</a>
+        <a href="../users_manage_pages/my_wallets.jsp" class="module">我的钱包</a>
     </div>
     <a href="../settings_pages/settings.jsp" class="module settings-module">设置</a>
 </div>

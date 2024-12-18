@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xxxx.mapper.ProductMapper">
+
+    <!-- 查询所有商品
+    <select id="selectAll" resultType="com.xxxx.bean.Product">
+        SELECT *
+        FROM ProductInfo
+    </select>
+    -->
+    <!-- 查询商品数量 -->
+    <select id="selectAmount" resultType="int">
+        SELECT count(*)
+        FROM ProductInfo
+    </select>
+
+    <!-- 根据 productId 查询商品 -->
+    <select id="selectById" parameterType="int" resultType="com.xxxx.bean.Product">
+        SELECT *
+        FROM ProductInfo
+        WHERE productId = #{productId}
+    </select>
+
+    <!-- 根据 productName 查询商品 -->
+    <select id="queryProductByName" parameterType="String" resultType="com.xxxx.bean.Product">
+        SELECT *
+        FROM ProductInfo
+        WHERE productName = #{productName}
+    </select>
+
+    <!-- 插入商品 -->
+    <insert id="insertProduct" parameterType="com.xxxx.bean.Product">
+        INSERT INTO ProductInfo (productId, productName, productPrice, productAmount)
+        VALUES (#{productId}, #{productName}, #{productPrice}, #{productAmount})
+    </insert>
+
+    <!-- 查找最大productId，便于给新商品分配id -->
+    <select id="maxProductId">
+        select max(productId) from ProductInfo
+    </select>
+
+    <!-- 更新商品
+    <update id="updateUser" parameterType="User">
+        UPDATE users
+        SET user_name = #{userName}, email = #{email}
+        WHERE id = #{id}
+    </update>
+    -->
+    <!-- 删除商品
+    <delete id="deleteUser" parameterType="int">
+        DELETE FROM users WHERE id = #{id}
+    </delete>
+    -->
+</mapper>

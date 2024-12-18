@@ -22,6 +22,6 @@
     <a href="../personal_pages/user_personal.jsp">我的</a>
 </div>
 <h1>欢迎来到主页</h1>
-<p>这里是用户主页内容。</p>
+<p>这里是用户主页内容，浏览商品并采购商品</p>
 </body>
 </html>

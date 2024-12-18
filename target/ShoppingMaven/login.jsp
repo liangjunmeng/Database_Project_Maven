@@ -80,7 +80,7 @@
             cursor: pointer;
             font-size: 18px;
             background-size: 200% 200%;
-            animation: gradientButton 3s ease infinite;
+            animation: gradientButton 6s ease infinite;
         }
 
         .login-container button:hover {

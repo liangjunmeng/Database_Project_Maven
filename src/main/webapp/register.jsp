@@ -81,7 +81,7 @@
             cursor: pointer;
             font-size: 18px;
             background-size: 200% 200%;
-            animation: gradientButton 3s ease infinite;
+            animation: gradientButton 6s ease infinite;
         }
 
         .login-container button:hover {
@@ -251,7 +251,7 @@
             success: function (response) {
                 // 根据服务器返回的数据进行处理
                 if (response.success) {
-                    // 登录成功，弹窗显示成功消息
+                    // 注册成功，弹窗显示成功消息
                     showModal(response.message);
 
                     // 1.5秒后重定向到首页
@@ -259,7 +259,7 @@
                         window.location.href = "homepages/home.jsp";
                     }, 1500);
                 } else {
-                    // 登录失败，弹窗显示错误消息
+                    // 注册失败，弹窗显示错误消息
                     showModal(response.message);
                 }
             },

@@ -1,7 +1,7 @@
 package com.xxxx.controller;
 
 import com.xxxx.bean.vo.MessageModel;
-import com.xxxx.service.UserService;
+import com.xxxx.service.ProductService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -9,18 +9,19 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/register")
-public class UserRegisterServlet extends HttpServlet {
-    private UserService userService = new UserService();
+@WebServlet("/product_adding")
+public class ProductAddingServlet extends HttpServlet {
+    private ProductService productService = new ProductService();
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 获取请求参数
-        String uname = request.getParameter("username");
-        String upwd = request.getParameter("password");
+        String pname = request.getParameter("productName");
+        String pamount = request.getParameter("productAmount");
+        String pprice = request.getParameter("productPrice");
 
         // 调用业务层方法验证用户
-        MessageModel messageModel = userService.userRegister(uname, upwd);
+        MessageModel messageModel = productService.productAdding(pname,pamount,pprice);
 
         // 设置响应内容类型为 JSON
         response.setContentType("application/json");
@@ -30,8 +31,8 @@ public class UserRegisterServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         if (messageModel.getCode() == 1) {
-            // 注册成功：将用户信息设置到 session
-            request.getSession().setAttribute("user", messageModel.getObject());
+            // 登录成功：将用户信息设置到 session
+            request.getSession().setAttribute("product", messageModel.getObject());
 
             // 返回 JSON 数据
             out.write("{\"success\": true, \"message\": \"" + messageModel.getMsg() + "\"}");
@@ -42,3 +43,4 @@ public class UserRegisterServlet extends HttpServlet {
         out.flush();
     }
 }
+

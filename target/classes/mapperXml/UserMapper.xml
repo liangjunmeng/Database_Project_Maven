@@ -3,11 +3,12 @@
 
 <mapper namespace="com.xxxx.mapper.UserMapper">
 
-    <!-- 查询所有用户 -->
+    <!-- 查询所有用户
     <select id="selectAll" resultType="com.xxxx.bean.User">
         SELECT *
         FROM UserInfo
     </select>
+    -->
 
     <!-- 查询用户数量 -->
     <select id="selectAmount" resultType="int">
