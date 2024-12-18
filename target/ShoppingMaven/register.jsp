@@ -187,11 +187,11 @@
     <form id="signform">
         <div class="input-group">
             <label for="username">Username</label>
-            <input type="text" id="username" name="username" required>
+            <input type="text" id="username" name="username">
         </div>
         <div class="input-group">
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="password" name="password">
         </div>
         <button type="button" id="signbtn">Sign Up</button>
         <div class="register">
