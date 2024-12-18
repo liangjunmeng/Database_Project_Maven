@@ -1,9 +1,5 @@
 <%--
-  Created by IntelliJ IDEA.
-  User: CHINA
-  Date: 2024/12/18
-  Time: 19:02
-  To change this template use File | Settings | File Templates.
+  钱包页面（仅限用户）
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
