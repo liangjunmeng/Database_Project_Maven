@@ -79,10 +79,10 @@
 <body>
 <div class="modules-container">
     <div class="row-module">
-        <a href="myOrders.jsp" class="module">My Orders</a>
-        <a href="myWallet.jsp" class="module">My Wallet</a>
+        <a href="../user_personal/my_orders.jsp" class="module">我的订单</a>
+        <a href="../user_personal/my_wallet.jsp" class="module">我的钱包</a>
     </div>
-    <a href="settings.jsp" class="module settings-module">Setting</a>
+    <a href="../settings_pages/settings.jsp" class="module settings-module">设置</a>
 </div>
 </body>
 </html>

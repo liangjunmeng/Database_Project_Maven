@@ -1,3 +1,6 @@
+<%--
+  管理员首页
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -19,6 +22,6 @@
     <a href="../personal_pages/manager_personal.jsp">我的</a>
 </div>
 <h1>欢迎来到主页</h1>
-<p>这里是主页内容。</p>
+<p>这里是管理员主页内容。</p>
 </body>
 </html>
