@@ -1,7 +1,7 @@
 # Database_Project_Maven
 通过maven创建javaweb项目，包括添加了maven-archetype-webapp，以及配置了tomcat（点击Edit Configuration部署tomcat，再点击Deployment里的加号进行部署）
 项目思路：
-（代办）
+账号分为管理员账号（userid为1）和用户账号（userid不为1），管理员和用户登录后进入的首页不同，管理员的首页可以对商品进行增删改查而用户不可以。
 
 代码思路：
 ①
@@ -20,6 +20,7 @@ test层：测试层，用于测试和调试项目
 util层：工具层，放置各种通用类和方法
 resources：配置层，主要用于各种配置，如数据库连接、映射等的配置
 webapp：前端层，放置各种与前端代码相关的文件，如html、jsp、js等
+
 
 
 注意事项：

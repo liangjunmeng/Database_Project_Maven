@@ -35,12 +35,17 @@ public class UserLoginServlet extends HttpServlet {
         if (messageModel.getCode() == 1) {
             // 登录成功：将用户信息设置到 session
             request.getSession().setAttribute("user", messageModel.getObject());
-
             // 返回 JSON 数据
-            out.write("{\"success\": true, \"message\": \"" + messageModel.getMsg() + "\"}");
-        } else {
+            out.write("{\"success\": true, \"message\": \"" + messageModel.getMsg() + "\",\"isManager\": false}");
+        }
+        else if(messageModel.getCode() == 2){
+            // 登录成功：将用户信息设置到 session
+            request.getSession().setAttribute("user", messageModel.getObject());
+            // 返回 JSON 数据
+            out.write("{\"success\": true, \"message\": \"" + messageModel.getMsg() + "\",\"isManager\": true}");
+        }else {
             // 登录失败：返回错误信息
-            out.write("{\"success\": false, \"message\": \"" + messageModel.getMsg() + "\"}");
+            out.write("{\"success\": false, \"message\": \"" + messageModel.getMsg() + "\",\"isManager\": false}");
         }
         out.flush();
     }

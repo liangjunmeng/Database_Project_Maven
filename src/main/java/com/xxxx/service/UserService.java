@@ -44,6 +44,11 @@ public class UserService {
             return messageModel;
         }
 
+        //判断是否为管理员登录，若id为1则是管理员
+        if(user.getUserid() == 1){
+            messageModel.setCode(2);
+        }
+
         messageModel.setObject(user);
 
         return messageModel;

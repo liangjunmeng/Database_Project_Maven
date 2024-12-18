@@ -256,11 +256,18 @@
                 if (response.success) {
                     // 登录成功，弹窗显示成功消息
                     showModal(response.message);
-
-                    // 1.5秒后重定向到首页
-                    setTimeout(function () {
-                        window.location.href = "homepages/home.jsp";
-                    }, 1500);
+                    //判断是否为管理员
+                    if(!response.isManager) {
+                        // 1.5秒后重定向到首页
+                        setTimeout(function () {
+                            window.location.href = "homepages/home.jsp";
+                        }, 1500);
+                    }
+                    else{
+                        setTimeout(function () {
+                            window.location.href = "homepages/manager_home.jsp";
+                        }, 1500);
+                    }
                 } else {
                     // 登录失败，弹窗显示错误消息
                     showModal(response.message);

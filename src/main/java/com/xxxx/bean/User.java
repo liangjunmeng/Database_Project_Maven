@@ -1,11 +1,11 @@
 package com.xxxx.bean;
 /*用户实体类*/
 public class User {
-    private Integer userid; //用户编号
+    private int userid; //用户编号
     private String username; //用户名
     private String password; //用户密码
 
-    public Integer getUserid() {
+    public int getUserid() {
         return userid;
     }
 
@@ -17,7 +17,7 @@ public class User {
         return password;
     }
 
-    public void setUserid(Integer userid) {
+    public void setUserid(int userid) {
         this.userid = userid;
     }
 
