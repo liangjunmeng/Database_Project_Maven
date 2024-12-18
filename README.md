@@ -1,7 +1,9 @@
 # Database_Project_Maven
 通过maven创建javaweb项目，包括添加了maven-archetype-webapp，以及配置了tomcat（点击Edit Configuration部署tomcat，再点击Deployment里的加号进行部署）
+项目思路：
+（代办）
 
-该项目思路：
+代码思路：
 ①
 前端使用Ajax提交方式提交至Servlet处理请求和响应（Json响应），后端处理完后返回响应至前端，实现消息结果提示和页面跳转。
 ②
