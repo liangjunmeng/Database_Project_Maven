@@ -3,9 +3,15 @@
 
 <mapper namespace="com.xxxx.mapper.UserMapper">
 
-    <!-- 查询所有用户SSsS -->
-    <select id="selectAll" parameterType="String" resultType="com.xxxx.bean.User">
-        SELECT userid, username, password
+    <!-- 查询所有用户 -->
+    <select id="selectAll" resultType="com.xxxx.bean.User">
+        SELECT *
+        FROM UserInfo
+    </select>
+
+    <!-- 查询用户数量 -->
+    <select id="selectAmount" resultType="int">
+        SELECT count(*)
         FROM UserInfo
     </select>
 
@@ -24,15 +30,15 @@
     </select>
 
     <!-- 插入用户 -->
-    <insert id="insertUser">
+    <insert id="insertUser" parameterType="com.xxxx.bean.User">
         INSERT INTO UserInfo (userid, username, password)
         VALUES (#{userid}, #{username}, #{password})
     </insert>
 
     <!-- 查找最大userid，便于给新用户分配id -->
-    <insert id="maxUserid">
+    <select id="maxUserid">
         select max(userid) from UserInfo
-    </insert>
+    </select>
 
     <!-- 更新用户
     <update id="updateUser" parameterType="User">

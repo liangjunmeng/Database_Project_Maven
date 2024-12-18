@@ -24,7 +24,7 @@ public class UserRegisterServlet extends HttpServlet {
             request.getSession().setAttribute("user",messageModel.getObject());
             response.sendRedirect("homepages/home.jsp");
         }else{
-            //将消息模型对象设置到request作用域中，请求转发跳转到login.jsp
+            //将消息模型对象设置到request作用域中，请求转发跳转到register.jsp
             request.setAttribute("messageModel",messageModel);
             request.getRequestDispatcher("register.jsp").forward(request,response);
         }

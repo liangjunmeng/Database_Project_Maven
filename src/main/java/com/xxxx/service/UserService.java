@@ -7,6 +7,8 @@ import com.xxxx.util.GetSqlSession;
 import com.xxxx.util.StringUtil;
 import org.apache.ibatis.session.SqlSession;
 
+import java.util.List;
+
 /*
 * 业务逻辑,判断登录时用户是否存在
 */
@@ -42,7 +44,6 @@ public class UserService {
             return messageModel;
         }
 
-
         messageModel.setObject(user);
 
         return messageModel;
@@ -73,13 +74,20 @@ public class UserService {
         }
 
         else{
-            int userid = userMapper.maxUserid() + 1;
-            userMapper.insertUser(userid, uname, upwd);
+            int userid;
+            if(userMapper.selectAmount() == 0){
+                userid = 1;
+            }
+            else{
+                userid = userMapper.maxUserid() + 1;
+            }
+            u.setUserid(userid);
+            userMapper.insertUser(u);
+            session.commit(); //提交事务
+
         }
 
-
         messageModel.setObject(user);
-
         return messageModel;
     }
 

@@ -11,9 +11,14 @@ public class Test {
 
         SqlSession session = GetSqlSession.createSqlSession();
         UserMapper userMapper = session.getMapper(UserMapper.class);
-        User user = userMapper.queryuserByName("admin");
-        System.out.println(user.getPassword());
-
+        User user = new User();
+        user.setUserid(2);
+        user.setUsername("user1");
+        user.setPassword("123456");
+        userMapper.insertUser(user);
+        session.commit();
+        System.out.println(userMapper.selectAmount());
+        session.close();
     }
 
 }
