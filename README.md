@@ -1,2 +1,10 @@
 # Database_Project_Maven
 通过maven创建javaweb项目，包括添加了maven-archetype-webapp，以及配置了tomcat（点击Edit Configuration部署tomcat，再点击Deployment里的加号进行部署）
+
+该项目思路：
+①
+前端使用Ajax提交方式提交至Servlet处理请求和响应（Json响应），后端处理完后返回响应至前端，实现消息结果提示和页面跳转。
+②
+后端的业务逻辑主要有service负责，让controller层的servlet接收到的请求可以通过调用service类中的方法实现业务逻辑处理。
+③
+数据库的映射主要通过mapper.xml文件和mapper接口类的方法一一对应实现，而后通过mybatis配置文件连接数据库、使用配置映射器完成映射。从而使得可以通过调用java中的类实现对数据库的操作。
