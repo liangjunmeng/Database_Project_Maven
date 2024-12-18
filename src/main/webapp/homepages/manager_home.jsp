@@ -1,16 +1,27 @@
 <%--
-  Created by IntelliJ IDEA.
-  User: CHINA
-  Date: 2024/12/18
-  Time: 12:09
-  To change this template use File | Settings | File Templates.
+  管理员首页
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Manager Home Page</title>
+    <style>
+        .header {
+            background-color: #f2f2f2;
+            padding: 10px;
+            text-align: right;
+        }
+        a {
+            text-decoration: none;
+            color: blue;
+        }
+    </style>
 </head>
 <body>
-<div>Welcome here, manager!</div>
+<div class="header">
+    <a href="../personal_pages/manager_personal.jsp">我的</a>
+</div>
+<h1>欢迎来到主页</h1>
+<p>这里是主页内容。</p>
 </body>
 </html>
