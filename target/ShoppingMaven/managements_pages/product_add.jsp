@@ -176,7 +176,7 @@
         </div>
         <div class="input-group">
             <label for="productPrice">商品单价:</label>
-            <input type="text" id="productPrice" name="productPrice">
+            <input type="number" id="productPrice" name="productPrice">
         </div>
         <button type="button" id="addbtn">添加</button>
     </form>
