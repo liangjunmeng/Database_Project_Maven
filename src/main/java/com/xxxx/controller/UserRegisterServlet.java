@@ -7,6 +7,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/register")
 public class UserRegisterServlet extends HttpServlet {
@@ -14,19 +15,30 @@ public class UserRegisterServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 获取请求参数
         String uname = request.getParameter("username");
         String upwd = request.getParameter("password");
 
-        MessageModel messageModel = userService.userRegister(uname,upwd);
+        // 调用业务层方法验证用户
+        MessageModel messageModel = userService.userRegister(uname, upwd);
 
-        if(messageModel.getCode() == 1){
-            //将消息模型中的用户信息设置到session作用域中，重定向跳转到首页
-            request.getSession().setAttribute("user",messageModel.getObject());
-            response.sendRedirect("homepages/home.jsp");
-        }else{
-            //将消息模型对象设置到request作用域中，请求转发跳转到register.jsp
-            request.setAttribute("messageModel",messageModel);
-            request.getRequestDispatcher("register.jsp").forward(request,response);
+        // 设置响应内容类型为 JSON
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        // 定义返回的 JSON 数据
+        PrintWriter out = response.getWriter();
+
+        if (messageModel.getCode() == 1) {
+            // 登录成功：将用户信息设置到 session
+            request.getSession().setAttribute("user", messageModel.getObject());
+
+            // 返回 JSON 数据
+            out.write("{\"success\": true, \"message\": \"" + messageModel.getMsg() + "\"}");
+        } else {
+            // 登录失败：返回错误信息
+            out.write("{\"success\": false, \"message\": \"" + messageModel.getMsg() + "\"}");
         }
+        out.flush();
     }
 }

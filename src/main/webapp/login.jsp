@@ -180,7 +180,7 @@
 
 <div class="login-container">
     <div class="login-title">Login</div>
-    <form action="login" method="post" id="loginform">
+    <form id="loginform">
         <div class="input-group">
             <label for="username">Username</label>
             <input type="text" id="username" name="username" value="${messageModel.getObject().getUsername()}">
@@ -189,7 +189,7 @@
             <label for="password">Password</label>
             <input type="password" id="password" name="password" value="${messageModel.getObject().getPassword()}">
         </div>
-        <button type="submit" id="loginbtn">Login In</button>
+        <button type="button" id="loginbtn">Login In</button>
         <div class="register">
             Don't have an account? <a href="register.jsp" class="registerReal">Click here</a>
         </div>
@@ -238,8 +238,39 @@
             showModal("Password is required.");
             return;  // 结束函数，避免继续执行提交
         }
-
+        /*
+        该方法是传统表单提交方式，这里不再采用，取而代之用Ajax提交和JSON响应，更灵活方便
         $("#loginform").submit();
+        */
+        // 使用 Ajax 提交表单数据到 Servlet
+        $.ajax({
+            url: "login", // Servlet 的 URL
+            type: "POST",
+            data: {
+                username: uname,
+                password: upwd
+            },
+            dataType: "json", // 指定返回数据的类型为 JSON
+            success: function (response) {
+                // 根据服务器返回的数据进行处理
+                if (response.success) {
+                    // 登录成功，弹窗显示成功消息
+                    showModal(response.message);
+
+                    // 1.5秒后重定向到首页
+                    setTimeout(function () {
+                        window.location.href = "homepages/home.jsp";
+                    }, 1500);
+                } else {
+                    // 登录失败，弹窗显示错误消息
+                    showModal(response.message);
+                }
+            },
+            error: function () {
+                // 网络或服务器错误
+                showModal("An error occurred. Please try again.");
+            }
+        });
     });
 
     // 判断字符串是否为空，空则返回 true，否则返回 false

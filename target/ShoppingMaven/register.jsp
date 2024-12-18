@@ -184,7 +184,7 @@
 
 <div class="login-container">
     <div class="login-title">Register</div>
-    <form action="register" method="post" id="signform">
+    <form id="signform">
         <div class="input-group">
             <label for="username">Username</label>
             <input type="text" id="username" name="username" required>
@@ -193,7 +193,7 @@
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required>
         </div>
-        <button type="submit" id="signbtn">Sign Up</button>
+        <button type="button" id="signbtn">Sign Up</button>
         <div class="register">
             Already have an account? <a href="login.jsp" class="registerReal">Back to login</a>
         </div>
@@ -239,7 +239,35 @@
             return;  // 结束函数，避免继续执行提交
         }
 
-        $("#signform").submit();
+        // 使用 Ajax 提交表单数据到 Servlet
+        $.ajax({
+            url: "register", // Servlet 的 URL
+            type: "POST",
+            data: {
+                username: uname,
+                password: upwd
+            },
+            dataType: "json", // 指定返回数据的类型为 JSON
+            success: function (response) {
+                // 根据服务器返回的数据进行处理
+                if (response.success) {
+                    // 登录成功，弹窗显示成功消息
+                    showModal(response.message);
+
+                    // 1.5秒后重定向到首页
+                    setTimeout(function () {
+                        window.location.href = "homepages/home.jsp";
+                    }, 1500);
+                } else {
+                    // 登录失败，弹窗显示错误消息
+                    showModal(response.message);
+                }
+            },
+            error: function () {
+                // 网络或服务器错误
+                showModal("An error occurred. Please try again.");
+            }
+        });
     });
 
     // 判断字符串是否为空，空则返回 true，否则返回 false

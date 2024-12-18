@@ -23,7 +23,7 @@ public class UserService {
 
         if(StringUtil.isEmpty(uname) || StringUtil.isEmpty(upwd)){
             messageModel.setCode(0);
-            messageModel.setMsg("Username or password cannot be empty.");
+            messageModel.setMsg("Username or password can't be empty.");
             return messageModel;
         }
 
@@ -34,7 +34,7 @@ public class UserService {
 
         if(user == null){
             messageModel.setCode(0);
-            messageModel.setMsg("Username doesnot exit!");
+            messageModel.setMsg("Username doesn't exit!");
             return messageModel;
         }
 
@@ -58,7 +58,7 @@ public class UserService {
 
         if(StringUtil.isEmpty(uname) || StringUtil.isEmpty(upwd)){
             messageModel.setCode(0);
-            messageModel.setMsg("Username or password cannot be empty.");
+            messageModel.setMsg("Username or password can't be empty.");
             return messageModel;
         }
 

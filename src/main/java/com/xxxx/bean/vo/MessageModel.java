@@ -6,7 +6,7 @@ package com.xxxx.bean.vo;
 * */
 public class MessageModel {
     private Integer code = 1;//状态码
-    private String msg = "Successful！";//提示信息
+    private String msg = "Success！";//提示信息
     private Object object;//回显对象
 
     public Integer getCode() {
