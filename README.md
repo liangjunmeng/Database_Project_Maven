@@ -31,3 +31,17 @@ webapp：前端层，放置各种与前端代码相关的文件，如html、jsp�
 跳转到“./login”,那就代表跳转到“/maven/web/login”;
 ”../login“表示上上级目录加上/login，如“/maven/login”，以此类推...
 如果只是单纯地写上“login”，等同于“./login”
+4.有关javascript：
+①
+productModule.innerHTML = `
+<h3>Name:\${product.productName}</h3>
+<p>Amount:\${product.productAmount}</p>
+<p>Price:\${product.productPrice}</p>
+<button onclick="location.href='./product_detail.jsp?id=\${product.productId}'">查看详情</button>
+`;
+其中的“${product.productName}”前面需要添加”\“转义符号，否则显示出来的都是空白。
+理由：
+在 JavaScript 中，模板字符串（template literals）允许你使用反引号 ` 来包围字符串，
+并在字符串中使用 ${...} 语法来嵌入变量或表达式的值。如果你需要在模板字符串中包含一个实际
+的美元符号 $，你需要对它进行转义，因为美元符号在模板字符串中有特殊的意义（它标志着变量或表
+达式的开始）。

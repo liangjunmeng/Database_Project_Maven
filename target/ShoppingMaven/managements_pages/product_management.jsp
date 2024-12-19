@@ -160,13 +160,13 @@
 <div class="modal" id="confirmModal">
     <div class="message">您确定要添加商品吗？</div>
     <div class="buttons">
-        <button class="confirm" onclick="location.href='./product_add.jsp'">确定</button>
-        <button class="cancel" onclick="closeModal()">取消</button>
+        <button class="confirm" onclick="closeModal(true)">确定</button>
+        <button class="cancel" onclick="closeModal(false)">取消</button>
     </div>
 </div>
 
 <div id="productList"></div>
-
+<script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -180,16 +180,13 @@
                 const productList = document.getElementById('productList');
                 productList.innerHTML = ``; // 清空现有内容
                 data.forEach(product => {
-                    console.log('Product Name:', product.productName);  // 打印 productName
-                    console.log('Product Amount:', product.productAmount);  // 打印 productAmount
-                    console.log(typeof product.productName)
                     const productModule = document.createElement('div');
                     productModule.className = 'product-module';
                     productModule.innerHTML = `
-                        <h3>` + product.productName + `</h3>
-                        <p>${product.productAmount}</p>
-                        <p>1</p>
-                        <button onclick="location.href='./product_detail.jsp?id=${product.productId}'">查看详情</button>
+                        <h3>Name:\${product.productName}</h3>
+                        <p>Amount:\${product.productAmount}</p>
+                        <p>Price:\${product.productPrice}</p>
+                        <button onclick="location.href='./product_detail.jsp?id=\${product.productId}'">查看详情</button>
                     `;
                     productList.appendChild(productModule);
                 });
@@ -205,9 +202,14 @@
         overlay.style.display = "block";
     }
 
-    function closeModal() {
-        modal.style.display = "none";
-        overlay.style.display = "none";
+    function closeModal(isConfirm) {
+        if (isConfirm) {
+            window.location.href = './product_add.jsp';
+        }
+        else {
+            modal.style.display = "none";
+            overlay.style.display = "none";
+        }
     }
 
     // 阻止遮罩层的点击事件冒泡到弹窗
