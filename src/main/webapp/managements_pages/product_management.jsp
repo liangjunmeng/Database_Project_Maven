@@ -178,15 +178,17 @@
             .then(response => response.json())
             .then(data => {
                 const productList = document.getElementById('productList');
-                productList.innerHTML = ''; // 清空现有内容
+                productList.innerHTML = ``; // 清空现有内容
                 data.forEach(product => {
                     console.log('Product Name:', product.productName);  // 打印 productName
                     console.log('Product Amount:', product.productAmount);  // 打印 productAmount
+                    console.log(typeof product.productName)
                     const productModule = document.createElement('div');
                     productModule.className = 'product-module';
                     productModule.innerHTML = `
-                        <h3>${product.productName}</h3>
+                        <h3>` + product.productName + `</h3>
                         <p>${product.productAmount}</p>
+                        <p>1</p>
                         <button onclick="location.href='./product_detail.jsp?id=${product.productId}'">查看详情</button>
                     `;
                     productList.appendChild(productModule);
