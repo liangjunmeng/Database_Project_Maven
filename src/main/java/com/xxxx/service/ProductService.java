@@ -7,6 +7,8 @@ import com.xxxx.util.GetSqlSession;
 import com.xxxx.util.StringUtil;
 import org.apache.ibatis.session.SqlSession;
 
+import java.util.List;
+
 public class ProductService {
     //商品添加
     public MessageModel productAdding(String pname, String pamount, String pprice) {
@@ -56,5 +58,13 @@ public class ProductService {
 
         messageModel.setObject(product);
         return messageModel;
+    }
+
+    //商品遍历
+    public List<Product> productGetting() {
+
+        SqlSession session = GetSqlSession.createSqlSession();
+        ProductMapper productMapper = session.getMapper(ProductMapper.class);
+        return productMapper.selectAll();
     }
 }

@@ -119,6 +119,37 @@
                 background-position: 0% 50%;
             }
         }
+
+        .product-module {
+            background-color: white;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            width: 300px;
+            margin: 10px auto;
+        }
+
+        .product-module h3 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .product-module p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .product-module button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            background-color: #3abff8;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -134,7 +165,37 @@
     </div>
 </div>
 
+<div id="productList"></div>
+
 <script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        fetchProducts();
+    });
+
+    function fetchProducts() {
+        fetch("../product_getting")
+            .then(response => response.json())
+            .then(data => {
+                const productList = document.getElementById('productList');
+                productList.innerHTML = ''; // 清空现有内容
+                data.forEach(product => {
+                    console.log('Product Name:', product.productName);  // 打印 productName
+                    console.log('Product Amount:', product.productAmount);  // 打印 productAmount
+                    const productModule = document.createElement('div');
+                    productModule.className = 'product-module';
+                    productModule.innerHTML = `
+                        <h3>${product.productName}</h3>
+                        <p>${product.productAmount}</p>
+                        <button onclick="location.href='./product_detail.jsp?id=${product.productId}'">查看详情</button>
+                    `;
+                    console.log('Generated HTML:', productModule.innerHTML); // 打印生成的 HTML
+                    productList.appendChild(productModule);
+                });
+            })
+            .catch(error => console.error('Error fetching products:', error));
+    }
+
     var modal = document.getElementById("confirmModal");
     var overlay = document.getElementById("modalOverlay");
 

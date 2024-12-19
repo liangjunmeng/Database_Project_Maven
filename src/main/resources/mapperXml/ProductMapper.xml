@@ -3,12 +3,12 @@
 
 <mapper namespace="com.xxxx.mapper.ProductMapper">
 
-    <!-- 查询所有商品
+    <!-- 查询所有商品 -->
     <select id="selectAll" resultType="com.xxxx.bean.Product">
         SELECT *
         FROM ProductInfo
     </select>
-    -->
+
     <!-- 查询商品数量 -->
     <select id="selectAmount" resultType="int">
         SELECT count(*)

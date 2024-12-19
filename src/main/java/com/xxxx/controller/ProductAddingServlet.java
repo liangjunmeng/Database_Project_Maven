@@ -31,9 +31,6 @@ public class ProductAddingServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         if (messageModel.getCode() == 1) {
-            // 登录成功：将用户信息设置到 session
-            request.getSession().setAttribute("product", messageModel.getObject());
-
             // 返回 JSON 数据
             out.write("{\"success\": true, \"message\": \"" + messageModel.getMsg() + "\"}");
         } else {

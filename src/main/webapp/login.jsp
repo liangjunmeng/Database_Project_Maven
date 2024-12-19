@@ -265,7 +265,7 @@
                     }
                     else{
                         setTimeout(function () {
-                            window.location.href = "homepages/manager_home.jsp";
+                            window.location.href = "personal_pages/manager_personal.jsp";
                         }, 1500);
                     }
                 } else {
