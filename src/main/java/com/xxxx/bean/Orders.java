@@ -1,10 +1,19 @@
 package com.xxxx.bean;
 
 public class Orders {
+    private int orderId;
+    private int userid;
     private int productId;
     private int buyingAmount;
-    private int userid;
     private int buyingPrice;
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
 
     public int getProductId() {
         return productId;
