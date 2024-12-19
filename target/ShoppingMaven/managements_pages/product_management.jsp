@@ -162,6 +162,7 @@
             cursor: pointer;
             width: 350px; /* 增加模块的宽度 */
             max-width: 100%; /* 确保模块宽度不超过容器宽度 */
+            position: relative; /* 确保小圆框相对于商品模块定位 */
         }
 
         .product-module h3 {
@@ -191,6 +192,23 @@
             transform: scale(1.1); /* 鼠标悬浮时放大按钮 */
         }
 
+        .product-module .delete-checkbox {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 2px solid #f83abf;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none; /* 默认隐藏 */
+            z-index: 10;
+        }
+
+        .product-module .delete-checkbox:hover {
+            background-color: #f83abf;
+        }
     </style>
 </head>
 <body>
@@ -212,11 +230,23 @@
 
 <script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-
+    let deleteMode = false; // 控制勾选框的显示状态
+    // 点击加号按钮
     document.addEventListener('DOMContentLoaded', function() {
         fetchProducts();
     });
-
+    // 点击减号按钮切换删除模式
+    document.getElementById("removeButton").onclick = function() {
+        deleteMode = !deleteMode; // 切换deleteMode状态
+        toggleDeleteCheckboxes(); // 更新所有商品模块的小圆框显示状态
+    }
+    // 显示或隐藏删除小圆框
+    function toggleDeleteCheckboxes() {
+        const deleteCheckboxes = document.querySelectorAll('.delete-checkbox');
+        deleteCheckboxes.forEach(checkbox => {
+            checkbox.style.display = deleteMode ? 'block' : 'none'; // 根据deleteMode控制显示或隐藏
+        });
+    }
     function fetchProducts() {
         fetch("../product_getting")
             .then(response => response.json())
@@ -227,6 +257,7 @@
                     const productModule = document.createElement('div');
                     productModule.className = 'product-module';
                     productModule.innerHTML = `
+                    <div class="delete-checkbox" onclick="location.href='./product_detail.jsp?id=\${product.productId}'"></div>
                     <h3>\${product.productName}</h3>
                     <p>库存:\${product.productAmount}</p>
                     <p>价格:￥\${product.productPrice}</p>
