@@ -47,9 +47,9 @@
         WHERE id = #{id}
     </update>
     -->
-    <!-- 删除商品
-    <delete id="deleteUser" parameterType="int">
-        DELETE FROM users WHERE id = #{id}
+    <!-- 删除商品 -->
+    <delete id="deleteProductById" parameterType="Integer">
+        DELETE FROM ProductInfo WHERE productId = #{productId}
     </delete>
-    -->
+
 </mapper>

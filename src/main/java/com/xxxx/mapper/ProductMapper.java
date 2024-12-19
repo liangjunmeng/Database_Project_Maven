@@ -11,4 +11,5 @@ public interface ProductMapper {
     public Product queryProductByName(String productName);
     public void insertProduct(Product product);
     public int maxProductId();
+    public void deleteProductById(Integer productId);
 }

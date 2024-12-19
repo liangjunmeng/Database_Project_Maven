@@ -67,4 +67,15 @@ public class ProductService {
         ProductMapper productMapper = session.getMapper(ProductMapper.class);
         return productMapper.selectAll();
     }
+
+    //通过商品id将商品成批删除
+    public void productDeleting(List<Integer> ids) {
+
+        SqlSession session = GetSqlSession.createSqlSession();
+        ProductMapper productMapper = session.getMapper(ProductMapper.class);
+        for (Integer id : ids) {
+            productMapper.deleteProductById(id);
+        }
+        session.commit(); //提交事务，让数据库得以更新
+    }
 }
