@@ -8,17 +8,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>商品管理</title>
     <style>
-        body {
+        html {
             font-family: 'Arial', sans-serif;
             margin: 0;
+            padding: 0;
             background: linear-gradient(45deg, #3abff8, #f83abf);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
         }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
 
         @keyframes gradientBG {
             0% {
@@ -32,22 +36,39 @@
             }
         }
 
-        #addButton {
+        #addButton,
+        #removeButton {
             position: fixed;
-            top: 20px;
             right: 20px;
-            padding: 15px 25px;
+            width: 70px; /* 确保两个按钮宽度一致 */
+            height: 60px; /* 确保两个按钮高度一致 */
+            padding: 0; /* 去除多余的内边距，保持大小一致 */
             background-color: white;
             color: black;
             border: none;
-            border-radius: 10px;
+            border-radius: 10px; /* 圆形按钮 */
             cursor: pointer;
-            font-size: 24px;
+            font-size: 36px; /* 字体大小一致 */
             font-weight: bold;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* 居中对齐文本 */
         }
-        #addButton:hover {
+
+        #addButton {
+            top: 20px; /* 距顶部的距离 */
+        }
+
+        #removeButton {
+            top: 90px; /* 确保与加号按钮垂直间隔 */
+        }
+
+        #addButton:hover,
+        #removeButton:hover {
             background-color: #f8f8f8;
+            transform: scale(1.1); /* 鼠标悬浮时放大按钮 */
         }
 
         .modal-overlay {
@@ -120,15 +141,27 @@
             }
         }
 
+        .product-list-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* 将内容从顶部开始排列 */
+            min-height: 100vh; /* 确保容器至少有视口高度 */
+            margin-top: 100px; /* 给商品列表留出足够的空间，防止被按钮遮挡 */
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
         .product-module {
             background-color: white;
-            margin: 10px;
-            padding: 20px;
+            margin: 20px; /* 增加模块之间的间距 */
+            padding: 30px; /* 增加模块内容的内边距 */
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             cursor: pointer;
-            width: 300px;
-            margin: 10px auto;
+            width: 350px; /* 增加模块的宽度 */
+            max-width: 100%; /* 确保模块宽度不超过容器宽度 */
         }
 
         .product-module h3 {
@@ -147,14 +180,22 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
-            background-color: #3abff8;
-            color: white;
+            background: linear-gradient(45deg, #3abff8, #f83abf); /* 与页面背景一致 */
+            background-size: 400% 400%; /* 确保渐变动态 */
+            animation: gradientBG 15s ease infinite; /* 与页面背景动画同步 */
+            color: white; /* 保持文字颜色对比清晰 */
+            transition: transform 0.2s ease; /* 增加点击时的动画效果 */
         }
+
+        .product-module button:hover {
+            transform: scale(1.1); /* 鼠标悬浮时放大按钮 */
+        }
+
     </style>
 </head>
 <body>
-<h1>欢迎来到商品管理页面</h1>
 <button id="addButton">+</button>
+<button id="removeButton">-</button>
 
 <div class="modal-overlay" id="modalOverlay"></div>
 <div class="modal" id="confirmModal">
@@ -165,7 +206,10 @@
     </div>
 </div>
 
-<div id="productList"></div>
+<div class="product-list-container">
+    <div id="productList"></div>
+</div>
+
 <script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
 
@@ -183,10 +227,10 @@
                     const productModule = document.createElement('div');
                     productModule.className = 'product-module';
                     productModule.innerHTML = `
-                        <h3>Name:\${product.productName}</h3>
-                        <p>Amount:\${product.productAmount}</p>
-                        <p>Price:\${product.productPrice}</p>
-                        <button onclick="location.href='./product_detail.jsp?id=\${product.productId}'">查看详情</button>
+                    <h3>\${product.productName}</h3>
+                    <p>库存:\${product.productAmount}</p>
+                    <p>价格:￥\${product.productPrice}</p>
+                    <button onclick="location.href='./product_detail.jsp?id=\${product.productId}'">查看详情</button>
                     `;
                     productList.appendChild(productModule);
                 });
