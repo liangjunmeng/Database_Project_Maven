@@ -25,6 +25,34 @@ body {
         background-position: 0% 50%;
     }
 }
+#backHomeButton {
+    position: fixed;
+    left: 20px;
+    width: 120px;
+    height: 60px;
+    padding: 0;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 居中对齐文本 */
+}
+
+#backHomeButton {
+    top: 20px; /* 确保与加号按钮同一行 */
+}
+
+#backHomeButton:hover {
+    background-color: #f8f8f8;
+    transform: scale(1.1); /* 鼠标悬浮时放大按钮 */
+}
 
 #addButton,
 #removeButton {
@@ -36,7 +64,7 @@ body {
     background-color: white;
     color: black;
     border: none;
-    border-radius: 10px; /* 圆形按钮 */
+    border-radius: 10px;
     cursor: pointer;
     font-size: 36px; /* 字体大小一致 */
     font-weight: bold;
@@ -222,4 +250,54 @@ body {
 
 .product-module .delete-checkbox.selected {
     background-color: #f83abf; /* 勾选时背景变为粉色 */
+}
+
+/* 自定义弹窗遮罩层 */
+.custom-modal-overlay {
+    display: none;  /* 初始不显示 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);  /* 半透明背景 */
+    z-index: 999;  /* 遮罩层置于内容上方 */
+}
+
+/* 自定义弹窗样式 */
+.custom-modal {
+    display: none;  /* 初始不显示 */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.2);  /* 边缘 */
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+    z-index: 1000;  /* 弹窗置于遮罩层上方 */
+    max-width: 250px; /* 弹窗最大宽度 */
+    width: 60%; /* 宽度为60% */
+}
+
+.custom-modal .custom-message {
+    color: #111;
+    font-size: 16px;
+    text-align: center;
+}
+
+.custom-modal .custom-close {
+    background: transparent;
+    color: #333;
+    font-size: 28px;
+    border: none;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.custom-modal .custom-close:hover {
+    color: red;
 }

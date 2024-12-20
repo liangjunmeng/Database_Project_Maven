@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="product_management.css">
 <button id="addButton">+</button>
 <button id="removeButton">-</button>
+<button id="backHomeButton">回到首页</button>
 <button id="deleteButton" disabled>删除</button>
 
 <div class="modal-overlay" id="modalOverlay"></div>
@@ -23,6 +24,16 @@
     </div>
 </div>
 
+<!-- 弹窗遮罩层 -->
+<div id="customModalOverlay" class="custom-modal-overlay"></div>
+
+<!-- 弹窗 -->
+<div id="customErrorModal" class="custom-modal">
+    <div class="custom-message" id="customErrorMessage"></div>
+    <button class="custom-close" onclick="closeCustomModal()">&times;</button>
+</div>
+
+
 <div class="product-list-container">
     <div id="productList"></div>
 </div>
@@ -32,6 +43,26 @@
     let deleteMode = false; // 控制勾选框的显示状态
     let deleteBtn = false; // 控制删除按钮的显示状态
     let selectedProductIds = []; // 存储被选中的商品ID
+
+    // 点击回到首页按钮
+    document.getElementById("backHomeButton").onclick = function() {
+        location.href = '../personal_pages/manager_personal.jsp';
+    }
+
+    // 显示弹窗
+    function showCustomModal(message) {
+        $("#customErrorMessage").text(message);  // 设置错误信息
+        $("#customErrorModal").show();  // 显示弹窗
+        $("#customModalOverlay").show();  // 显示遮罩层
+    }
+
+    // 关闭弹窗
+    function closeCustomModal() {
+        $("#customErrorModal").hide();  // 隐藏弹窗
+        $("#customModalOverlay").hide();  // 隐藏遮罩层
+    }
+
+
     // 点击减号按钮切换删除模式以及勾选框的状态
     document.getElementById("removeButton").onclick = function() {
         deleteMode = !deleteMode; // 切换deleteMode状态
@@ -91,14 +122,24 @@
         })
             .then(response => response.json())
             .then(data => {
+                // 根据删除结果显示不同的提示框
+                const resultModal = document.getElementById('resultModal');
+                const resultMessage = document.getElementById('resultMessage');
+                const modalOverlay = document.getElementById('modalOverlay');
                 if (data.success) {
-                    alert('删除成功');
-                    fetchProducts(); // 刷新商品列表
+                    showCustomModal("删除成功！");
                 } else {
-                    alert('删除失败');
+                    showCustomModal("删除失败！");
                 }
+
+                // 刷新商品列表
+                fetchProducts();
             })
-            .catch(error => console.error('Error deleting products:', error));
+            .catch(error => {
+                console.error('Error deleting products:', error);
+                // 错误时显示提示框
+                showCustomModal("删除过程中发生错误！");
+            });
     }
 
     var modal = document.getElementById("confirmModal");
@@ -128,6 +169,7 @@
             })
             .catch(error => console.error('Error fetching products:', error));
     }
+
     //使得点击模块后跳转到的页面能够取得被点击模块的信息
     function saveToLocalStorage(productId, productName, productAmount, productPrice) {
         localStorage.setItem('productId', productId);

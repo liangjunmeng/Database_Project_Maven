@@ -62,10 +62,18 @@ $.ajax({...});：这是jQuery提供的Ajax方法，用于发送异步HTTP请求�
 如果没有加载jQuery库，那么$这个符号将不会指向jQuery对象，而是保持为undefined，导致所有
 使用$的代码都会抛出错误，因为它们试图调用undefined的方法或属性。
 因此，为了使这段代码正常工作，你需要确保jQuery库被正确加载。如果你不想使用外部链接，你也可
-以将jQuery库文件下载到你的服务器，并使用相对路径或绝对路径来引用它
-。
+以将jQuery库文件下载到你的服务器，并使用相对路径或绝对路径来引用它。
+
 5.有关前端和servlet：
 如果前端以表单或Ajax形式提交，会自动调用servlet中的service方法，service方法会判断前端
 是post提交还是get提交分别调用doPost或doGet函数，如果要取得前端传来的参数，一并使用
-request.getParameter("参数名")来取得
+request.getParameter("参数名")来获得
 
+6.有关css:
+在 .product-module .delete-checkbox 中，product-module 和 delete-checkbox 
+都是 类名（class），不是 ID。具体来说：
+.product-module 是类名，表示具有 product-module 类的元素。
+.delete-checkbox 也是类名，表示具有 delete-checkbox 类的元素。
+解析：
+类选择器：类选择器是以点号 (.) 开头的，例如 .product-module 和 .delete-checkbox。
+ID选择器：ID选择器是以井号 (#) 开头的，例如 #product-module 和 #delete-checkbox。
