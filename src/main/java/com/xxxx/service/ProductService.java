@@ -78,4 +78,47 @@ public class ProductService {
         }
         session.commit(); //提交事务，让数据库得以更新
     }
+
+    //商品更新（以id为依据）
+    public MessageModel productUpdating(String pid, String pname, String pamount, String pprice) {
+        MessageModel messageModel = new MessageModel();
+        Product p = new Product();
+        p.setProductId(Integer.valueOf(pid));
+        p.setProductName(pname);
+        p.setProductAmount(Integer.valueOf(pamount));
+        p.setProductPrice(Integer.valueOf(pprice));
+        /*
+        将字符串转化为数字，因为前端ajax将这些数据转换为var，即字符串形式再传给后端，
+        因为前端需要通过检验字符串是否为空判断用户输入的合法性
+        */
+        messageModel.setObject(p);
+
+        if(StringUtil.isEmpty(pname) || StringUtil.isEmpty(pamount) || StringUtil.isEmpty(pprice)){
+            messageModel.setCode(0);
+            messageModel.setMsg("商品名、数量或单价不能为空！");
+            return messageModel;
+        }
+
+        SqlSession session = GetSqlSession.createSqlSession();
+        ProductMapper productMapper = session.getMapper(ProductMapper.class);
+        Product product = productMapper.queryProductByName(pname);
+
+        //如果更改后的商品名和其他商品（id不同）名有冲突
+        if(product != null && product.getProductId()!=p.getProductId()){
+            messageModel.setCode(0);
+            messageModel.setMsg("商品名已存在！");
+            return messageModel;
+        }
+
+        else{
+            messageModel.setMsg("商品更新成功！");
+            productMapper.updateProductById(p);
+            session.commit(); //提交事务，让数据库得以更新
+
+
+        }
+
+        messageModel.setObject(product);
+        return messageModel;
+    }
 }

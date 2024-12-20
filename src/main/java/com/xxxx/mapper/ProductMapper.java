@@ -12,4 +12,5 @@ public interface ProductMapper {
     public void insertProduct(Product product);
     public int maxProductId();
     public void deleteProductById(Integer productId);
+    public void updateProductById(Product product);
 }

@@ -130,7 +130,6 @@
     }
     //使得点击模块后跳转到的页面能够取得被点击模块的信息
     function saveToLocalStorage(productId, productName, productAmount, productPrice) {
-        console.log("ss");
         localStorage.setItem('productId', productId);
         localStorage.setItem('productName', productName);
         localStorage.setItem('productAmount', productAmount);

@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>添加商品</title>
+    <title>更新商品</title>
 </head>
 <body>
 <link rel="stylesheet" href="product_add_or_update.css">
@@ -41,12 +41,16 @@
 </body>
 <script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript">
+    var productId;
+    var productName;
+    var productAmount;
+    var productPrice;
     //获得上一个页面里被点击模块的信息
     window.onload = function() {
-        const productId = localStorage.getItem('productId');
-        const productName = localStorage.getItem('productName');
-        const productAmount = localStorage.getItem('productAmount');
-        const productPrice = localStorage.getItem('productPrice');
+        productId = localStorage.getItem('productId');
+        productName = localStorage.getItem('productName');
+        productAmount = localStorage.getItem('productAmount');
+        productPrice = localStorage.getItem('productPrice');
         // 将 localStorage 中的值填充到对应的 input 元素中
         if (productName) {
             document.getElementById('productName').value = productName;
@@ -75,6 +79,7 @@
     $("#addbtn").click(function (event) {
         // 阻止表单的默认提交行为
         event.preventDefault();
+        var pid = productId;
         var pname = $("#productName").val();
         var pamount = $("#productQuantity").val();
         var pprice = $("#productPrice").val();
@@ -98,9 +103,10 @@
 
         // 使用 Ajax 提交表单数据到 Servlet
         $.ajax({
-            url: "../product_adding", // Servlet 的 URL
+            url: "../product_updating", // Servlet 的 URL
             type: "POST",
             data: {
+                productId: pid,
                 productName: pname,
                 productAmount: pamount,
                 productPrice: pprice

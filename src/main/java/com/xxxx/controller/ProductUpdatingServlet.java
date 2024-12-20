@@ -22,7 +22,7 @@ public class ProductUpdatingServlet extends HttpServlet {
         String pprice = request.getParameter("productPrice");
 
         // 调用业务层方法验证用户
-        MessageModel messageModel = productService.productAdding(pname,pamount,pprice);
+        MessageModel messageModel = productService.productUpdating(pid,pname,pamount,pprice);
 
         // 设置响应内容类型为 JSON
         response.setContentType("application/json");
