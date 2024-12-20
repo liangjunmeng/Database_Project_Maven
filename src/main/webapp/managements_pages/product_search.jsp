@@ -1,4 +1,7 @@
 <%--
+  管理员的搜索界面，便于管理员删除特定的商品
+--%>
+<%--
   商品管理（仅限管理员）
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -9,21 +12,16 @@
     <title>商品管理</title>
 <body>
 <%-- 引用css文件，避免代码太长 --%>
-<link rel="stylesheet" href="product_management.css">
-<button id="addButton">+</button>
+<link rel="stylesheet" href="product_search.css">
 <button id="removeButton">-</button>
-<button id="backHomeButton">回到首页</button>
-<button id="searchButton">搜索</button>
-<button id="deleteButton" disabled>删除</button>
-
-<div class="modal-overlay" id="modalOverlay"></div>
-<div class="modal" id="confirmModal">
-    <div class="message">您确定要添加商品吗？</div>
-    <div class="buttons">
-        <button class="confirm" onclick="closeModal(true)">确定</button>
-        <button class="cancel" onclick="closeModal(false)">取消</button>
-    </div>
+<button id="backHomeButton">全部商品</button>
+<!-- 搜索框 -->
+<div class="search-container">
+    <input type="text" id="searchInput" placeholder="请输入商品名称" />
 </div>
+<button id="searchButton">搜索</button>
+
+<button id="deleteButton" disabled>删除</button>
 
 <!-- 弹窗遮罩层 -->
 <div id="customModalOverlay" class="custom-modal-overlay"></div>
@@ -45,9 +43,9 @@
     let deleteBtn = false; // 控制删除按钮的显示状态
     let selectedProductIds = []; // 存储被选中的商品ID
 
-    // 点击回到首页按钮
+    // 点击回到全部商品按钮
     document.getElementById("backHomeButton").onclick = function() {
-        location.href = '../personal_pages/manager_personal.jsp';
+        location.href = './product_management.jsp';
     }
 
     // 点击回到搜索按钮
@@ -185,26 +183,6 @@
         location.href = './product_update.jsp';
     }
 
-    // 点击加号按钮
-    document.getElementById("addButton").onclick = function() {
-        modal.style.display = "block";
-        overlay.style.display = "block";
-    }
-
-    function closeModal(isConfirm) {
-        if (isConfirm) {
-            window.location.href = './product_add.jsp';
-        }
-        else {
-            modal.style.display = "none";
-            overlay.style.display = "none";
-        }
-    }
-
-    // 阻止遮罩层的点击事件冒泡到弹窗
-    overlay.addEventListener('click', function(event) {
-        event.stopPropagation();
-    });
 </script>
 </body>
 </html>

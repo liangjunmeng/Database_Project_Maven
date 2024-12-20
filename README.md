@@ -79,7 +79,11 @@ request.getParameter("参数名")来获得
 类选择器：类选择器是以点号 (.) 开头的，例如 .product-module 和 .delete-checkbox。
 ID选择器：ID选择器是以井号 (#) 开头的，例如 #product-module 和 #delete-checkbox。
 
-7.浏览器缓存问题
+7.浏览器利用
+点击f12即可开启开发者模式，此时再点击右侧调试区的源代码（虫子标志），修改里面的css或jsp都会
+动态且直接地显示在左边显示页面中
+
+8.浏览器缓存问题
 浏览器通常会缓存静态资源（如CSS、JavaScript、图片等），所以即使你修改了CSS文件，浏览器可能仍然加载的是旧的缓存版本。
 
 解决方法：

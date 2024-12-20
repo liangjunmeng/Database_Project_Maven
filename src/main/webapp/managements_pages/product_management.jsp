@@ -50,6 +50,11 @@
         location.href = '../personal_pages/manager_personal.jsp';
     }
 
+    // 点击回到搜索按钮
+    document.getElementById("searchButton").onclick = function() {
+        location.href = './product_search.jsp';
+    }
+
     // 显示弹窗
     function showCustomModal(message) {
         $("#customErrorMessage").text(message);  // 设置错误信息
