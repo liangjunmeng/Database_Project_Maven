@@ -70,6 +70,7 @@ $.ajax({...});：这是jQuery提供的Ajax方法，用于发送异步HTTP请求�
 request.getParameter("参数名")来获得
 
 6.有关css:
+
 在 .product-module .delete-checkbox 中，product-module 和 delete-checkbox 
 都是 类名（class），不是 ID。具体来说：
 .product-module 是类名，表示具有 product-module 类的元素。
@@ -77,3 +78,12 @@ request.getParameter("参数名")来获得
 解析：
 类选择器：类选择器是以点号 (.) 开头的，例如 .product-module 和 .delete-checkbox。
 ID选择器：ID选择器是以井号 (#) 开头的，例如 #product-module 和 #delete-checkbox。
+
+7.浏览器缓存问题
+浏览器通常会缓存静态资源（如CSS、JavaScript、图片等），所以即使你修改了CSS文件，浏览器可能仍然加载的是旧的缓存版本。
+
+解决方法：
+强制刷新：在浏览器中，按 Ctrl + F5 （Windows）或 Cmd + Shift + R （Mac）来强制刷新页面，这会重新加载所有的资源而不使用缓存。
+清除缓存：
+打开浏览器开发者工具（按 F12），选择 Network 面板，并勾选 Disable cache。
+然后重新加载页面。

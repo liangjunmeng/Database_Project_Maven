@@ -13,6 +13,7 @@
 <button id="addButton">+</button>
 <button id="removeButton">-</button>
 <button id="backHomeButton">回到首页</button>
+<button id="searchButton">搜索</button>
 <button id="deleteButton" disabled>删除</button>
 
 <div class="modal-overlay" id="modalOverlay"></div>

@@ -25,7 +25,9 @@ body {
         background-position: 0% 50%;
     }
 }
-#backHomeButton {
+
+#backHomeButton,
+#searchButton {
     position: fixed;
     left: 20px;
     width: 120px;
@@ -49,10 +51,16 @@ body {
     top: 20px; /* 确保与加号按钮同一行 */
 }
 
-#backHomeButton:hover {
+#searchButton {
+    top: 90px;
+}
+#backHomeButton:hover,
+#searchButton:hover {
     background-color: #f8f8f8;
     transform: scale(1.1); /* 鼠标悬浮时放大按钮 */
 }
+
+
 
 #addButton,
 #removeButton {
