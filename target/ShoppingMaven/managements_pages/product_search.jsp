@@ -48,6 +48,19 @@
     let deleteMode = false; // 控制勾选框的显示状态
     let deleteBtn = false; // 控制删除按钮的显示状态
     let selectedProductIds = []; // 存储被选中的商品ID
+    //用于存储用户点击搜索后搜索框里的值
+    var userEnter = "";
+    window.onload = function() {
+        var managerInputFromStorage = localStorage.getItem('managerInput');
+        var lastPage = localStorage.getItem('lastPage');
+        if (managerInputFromStorage != null && lastPage == "product_update") {
+            localStorage.setItem('lastPage', "product_search");
+            userEnter = managerInputFromStorage;
+            clickSearchSourceIsnotHand = true;
+            document.getElementById('searchInput').value = userEnter;
+            $("#searchButton").click();
+        }
+    }
     // 点击全部商品按钮
     document.getElementById("backHomeButton").onclick = function() {
         location.href = './product_management.jsp';
@@ -137,6 +150,7 @@
                 }
                 //触发搜索按钮点击事件
                 clickSearchSourceIsnotHand = true;
+                document.getElementById('searchInput').value = userEnter;
                 $("#searchButton").click();
 
             })
@@ -160,6 +174,9 @@
                 clickSearchSourceIsnotHand = false;
             }
             return;  // 结束函数，避免继续执行提交
+        }
+        if(!clickSearchSourceIsnotHand) {
+            userEnter = managerInput;
         }
         // 发送POST请求，将managerInput传给后端
         fetch("../product_getting", {
@@ -203,6 +220,7 @@
     //使得点击模块后跳转到的页面能够取得被点击模块的信息
     function saveToLocalStorage(productId, productName, productAmount, productPrice) {
         localStorage.setItem('lastPage', "product_search");
+        localStorage.setItem('managerInput',userEnter);
         localStorage.setItem('productId', productId);
         localStorage.setItem('productName', productName);
         localStorage.setItem('productAmount', productAmount);

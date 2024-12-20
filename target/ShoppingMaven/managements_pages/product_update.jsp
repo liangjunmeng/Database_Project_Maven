@@ -127,6 +127,8 @@
                         }, 1500);
                     }
                     else if(lastPage == "product_search") {
+                        localStorage.setItem('lastPage',"product_update");
+                        localStorage.setItem('managerInput',localStorage.getItem('managerInput'));
                         setTimeout(function () {
                             location.href = './product_search.jsp';
                         }, 1500);
