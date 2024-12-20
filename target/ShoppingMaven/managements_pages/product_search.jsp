@@ -39,18 +39,18 @@
 
 <script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
+    /*
+    判断点击搜索按钮是来自用户还是删除函数deleteSelectedProducts，
+    因为如果删除了一个商品后无商品了，系统默认再搜索，会弹出无商品警告，
+    而用户明明没有按下搜索
+     */
+    let clickSearchSourceIsnotHand = false;
     let deleteMode = false; // 控制勾选框的显示状态
     let deleteBtn = false; // 控制删除按钮的显示状态
     let selectedProductIds = []; // 存储被选中的商品ID
-
-    // 点击回到全部商品按钮
+    // 点击全部商品按钮
     document.getElementById("backHomeButton").onclick = function() {
         location.href = './product_management.jsp';
-    }
-
-    // 点击回到搜索按钮
-    document.getElementById("searchButton").onclick = function() {
-        location.href = './product_search.jsp';
     }
 
     // 显示弹窗
@@ -135,9 +135,10 @@
                 } else {
                     showCustomModal("删除失败！");
                 }
+                //触发搜索按钮点击事件
+                clickSearchSourceIsnotHand = true;
+                $("#searchButton").click();
 
-                // 刷新商品列表
-                fetchProducts();
             })
             .catch(error => {
                 console.error('Error deleting products:', error);
@@ -146,34 +147,54 @@
             });
     }
 
-    var modal = document.getElementById("confirmModal");
-    var overlay = document.getElementById("modalOverlay");
-    // 进入页面即可自动执行，刷新并显示出所有商品
-    document.addEventListener('DOMContentLoaded', function() {
-        fetchProducts();
-    });
-    function fetchProducts() {
-        fetch("../product_getting")
+    $("#searchButton").click(function (event) {
+        // 阻止表单的默认提交行为
+        event.preventDefault();
+        var managerInput = $("#searchInput").val();
+        // 判断用户名是否为空
+        if (isEmpty(managerInput)) {
+            showCustomModal("请勿输入空名称！");
+            return;  // 结束函数，避免继续执行提交
+        }
+        // 发送POST请求，将managerInput传给后端
+        fetch("../product_getting", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",  // 设置请求头为JSON格式
+            },
+            body: JSON.stringify({ managerInput: managerInput })  // 将managerInput作为JSON数据发送
+        })
             .then(response => response.json())
             .then(data => {
                 const productList = document.getElementById('productList');
                 productList.innerHTML = ``; // 清空现有内容
-                data.forEach(product => {
-                    const productModule = document.createElement('div');
-                    productModule.className = 'product-module';
-                    productModule.innerHTML = `
+                if (data.length === 0) {
+                    if(!clickSearchSourceIsnotHand) {
+                        // data为空时弹出搜索结果不存在提示
+                        showCustomModal("无符合条件的商品！");
+                    }
+                    else{
+                        //把状态改回false，防止下次用户搜索无结果不会弹出提示框
+                        clickSearchSourceIsnotHand = false;
+                    }
+                }
+                else {
+                    data.forEach(product => {
+                        const productModule = document.createElement('div');
+                        productModule.className = 'product-module';
+                        productModule.innerHTML = `
                     <div class="delete-checkbox" data-id="\${product.productId}" onclick="toggleCheckbox(\${product.productId})"></div>
                     <h3>\${product.productName}</h3>
                     <p>库存:\${product.productAmount}</p>
                     <p>价格:￥\${product.productPrice}</p>
                     <button onclick="saveToLocalStorage(\${product.productId}, '\${product.productName}', \${product.productAmount}, \${product.productPrice})">点击更新</button>
                     `;
-                    productList.appendChild(productModule);
-                });
+                        productList.appendChild(productModule);
+                    });
+                }
             })
             .catch(error => console.error('Error fetching products:', error));
-    }
-
+    });
     //使得点击模块后跳转到的页面能够取得被点击模块的信息
     function saveToLocalStorage(productId, productName, productAmount, productPrice) {
         localStorage.setItem('productId', productId);
@@ -183,6 +204,13 @@
         location.href = './product_update.jsp';
     }
 
+    // 判断字符串是否为空，空则返回 true，否则返回 false
+    function isEmpty(str) {
+        if (str == null || str.trim() == "") {
+            return true;
+        }
+        return false;
+    }
 </script>
 </body>
 </html>

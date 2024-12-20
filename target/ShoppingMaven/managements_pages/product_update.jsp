@@ -120,7 +120,7 @@
 
                     // 1.5秒后重定向到首页
                     setTimeout(function () {
-                        window.location.href = "product_management.jsp";
+                        location.href = './product_management.jsp';
                     }, 1500);
                 } else {
                     // 添加失败，弹窗显示错误消息

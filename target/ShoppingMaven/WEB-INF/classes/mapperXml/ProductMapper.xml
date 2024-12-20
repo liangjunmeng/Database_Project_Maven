@@ -9,6 +9,13 @@
         FROM ProductInfo
     </select>
 
+    <!-- 使用like查询商品 -->
+    <select id="searchProductByLike" parameterType="String" resultType="com.xxxx.bean.Product">
+        SELECT *
+        FROM ProductInfo
+        WHERE productName like #{str}
+    </select>
+
     <!-- 查询商品数量 -->
     <select id="selectAmount" resultType="int">
         SELECT count(*)

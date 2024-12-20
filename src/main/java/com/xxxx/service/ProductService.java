@@ -68,6 +68,16 @@ public class ProductService {
         return productMapper.selectAll();
     }
 
+    //商品遍历(like搜索)
+    public List<Product> productSearching(String str) {
+
+        str = StringUtil.addPercentSign(str);
+
+        SqlSession session = GetSqlSession.createSqlSession();
+        ProductMapper productMapper = session.getMapper(ProductMapper.class);
+        return productMapper.searchProductByLike(str);
+    }
+
     //通过商品id将商品成批删除
     public void productDeleting(List<Integer> ids) {
 

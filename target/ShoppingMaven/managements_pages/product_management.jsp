@@ -50,7 +50,7 @@
         location.href = '../personal_pages/manager_personal.jsp';
     }
 
-    // 点击回到搜索按钮
+    // 点击搜索按钮，来到搜索页面
     document.getElementById("searchButton").onclick = function() {
         location.href = './product_search.jsp';
     }
