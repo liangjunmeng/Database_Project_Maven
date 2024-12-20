@@ -1,5 +1,5 @@
 <%--
-  用于添加商品，包括填写商品名字、数量和单价
+  用于更新商品
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
@@ -11,7 +11,7 @@
 <body>
 <link rel="stylesheet" href="product_add_or_update.css">
 <div class="product-form-container">
-    <div class="product-form-title">商品添加</div>
+    <div class="product-form-title">商品更新</div>
     <form id="addingfrom">
         <div class="input-group">
             <label for="productName">商品名:</label>
@@ -25,7 +25,7 @@
             <label for="productPrice">商品单价:</label>
             <input type="number" id="productPrice" name="productPrice">
         </div>
-        <button type="button" id="addbtn">添加</button>
+        <button type="button" id="addbtn">更新</button>
     </form>
 </div>
 
@@ -41,6 +41,23 @@
 </body>
 <script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript">
+    //获得上一个页面里被点击模块的信息
+    window.onload = function() {
+        const productId = localStorage.getItem('productId');
+        const productName = localStorage.getItem('productName');
+        const productAmount = localStorage.getItem('productAmount');
+        const productPrice = localStorage.getItem('productPrice');
+        // 将 localStorage 中的值填充到对应的 input 元素中
+        if (productName) {
+            document.getElementById('productName').value = productName;
+        }
+        if (productAmount) {
+            document.getElementById('productQuantity').value = productAmount;
+        }
+        if (productPrice) {
+            document.getElementById('productPrice').value = productPrice;
+        }
+    };
 
     // 显示弹窗
     function showModal(message) {
@@ -58,6 +75,7 @@
     $("#addbtn").click(function (event) {
         // 阻止表单的默认提交行为
         event.preventDefault();
+        var pid = $("#productId").val();
         var pname = $("#productName").val();
         var pamount = $("#productQuantity").val();
         var pprice = $("#productPrice").val();
@@ -81,9 +99,10 @@
 
         // 使用 Ajax 提交表单数据到 Servlet
         $.ajax({
-            url: "../product_adding", // Servlet 的 URL
+            url: "../product_updating", // Servlet 的 URL
             type: "POST",
             data: {
+                productId: pid,
                 productName: pname,
                 productAmount: pamount,
                 productPrice: pprice
@@ -120,3 +139,4 @@
     }
 </script>
 </html>
+

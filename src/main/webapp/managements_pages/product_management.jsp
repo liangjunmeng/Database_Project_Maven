@@ -121,12 +121,21 @@
                     <h3>\${product.productName}</h3>
                     <p>库存:\${product.productAmount}</p>
                     <p>价格:￥\${product.productPrice}</p>
-                    <button onclick="location.href='./product_detail.jsp?id=\${product.productId}'">查看详情</button>
+                    <button onclick="saveToLocalStorage(\${product.productId}, '\${product.productName}', \${product.productAmount}, \${product.productPrice})">点击更新</button>
                     `;
                     productList.appendChild(productModule);
                 });
             })
             .catch(error => console.error('Error fetching products:', error));
+    }
+    //使得点击模块后跳转到的页面能够取得被点击模块的信息
+    function saveToLocalStorage(productId, productName, productAmount, productPrice) {
+        console.log("ss");
+        localStorage.setItem('productId', productId);
+        localStorage.setItem('productName', productName);
+        localStorage.setItem('productAmount', productAmount);
+        localStorage.setItem('productPrice', productPrice);
+        location.href = './product_update.jsp';
     }
 
     // 点击加号按钮

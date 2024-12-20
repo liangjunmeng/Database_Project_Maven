@@ -26,12 +26,15 @@ webapp：前端层，放置各种与前端代码相关的文件，如html、jsp�
 注意事项：
 1.service层在对数据库的更新（修改、删除和插入）操作后要及时将事务提交（session.commit()），
 否则数据库数据无法更新，更有甚者会导致项目和ssms崩溃！
+
 2.注意拼写问题，如html中input里的value不要写成values，后端@Param不要写成@param
+
 3.关于里面的路径说明：
 “./login”表示上级目录加上/login，如/maven/web/register.jsp里如果写了
 跳转到“./login”,那就代表跳转到“/maven/web/login”;
 ”../login“表示上上级目录加上/login，如“/maven/login”，以此类推...
 如果只是单纯地写上“login”，等同于“./login”
+
 4.有关javascript：
 ①
 productModule.innerHTML = `
@@ -51,15 +54,18 @@ productModule.innerHTML = `
 这行代码的作用是从外部链接加载jQuery库。如果删除了这行代码，那么页面上将不会加载jQuery库，
 而脚本中使用了$（jQuery的别名）来执行操作，没有jQuery库的支持，这些操作将无法执行，因此脚
 本无法正常工作。
-
 具体来说，以下是一些依赖于jQuery的代码段：
-
 $("#errorMessage").text(message);：这是jQuery用来设置元素文本内容的方法。
 $("#errorModal").show();：这是jQuery用来显示元素的方法。
 $("#loginbtn").click(function (event) {...});：这是jQuery用来绑定点击事件的方法。
 $.ajax({...});：这是jQuery提供的Ajax方法，用于发送异步HTTP请求。
 如果没有加载jQuery库，那么$这个符号将不会指向jQuery对象，而是保持为undefined，导致所有
 使用$的代码都会抛出错误，因为它们试图调用undefined的方法或属性。
-
 因此，为了使这段代码正常工作，你需要确保jQuery库被正确加载。如果你不想使用外部链接，你也可
-以将jQuery库文件下载到你的服务器，并使用相对路径或绝对路径来引用它。
+以将jQuery库文件下载到你的服务器，并使用相对路径或绝对路径来引用它
+。
+5.有关前端和servlet：
+如果前端以表单或Ajax形式提交，会自动调用servlet中的service方法，service方法会判断前端
+是post提交还是get提交分别调用doPost或doGet函数，如果要取得前端传来的参数，一并使用
+request.getParameter("参数名")来取得
+
