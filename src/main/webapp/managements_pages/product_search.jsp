@@ -153,7 +153,12 @@
         var managerInput = $("#searchInput").val();
         // 判断用户名是否为空
         if (isEmpty(managerInput)) {
-            showCustomModal("请勿输入空名称！");
+            if(!clickSearchSourceIsnotHand) {
+                showCustomModal("请勿输入空名称！");
+            }
+            else{
+                clickSearchSourceIsnotHand = false;
+            }
             return;  // 结束函数，避免继续执行提交
         }
         // 发送POST请求，将managerInput传给后端
@@ -197,6 +202,7 @@
     });
     //使得点击模块后跳转到的页面能够取得被点击模块的信息
     function saveToLocalStorage(productId, productName, productAmount, productPrice) {
+        localStorage.setItem('lastPage', "product_search");
         localStorage.setItem('productId', productId);
         localStorage.setItem('productName', productName);
         localStorage.setItem('productAmount', productAmount);

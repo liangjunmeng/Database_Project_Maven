@@ -41,12 +41,14 @@
 </body>
 <script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript">
+    var lastPage;
     var productId;
     var productName;
     var productAmount;
     var productPrice;
     //获得上一个页面里被点击模块的信息
     window.onload = function() {
+        lastPage = localStorage.getItem('lastPage');
         productId = localStorage.getItem('productId');
         productName = localStorage.getItem('productName');
         productAmount = localStorage.getItem('productAmount');
@@ -119,9 +121,16 @@
                     showModal(response.message);
 
                     // 1.5秒后重定向到首页
-                    setTimeout(function () {
-                        location.href = './product_management.jsp';
-                    }, 1500);
+                    if(lastPage == "product_management") {
+                        setTimeout(function () {
+                            location.href = './product_management.jsp';
+                        }, 1500);
+                    }
+                    else if(lastPage == "product_search") {
+                        setTimeout(function () {
+                            location.href = './product_search.jsp';
+                        }, 1500);
+                    }
                 } else {
                     // 添加失败，弹窗显示错误消息
                     showModal(response.message);
