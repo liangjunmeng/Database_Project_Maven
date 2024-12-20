@@ -48,6 +48,7 @@
     let deleteMode = false; // 控制勾选框的显示状态
     let deleteBtn = false; // 控制删除按钮的显示状态
     let selectedProductIds = []; // 存储被选中的商品ID
+    var userEnter = "";
     // 点击全部商品按钮
     document.getElementById("backHomeButton").onclick = function() {
         location.href = './product_management.jsp';
@@ -160,6 +161,9 @@
                 clickSearchSourceIsnotHand = false;
             }
             return;  // 结束函数，避免继续执行提交
+        }
+        if(!clickSearchSourceIsnotHand) {
+            userEnter = managerInput;
         }
         // 发送POST请求，将managerInput传给后端
         fetch("../product_getting", {
