@@ -45,3 +45,20 @@ productModule.innerHTML = `
 并在字符串中使用 ${...} 语法来嵌入变量或表达式的值。如果你需要在模板字符串中包含一个实际
 的美元符号 $，你需要对它进行转义，因为美元符号在模板字符串中有特殊的意义（它标志着变量或表
 达式的开始）。
+②
+<script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script> 
+这行代码的作用是从外部链接加载jQuery库。如果删除了这行代码，那么页面上将不会加载jQuery库，
+而脚本中使用了$（jQuery的别名）来执行操作，没有jQuery库的支持，这些操作将无法执行，因此脚
+本无法正常工作。
+
+具体来说，以下是一些依赖于jQuery的代码段：
+
+$("#errorMessage").text(message);：这是jQuery用来设置元素文本内容的方法。
+$("#errorModal").show();：这是jQuery用来显示元素的方法。
+$("#loginbtn").click(function (event) {...});：这是jQuery用来绑定点击事件的方法。
+$.ajax({...});：这是jQuery提供的Ajax方法，用于发送异步HTTP请求。
+如果没有加载jQuery库，那么$这个符号将不会指向jQuery对象，而是保持为undefined，导致所有
+使用$的代码都会抛出错误，因为它们试图调用undefined的方法或属性。
+
+因此，为了使这段代码正常工作，你需要确保jQuery库被正确加载。如果你不想使用外部链接，你也可
+以将jQuery库文件下载到你的服务器，并使用相对路径或绝对路径来引用它。
