@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Page</title>
+    <title>注册页面</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -260,6 +260,7 @@
                         document.getElementById('username').value = "";
                         document.getElementById('password').value = "";
                         //window.location.href = "homepages/home.jsp";
+                        //这里有问题，应该判断是否为管理员
                         window.open("homepages/home.jsp", "_blank");
                     }, 1500);
                 } else {

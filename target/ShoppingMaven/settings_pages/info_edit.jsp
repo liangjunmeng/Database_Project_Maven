@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>更新商品</title>
+    <title>用户信息编辑</title>
 </head>
 <body>
 <link rel="stylesheet" href="info_edit.css">
@@ -50,7 +50,6 @@
     var userid = "<%= userid %>";
     var username = "<%= username %>";
     var password = "<%= password %>";
-    console.log(username);
     //获得上一个页面里被点击模块的信息
     window.onload = function() {
         // 将 localStorage 中的值填充到对应的 input 元素中
@@ -101,7 +100,7 @@
             data: {
                 userid: uid,
                 username: uname,
-                password: upwn,
+                password: upwn
             },
             dataType: "json", // 指定返回数据的类型为 JSON
             success: function (response) {
@@ -117,6 +116,43 @@
 
                 } else {
                     // 更新失败，弹窗显示错误消息
+                    showModal(response.message);
+                }
+            },
+            error: function () {
+                // 网络或服务器错误
+                showModal("发生了错误，请稍后再尝试！");
+            }
+        });
+    });
+
+    //注销用户
+    $("#clearbtn").click(function (event) {
+        // 阻止表单的默认提交行为
+        event.preventDefault();
+        var uid = userid;
+
+        // 使用 Ajax 提交表单数据到 Servlet
+        $.ajax({
+            url: "../user_deleting", // Servlet 的 URL
+            type: "POST",
+            data: {
+                userid: uid
+            },
+            dataType: "json", // 指定返回数据的类型为 JSON
+            success: function (response) {
+                // 根据服务器返回的数据进行处理
+                if (response.success) {
+                    // 注销成功，弹窗显示成功消息
+                    showModal(response.message);
+
+                    // 1.5秒后重定向到上一页
+                    setTimeout(function () {
+                        window.close();
+                    }, 1500);
+
+                } else {
+                    // 注销失败，弹窗显示错误消息
                     showModal(response.message);
                 }
             },

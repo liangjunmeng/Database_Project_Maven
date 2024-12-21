@@ -17,7 +17,7 @@
     </select>
 
     <!-- 根据 userid 查询用户 -->
-    <select id="selectById" parameterType="int" resultType="com.xxxx.bean.User">
+    <select id="selectById" parameterType="Integer" resultType="com.xxxx.bean.User">
         SELECT *
         FROM UserInfo
         WHERE userid = #{userid}
@@ -48,9 +48,9 @@
         WHERE userid = #{userid}
     </update>
 
-    <!-- 删除用户
-    <delete id="deleteUser" parameterType="int">
-        DELETE FROM users WHERE id = #{id}
+    <!-- 删除用户（已经能够级联删除） -->
+    <delete id="deleteUser" parameterType="Integer">
+        DELETE FROM UserInfo WHERE userid = #{userid}
     </delete>
-    -->
+
 </mapper>

@@ -142,4 +142,32 @@ public class UserService {
 
         return messageModel;
     }
+
+    //注销用户
+    public MessageModel userDelete(String uid) {
+        MessageModel messageModel = new MessageModel();
+
+        if(StringUtil.isEmpty(uid)){
+            messageModel.setCode(0);
+            messageModel.setMsg("用户的uid为空！");
+            return messageModel;
+        }
+
+        SqlSession session = GetSqlSession.createSqlSession();
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+
+        Integer userid = Integer.valueOf(uid);
+        User user = userMapper.selectById(userid);
+        if(user == null){
+            messageModel.setMsg("该用户不存在");
+            messageModel.setCode(0);
+            return messageModel;
+        }
+
+        userMapper.deleteUser(userid);
+        session.commit(); //提交事务，让数据库得以更新
+        messageModel.setMsg("已成功注销！");
+
+        return messageModel;
+    }
 }
