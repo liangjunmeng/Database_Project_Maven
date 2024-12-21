@@ -1,6 +1,6 @@
 package com.xxxx.bean;
 
-public class Wallets {
+public class Wallet {
     private String sources;
     private int balance;
     private int userid;

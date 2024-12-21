@@ -1,6 +1,6 @@
 package com.xxxx.bean;
 
-public class Orders {
+public class Order {
     private int orderId;
     private int userid;
     private int productId;
