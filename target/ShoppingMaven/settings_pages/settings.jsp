@@ -95,8 +95,15 @@
 
 <div class="login-container">
     <button class="button" onclick="location.href='info_edit.jsp'">编辑个人信息</button>
-    <button class="button" onclick="location.href='../index.jsp'">退出</button>
+    <button class="button" onclick="quit()">退出</button>
 </div>
-
 </body>
+<script>
+    function quit() {
+        // 可选：关闭当前标签页
+        window.close();
+        // 在新标签页打开 index.jsp
+        //window.open("../index.jsp", "_blank");
+    }
+</script>
 </html>

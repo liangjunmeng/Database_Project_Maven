@@ -260,12 +260,23 @@
                     if(!response.isManager) {
                         // 1.5秒后重定向到首页
                         setTimeout(function () {
-                            window.location.href = "homepages/home.jsp";
+                            //关闭弹窗并清除输入框里的内容
+                            closeModal();
+                            document.getElementById('username').value = "";
+                            document.getElementById('password').value = "";
+                            //同一标签页中打开，这里不再采用
+                            //window.location.href = "homepages/home.jsp";
+                            //重新打开一个标签页，方便之后的退出操作
+                            window.open("homepages/home.jsp", "_blank");
                         }, 1500);
                     }
                     else{
                         setTimeout(function () {
-                            window.location.href = "personal_pages/manager_personal.jsp";
+                            closeModal();
+                            document.getElementById('username').value = "";
+                            document.getElementById('password').value = "";
+                            //window.location.href = "personal_pages/manager_personal.jsp";
+                            window.open("personal_pages/manager_personal.jsp", "_blank");
                         }, 1500);
                     }
                 } else {

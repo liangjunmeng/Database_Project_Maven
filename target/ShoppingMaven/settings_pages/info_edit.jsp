@@ -112,7 +112,7 @@
 
                     // 1.5秒后重定向到上一页
                     setTimeout(function () {
-                        window.history.back();
+                        location.href = "settings.jsp";
                     }, 1500);
 
                 } else {

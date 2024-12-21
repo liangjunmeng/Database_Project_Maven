@@ -256,7 +256,11 @@
 
                     // 1.5秒后重定向到首页
                     setTimeout(function () {
-                        window.location.href = "homepages/home.jsp";
+                        closeModal();
+                        document.getElementById('username').value = "";
+                        document.getElementById('password').value = "";
+                        //window.location.href = "homepages/home.jsp";
+                        window.open("homepages/home.jsp", "_blank");
                     }, 1500);
                 } else {
                     // 注册失败，弹窗显示错误消息

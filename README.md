@@ -91,3 +91,10 @@ ID选择器：ID选择器是以井号 (#) 开头的，例如 #product-module 和
 清除缓存：
 打开浏览器开发者工具（按 F12），选择 Network 面板，并勾选 Disable cache。
 然后重新加载页面。
+
+9.页面跳转：
+可以使用window.location.href在当前页面进行页面的跳转，也可以使用window.open打开新的
+标签页，方便之后退出时window.close()将整个标签页关闭，防止回退而偷窥到其他用户隐私
+如window.open("homepages/home.jsp", "_blank")，其中：
+"homepages/home.jsp" 是要打开的页面的URL。
+"_blank" 是新窗口或标签页的名称。
