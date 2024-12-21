@@ -41,13 +41,13 @@
         select max(userid) from UserInfo
     </select>
 
-    <!-- 更新用户
-    <update id="updateUser" parameterType="User">
-        UPDATE users
-        SET user_name = #{userName}, email = #{email}
-        WHERE id = #{id}
+    <!-- 更新用户 -->
+    <update id="updateUser" parameterType="com.xxxx.bean.User">
+        UPDATE UserInfo
+        SET username = #{username}, password = #{password}
+        WHERE userid = #{userid}
     </update>
-    -->
+
     <!-- 删除用户
     <delete id="deleteUser" parameterType="int">
         DELETE FROM users WHERE id = #{id}

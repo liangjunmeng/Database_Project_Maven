@@ -12,4 +12,5 @@ public interface UserMapper {
     public User queryuserByName(String username);
     public void insertUser(User user);
     public int maxUserid();
+    public void updateUser(User user);
 }

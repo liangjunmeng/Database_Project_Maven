@@ -85,21 +85,21 @@
         var pname = $("#productName").val();
         var pamount = $("#productQuantity").val();
         var pprice = $("#productPrice").val();
-        // 判断用户名是否为空
+        // 判断商品名是否为空
         if (isEmpty(pname)) {
-            showModal("商品名不能为空");
+            showModal("商品名不能为空！");
             return;  // 结束函数，避免继续执行提交
         }
 
-        // 判断密码是否为空
+        // 判断商品数量是否为空
         if (isEmpty(pamount)) {
-            showModal("商品数量不能为空");
+            showModal("商品数量不能为空！");
             return;  // 结束函数，避免继续执行提交
         }
 
-        // 判断密码是否为空
+        // 判断商品价格是否为空
         if (isEmpty(pprice)) {
-            showModal("商品单价不为空");
+            showModal("商品单价不为空！");
             return;  // 结束函数，避免继续执行提交
         }
 

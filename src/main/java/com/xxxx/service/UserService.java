@@ -1,7 +1,9 @@
 package com.xxxx.service;
 
+import com.xxxx.bean.Product;
 import com.xxxx.bean.User;
 import com.xxxx.bean.vo.MessageModel;
+import com.xxxx.mapper.ProductMapper;
 import com.xxxx.mapper.UserMapper;
 import com.xxxx.util.GetSqlSession;
 import com.xxxx.util.StringUtil;
@@ -100,4 +102,44 @@ public class UserService {
         return messageModel;
     }
 
+    //用户更新（以id为依据）
+    public MessageModel userUpdating(String uid, String uname, String upwn) {
+        MessageModel messageModel = new MessageModel();
+        User u =new User();
+        u.setUserid(Integer.valueOf(uid));
+        u.setUsername(uname);
+        u.setPassword(upwn);
+        /*
+        将字符串转化为数字，因为前端ajax将这些数据转换为var，即字符串形式再传给后端，
+        因为前端需要通过检验字符串是否为空判断用户输入的合法性
+        */
+        messageModel.setObject(u);
+
+        if(StringUtil.isEmpty(uname) || StringUtil.isEmpty(upwn)){
+            messageModel.setCode(0);
+            messageModel.setMsg("用户名或密码不能为空！");
+            return messageModel;
+        }
+
+        SqlSession session = GetSqlSession.createSqlSession();
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+        User user = userMapper.queryuserByName(uname);
+
+        //如果更改后的用户名和其他用户（id不同）名有冲突
+        if(user != null && user.getUserid()!=u.getUserid()){
+            messageModel.setCode(0);
+            messageModel.setMsg("用户名已存在！");
+            return messageModel;
+        }
+
+        else{
+            messageModel.setMsg("个人信息更新成功！");
+            userMapper.updateUser(u);
+            session.commit(); //提交事务，让数据库得以更新
+
+
+        }
+
+        return messageModel;
+    }
 }

@@ -128,7 +128,6 @@ public class ProductService {
 
         }
 
-        messageModel.setObject(product);
         return messageModel;
     }
 }
