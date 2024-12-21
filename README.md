@@ -98,3 +98,12 @@ ID选择器：ID选择器是以井号 (#) 开头的，例如 #product-module 和
 如window.open("homepages/home.jsp", "_blank")，其中：
 "homepages/home.jsp" 是要打开的页面的URL。
 "_blank" 是新窗口或标签页的名称。
+
+10.数据库完整性
+如果实现删除或者创建、更新等功能时，产生了错误或崩溃而代码本身无问题，可能是：
+①
+原因：session事务未提交
+解决方法：session.commit()
+②
+原因：有其他表的外码绑定了用于操作的表的主码， 当值一致时，直接操作会导致错误
+解决方法：在数据库中的表中给外码添加约束实现级联删除，如加上on delete cascade后缀
