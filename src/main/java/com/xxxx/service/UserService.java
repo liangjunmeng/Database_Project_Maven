@@ -50,6 +50,7 @@ public class UserService {
             messageModel.setCode(2);
         }
 
+        messageModel.setMsg("登录成功！");
         messageModel.setObject(user);
 
         return messageModel;
@@ -90,7 +91,10 @@ public class UserService {
             u.setUserid(userid);
             userMapper.insertUser(u);
             session.commit(); //提交事务，让数据库得以更新
-
+            /*管理员账号注册*/
+            if(userid == 1){
+                messageModel.setCode(2);
+            }
             /*默认情况下，MyBatis 使用的是事务管理。如果你在执行插入操作后没有显式提交事务，
             则插入操作可能不会立即生效。特别是如果没有显式调用
             session.commit()，插入操作可能只是存在于本地事务中，
@@ -98,7 +102,8 @@ public class UserService {
 
         }
 
-        messageModel.setObject(user);
+        messageModel.setMsg("注册成功！");
+        messageModel.setObject(u);
         return messageModel;
     }
 

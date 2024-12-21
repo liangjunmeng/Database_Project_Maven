@@ -251,20 +251,33 @@
             success: function (response) {
                 // 根据服务器返回的数据进行处理
                 if (response.success) {
-                    // 注册成功，弹窗显示成功消息
+                    // 登录成功，弹窗显示成功消息
                     showModal(response.message);
-
-                    // 1.5秒后重定向到首页
-                    setTimeout(function () {
-                        closeModal();
-                        document.getElementById('username').value = "";
-                        document.getElementById('password').value = "";
-                        //window.location.href = "homepages/home.jsp";
-                        //这里有问题，应该判断是否为管理员
-                        window.open("homepages/home.jsp", "_blank");
-                    }, 1500);
+                    //判断是否为管理员
+                    if(!response.isManager) {
+                        // 1.5秒后重定向到首页
+                        setTimeout(function () {
+                            //关闭弹窗并清除输入框里的内容
+                            closeModal();
+                            document.getElementById('username').value = "";
+                            document.getElementById('password').value = "";
+                            //同一标签页中打开，这里不再采用
+                            //window.location.href = "homepages/home.jsp";
+                            //重新打开一个标签页，方便之后的退出操作
+                            window.open("homepages/home.jsp", "_blank");
+                        }, 1500);
+                    }
+                    else{
+                        setTimeout(function () {
+                            closeModal();
+                            document.getElementById('username').value = "";
+                            document.getElementById('password').value = "";
+                            //window.location.href = "personal_pages/manager_personal.jsp";
+                            window.open("personal_pages/manager_personal.jsp", "_blank");
+                        }, 1500);
+                    }
                 } else {
-                    // 注册失败，弹窗显示错误消息
+                    // 登录失败，弹窗显示错误消息
                     showModal(response.message);
                 }
             },

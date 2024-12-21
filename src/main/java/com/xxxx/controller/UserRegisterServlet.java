@@ -32,12 +32,17 @@ public class UserRegisterServlet extends HttpServlet {
         if (messageModel.getCode() == 1) {
             // 注册成功：将用户信息设置到 session
             request.getSession().setAttribute("user", messageModel.getObject());
-
             // 返回 JSON 数据
-            out.write("{\"success\": true, \"message\": \"" + messageModel.getMsg() + "\"}");
-        } else {
-            // 登录失败：返回错误信息
-            out.write("{\"success\": false, \"message\": \"" + messageModel.getMsg() + "\"}");
+            out.write("{\"success\": true, \"message\": \"" + messageModel.getMsg() + "\",\"isManager\": false}");
+        }
+        else if(messageModel.getCode() == 2){
+            // 注册成功：将管理员信息设置到 session
+            request.getSession().setAttribute("user", messageModel.getObject());
+            // 返回 JSON 数据
+            out.write("{\"success\": true, \"message\": \"" + messageModel.getMsg() + "\",\"isManager\": true}");
+        }else {
+            // 注册失败：返回错误信息
+            out.write("{\"success\": false, \"message\": \"" + messageModel.getMsg() + "\",\"isManager\": false}");
         }
         out.flush();
     }
