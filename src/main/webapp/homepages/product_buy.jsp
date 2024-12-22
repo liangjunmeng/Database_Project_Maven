@@ -46,9 +46,6 @@
     <div class="message">
         <label for="buyQuantity">购买数量：</label>
         <input type="number" id="buyQuantity" name="buyQuantity" min="1" value="1">
-        <br><br>
-        <label for="totalPrice">总金额（￥）：</label>
-        <input type="text" id="totalPrice" name="totalPrice" readonly>
     </div>
     <div class="modal-buttons">
         <button type="button" id="confirmBuy">确定</button>
