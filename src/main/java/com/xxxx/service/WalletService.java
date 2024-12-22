@@ -17,13 +17,13 @@ public class WalletService {
         return walletMapper.selectAll(userid);
     }
     //钱包添加(sos表示sources,blc表示balance,isP表示isPrior)
-    public MessageModel walletAdding(int uid, String sos, int blc, int isP) {
+    public MessageModel walletAdding(int uid, String sos) {
         MessageModel messageModel = new MessageModel();
         Wallet w = new Wallet();
         w.setUserid(uid);
         w.setSources(sos);
-        w.setBalance(blc);
-        w.setIsPrior(isP);
+        w.setBalance(0);
+        w.setIsPrior(0);
         messageModel.setObject(w);
 
         SqlSession session = GetSqlSession.createSqlSession();
