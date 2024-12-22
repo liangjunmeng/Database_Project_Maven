@@ -85,17 +85,25 @@ body {
 }
 
 #editbtn {
-
     background-image: linear-gradient(45deg, #3abff8, #f83abf);
+    background-size: 400% 400%;
     animation: gradientButton 6s ease infinite;
+    color: white;
+    border-radius: 5px;
+}
+
+#editbtn:hover{
+    animation: gradientButtonHover 0.5s ease forwards;
 }
 
 #clearbtn {
-    background-color: gray;
+    background-color: #aaa;
+    color: white;
+    border-radius: 5px;
 }
 
-.user-form-container button:hover {
-    animation: gradientButtonHover 0.5s ease forwards;
+#clearbtn:hover{
+    background-color: #bbb; /* 鼠标悬停时的背景颜色 */
 }
 
 @keyframes gradientButton {

@@ -24,6 +24,7 @@
     <mappers>
         <mapper resource="mapperXml/UserMapper.xml"/>
         <mapper resource="mapperXml/ProductMapper.xml"/>
+        <mapper resource="mapperXml/WalletMapper.xml"/>
     </mappers>
 
 </configuration>

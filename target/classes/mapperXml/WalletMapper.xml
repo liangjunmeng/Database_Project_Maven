@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xxxx.mapper.WalletMapper">
+
+    <!-- 查询所有钱包 -->
+    <select id="selectAll"  parameterType="Integer" resultType="com.xxxx.bean.Wallet">
+        SELECT *
+        FROM Wallets
+        WHERE userid = #{userid}
+    </select>
+
+    <!-- 插入钱包 -->
+    <insert id="insertProduct" parameterType="com.xxxx.bean.Wallet">
+        INSERT INTO Wallets (userid, sources, balance, isPrior)
+        VALUES (#{userid}, #{sources}, #{balance}, #{isPrior})
+    </insert>
+
+    <!-- 根据主码查询钱包 -->
+    <select id="queryWalletByPri" parameterType="com.xxxx.bean.Wallet" resultType="com.xxxx.bean.Wallet">
+        SELECT *
+        FROM Wallets
+        WHERE userid = #{userid} and sources = #{sources}
+    </select>
+
+    <!-- 使用like查询商品
+    <select id="searchProductByLike" parameterType="String" resultType="com.xxxx.bean.Product">
+        SELECT *
+        FROM ProductInfo
+        WHERE productName like #{str}
+    </select>
+    -->
+    <!-- 查询商品数量
+    <select id="selectAmount" resultType="int">
+        SELECT count(*)
+        FROM ProductInfo
+    </select>
+    -->
+    <!-- 根据 productId 查询商品
+    <select id="selectById" parameterType="int" resultType="com.xxxx.bean.Product">
+        SELECT *
+        FROM ProductInfo
+        WHERE productId = #{productId}
+    </select>
+    -->
+
+    <!-- 查找最大productId，便于给新商品分配id
+    <select id="maxProductId">
+        select max(productId) from ProductInfo
+    </select>
+    -->
+    <!-- 更新商品
+    <update id="updateProductById" parameterType="com.xxxx.bean.Product">
+        UPDATE ProductInfo
+        SET productName = #{productName}, productAmount = #{productAmount},
+            productPrice = #{productPrice}
+        WHERE productId = #{productId}
+    </update>
+    -->
+    <!-- 删除商品
+    <delete id="deleteProductById" parameterType="Integer">
+        DELETE FROM ProductInfo WHERE productId = #{productId}
+    </delete>
+    -->
+</mapper>

@@ -74,6 +74,35 @@
         .settings-module {
             margin-top: 20px;
         }
+
+        #backHomeButton {
+            position: fixed;
+            left: 20px;
+            width: 120px;
+            height: 60px;
+            padding: 0;
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* 居中对齐文本 */
+        }
+
+        #backHomeButton {
+            top: 20px; /* 确保与加号按钮同一行 */
+        }
+
+        #backHomeButton:hover {
+            background-color: #f8f8f8;
+            transform: scale(1.1); /* 鼠标悬浮时放大按钮 */
+        }
     </style>
 </head>
 <body>
@@ -84,5 +113,13 @@
     </div>
     <a href="../settings_pages/settings.jsp" class="module settings-module">设置</a>
 </div>
+<button id="backHomeButton">回到首页</button>
 </body>
+<script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    // 点击回到首页按钮
+    document.getElementById("backHomeButton").onclick = function() {
+        location.href = '../homepages/home.jsp';
+    }
+</script>
 </html>
