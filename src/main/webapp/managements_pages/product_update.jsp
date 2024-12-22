@@ -19,11 +19,11 @@
         </div>
         <div class="input-group">
             <label for="productQuantity">商品数量</label>
-            <input type="number" id="productQuantity" name="productQuantity">
+            <input type="text" id="productQuantity" name="productQuantity">
         </div>
         <div class="input-group">
             <label for="productPrice">商品单价（￥）</label>
-            <input type="number" id="productPrice" name="productPrice">
+            <input type="text" id="productPrice" name="productPrice">
         </div>
         <button type="button" id="addbtn">更新</button>
     </form>
@@ -102,6 +102,15 @@
             showModal("商品单价不为空！");
             return;  // 结束函数，避免继续执行提交
         }
+        //判断输入的数量或价格是否为整数
+        if(pamount != "0" && !isPositiveInt(pamount)){
+            showModal("商品数量应该为整数");
+            return;
+        }
+        if(pprice != "0" && !isPositiveInt(pprice)){
+            showModal("商品数量应该为整数");
+            return;
+        }
 
         // 使用 Ajax 提交表单数据到 Servlet
         $.ajax({
@@ -151,6 +160,10 @@
             return true;
         }
         return false;
+    }
+    // 判断字符串是否为正整数
+    function isPositiveInt(str) {
+        return /^[1-9]\d*$/.test(str);
     }
 </script>
 </html>

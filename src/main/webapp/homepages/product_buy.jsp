@@ -45,7 +45,7 @@
 <div id="buyModal" class="buy-modal">
     <div class="message">
         <label for="buyQuantity">购买数量：</label>
-        <input type="number" id="buyQuantity" name="buyQuantity" min="1" value="1">
+        <input type="text" id="buyQuantity" name="buyQuantity">
     </div>
     <div class="modal-buttons">
         <button type="button" id="confirmBuy">确定</button>
@@ -98,10 +98,6 @@
     function showBuyModal() {
         $("#buyModal").show();
         $("#buyModalOverlay").show();
-        // 初始化购买数量为1
-        $("#buyQuantity").val(1);
-        // 计算并显示总金额
-        updateTotalPrice();
     }
 
     // 关闭购买弹窗
@@ -112,14 +108,27 @@
 
     $("#addbtn").click(function (event) {
         // 阻止表单的默认提交行为
-        event.preventDefault();
-        var pid = productId;
-        var pname = $("#productName").val();
-        var pamount = $("#productQuantity").val();
-        var pprice = $("#productPrice").val();
         showBuyModal();
+    });
 
+    $("#confirmBuy").click(function (event) {
+        // 阻止表单的默认提交行为
+        event.preventDefault();
+        showBuyModal();
+        var buyingAmount = $("#buyQuantity").val();
 
+        if(isEmpty(buyingAmount)){
+            showModal("购买数量不能为空！")
+            return;
+        }
+        if(buyingAmount == "0"){
+            showModal("购买数量不能为0！");
+            return;
+        }
+        if (!isPositiveInt(buyingAmount)) {
+            showModal("购买数量应为正整数！");
+            return;
+        }
         // 使用 Ajax 提交表单数据到 Servlet
         $.ajax({
             url: "../product_updating", // Servlet 的 URL
@@ -168,6 +177,11 @@
             return true;
         }
         return false;
+    }
+
+    // 判断字符串是否为正整数
+    function isPositiveInt(str) {
+        return /^[1-9]\d*$/.test(str);
     }
 </script>
 </html>

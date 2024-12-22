@@ -119,7 +119,11 @@ input[readonly] {
 
 /* 弹窗样式 */
 .modal {
-    display: none;  /* 初始不显示 */
+    display: flex; /* 使 modal 使用 flexbox */
+    display: none; /*默认不显示*/
+    flex-direction: column; /* 设置主轴方向为垂直 */
+    justify-content: center; /* 垂直居中 */
+    align-items: center; /* 水平居中 */
     position: fixed;
     top: 50%;
     left: 50%;
@@ -127,18 +131,24 @@ input[readonly] {
     background-color: rgba(255, 255, 255, 0.9);
     padding: 30px;
     border-radius: 8px;
-    border: 1px solid rgba(0, 0, 0, 0.2);  /* 边缘 */
+    border: 1px solid rgba(0, 0, 0, 0.2);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
-    z-index: 1000;  /* 弹窗置于遮罩层上方 */
-    max-width: 250px; /* 弹窗最大宽度 */
-    width: 60%; /* 宽度为80% */
+    z-index: 1000;
+    max-width: 250px;
+    width: 60%;
 }
 
+
 .modal .message {
+    display: flex;  /* 使用 flexbox 布局 */
+    flex-direction: column;  /* 使内容从上到下排列 */
+    justify-content: center;  /* 垂直居中 */
+    align-items: center;  /* 水平居中 */
     color: #111;
     font-size: 16px;
     text-align: center;
 }
+
 
 .modal .close {
     background: transparent;
@@ -166,7 +176,7 @@ input[readonly] {
     border-radius: 8px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
-    z-index: 1000;
+    z-index: 600;
     max-width: 250px; /* 弹窗最大宽度 */
     width: 90%; /* 宽度为视口宽度的90% */
 }
@@ -192,7 +202,7 @@ input[readonly] {
     box-sizing: border-box; /* 边框和内边距包含在宽度内 */
 }
 
-.message input[type="number"] {
+.message input[type="text"] {
     font-weight: 100; /* 设置字体为较轻的粗细 */
 }
 
@@ -205,7 +215,7 @@ input[readonly] {
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);  /* 半透明背景 */
-    z-index: 999;  /* 遮罩层置于内容上方 */
+    z-index: 500;  /* 遮罩层置于内容上方 */
 }
 
 .modal-buttons {
