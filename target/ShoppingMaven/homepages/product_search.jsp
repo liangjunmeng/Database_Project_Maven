@@ -122,7 +122,7 @@
                         <h3>\${product.productName}</h3>
                         <p>库存:\${product.productAmount}</p>
                         <p>价格:￥\${product.productPrice}</p>
-                        <button onclick="saveToLocalStorage(\${product.productId}, '\${product.productName}', \${product.productAmount}, \${product.productPrice})">点击更新</button>
+                        <button onclick="saveToLocalStorage(\${product.productId}, '\${product.productName}', \${product.productAmount}, \${product.productPrice})">查看详情</button>
                         `;
                         productList.appendChild(productModule);
                     });
@@ -138,7 +138,7 @@
         localStorage.setItem('productName', productName);
         localStorage.setItem('productAmount', productAmount);
         localStorage.setItem('productPrice', productPrice);
-        location.href = './product_update.jsp';
+        location.href = 'product_buy.jsp';
     }
 
     // 判断字符串是否为空，空则返回 true，否则返回 false

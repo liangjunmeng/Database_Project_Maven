@@ -14,15 +14,15 @@
     <div class="product-form-title">商品更新</div>
     <form id="addingfrom">
         <div class="input-group">
-            <label for="productName">商品名:</label>
+            <label for="productName">商品名</label>
             <input type="text" id="productName" name="productName">
         </div>
         <div class="input-group">
-            <label for="productQuantity">商品数量:</label>
+            <label for="productQuantity">商品数量</label>
             <input type="number" id="productQuantity" name="productQuantity">
         </div>
         <div class="input-group">
-            <label for="productPrice">商品单价:</label>
+            <label for="productPrice">商品单价（￥）</label>
             <input type="number" id="productPrice" name="productPrice">
         </div>
         <button type="button" id="addbtn">更新</button>

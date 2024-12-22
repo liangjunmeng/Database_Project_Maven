@@ -1,9 +1,6 @@
 <%--
   用户首页
 --%>
-<%--
-  商品管理（仅限管理员）
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
@@ -86,7 +83,7 @@
         localStorage.setItem('productName', productName);
         localStorage.setItem('productAmount', productAmount);
         localStorage.setItem('productPrice', productPrice);
-        location.href = './product_update.jsp';
+        location.href = 'product_buy.jsp';
     }
 
     // 点击加号按钮
