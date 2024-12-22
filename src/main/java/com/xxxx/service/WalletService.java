@@ -1,12 +1,9 @@
 package com.xxxx.service;
 
-import com.xxxx.bean.Product;
 import com.xxxx.bean.Wallet;
 import com.xxxx.bean.vo.MessageModel;
-import com.xxxx.mapper.ProductMapper;
 import com.xxxx.mapper.WalletMapper;
 import com.xxxx.util.GetSqlSession;
-import com.xxxx.util.StringUtil;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
