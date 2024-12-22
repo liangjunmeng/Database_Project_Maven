@@ -162,7 +162,7 @@ input[readonly] {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: rgba(255, 255, 255, 0.9);
-    padding: 30px;
+    padding: 35px;
     border-radius: 8px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
@@ -171,9 +171,31 @@ input[readonly] {
     width: 90%; /* 宽度为视口宽度的90% */
 }
 
-.buy-modal input {
-    width: 60%;
+.message {
+    display: flex; /* 使用flexbox布局 */
+    align-items: center; /* 垂直居中对齐 */
+    width: 100%; /* 使输入组宽度为100% */
 }
+
+.buy-modal label {
+    font-size: 21px;
+    white-space: nowrap; /* 防止文本换行 */
+    font-weight: 400; /* 设置字体粗细为正常 */
+}
+
+.buy-modal input {
+    font-size: 25px;
+    width: 60%;
+    padding: 5px; /* 添加一些内边距 */
+    border: 1px solid #ccc; /* 添加边框 */
+    border-radius: 4px; /* 边框圆角 */
+    box-sizing: border-box; /* 边框和内边距包含在宽度内 */
+}
+
+.message input[type="number"] {
+    font-weight: 100; /* 设置字体为较轻的粗细 */
+}
+
 
 .buy-modal-overlay {
     display: none;  /* 初始不显示 */
@@ -206,15 +228,19 @@ input[readonly] {
     cursor: pointer;
 }
 
+#confirmBuy:hover{
+    animation: gradientButtonHover 0.5s ease forwards;
+}
+
 #cancelBuy {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: grey; /* Green */
-    color: white;
+    background-color: #aaa;
     cursor: pointer;
+    font-size: 18px;
 }
 
-.modal-buttons button:hover {
-    background-color: #45a049;
+#cancelBuy:hover{
+    background-color: #bbb; /* 鼠标悬停时的背景颜色 */
 }
