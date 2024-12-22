@@ -85,9 +85,24 @@
                     else{
                         var prior = "低";
                     }
+                    var source = "";
+                    switch (wallet.sources) {
+                        case "Alipay":
+                            source = "支付宝";
+                            break;
+                        case "Wechat":
+                            source = "微信";
+                            break;
+                        case "Applepay":
+                            source = "苹果支付";
+                            break;
+                        case "Localbank":
+                            source = "银行卡";
+                            break;
+                    }
                     productModule.className = 'product-module';
                     productModule.innerHTML = `
-                    <h3>\${wallet.sources}</h3>
+                    <h3>\${source}</h3>
                     <p>余额:￥\${wallet.balance}</p>
                     <p>优先级：\${prior}</p>
                     <button onclick="saveToLocalStorage(\${wallet.userid}, '\${wallet.sources}', \${wallet.balance}, \${wallet.isPrior})">查看详情</button>
