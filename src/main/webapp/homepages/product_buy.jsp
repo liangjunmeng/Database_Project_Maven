@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.xxxx.bean.User" %><%--
   用于商品购买
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -52,8 +52,13 @@
         <button type="button" id="cancelBuy" onclick="closeBuyModal()">取消</button>
     </div>
 </div>
-
 </body>
+<%
+    User user = (User) request.getSession().getAttribute("user");
+    int userid = user.getUserid();
+    String username = user.getUsername();
+    String password = user.getPassword();
+%>
 <script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript">
     var lastPage;
@@ -61,6 +66,9 @@
     var productName;
     var productAmount;
     var productPrice;
+    var userid = "<%= userid %>";
+    var username = "<%= username %>";
+    var password = "<%= password %>";
     //获得上一个页面里被点击模块的信息
     window.onload = function() {
         lastPage = localStorage.getItem('lastPage');
@@ -134,10 +142,7 @@
             url: "../product_updating", // Servlet 的 URL
             type: "POST",
             data: {
-                productId: pid,
-                productName: pname,
-                productAmount: pamount,
-                productPrice: pprice
+                productId: pid
             },
             dataType: "json", // 指定返回数据的类型为 JSON
             success: function (response) {
