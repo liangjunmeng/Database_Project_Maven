@@ -23,6 +23,7 @@
             <option value="Applepay">苹果</option>
         </select>
     </div>
+    <span id="alertInfo"></span>
     <div class="buttons">
         <button class="confirm" onclick="closeModal(true)">确定</button>
         <button class="cancel" onclick="closeModal(false)">取消</button>
@@ -49,6 +50,7 @@
 <script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
     var uid = "<%= userid %>";
+    var span;
     // 点击返回按钮
     document.getElementById("backHomeButton").onclick = function() {
         location.href = '../personal_pages/user_personal.jsp';
@@ -166,34 +168,24 @@
             success: function (response) {
                 // 根据服务器返回的数据进行处理
                 if (response.success) {
-                    // 登录成功，弹窗显示成功消息
-                    showModal(response.message);
-                    //判断是否为管理员
-                    if(!response.isManager) {
-                        // 1.5秒后重定向到首页
-                        setTimeout(function () {
-                            //关闭弹窗并清除输入框里的内容
-                            closeModal();
-                            document.getElementById('username').value = "";
-                            document.getElementById('password').value = "";
-                            //同一标签页中打开，这里不再采用
-                            //window.location.href = "homepages/home.jsp";
-                            //重新打开一个标签页，方便之后的退出操作
-                            window.open("homepages/home.jsp", "_blank");
-                        }, 1500);
-                    }
-                    else{
-                        setTimeout(function () {
-                            closeModal();
-                            document.getElementById('username').value = "";
-                            document.getElementById('password').value = "";
-                            //window.location.href = "personal_pages/manager_personal.jsp";
-                            window.open("personal_pages/manager_personal.jsp", "_blank");
-                        }, 1500);
-                    }
+                    // 添加成功
+                    span = document.getElementById('alertInfo');
+                    span.innerHTML = response.message;
+                    span.style.color = "green";
+                    setTimeout(function (){
+                        span.innerHTML = "";
+                    },1500);//1500毫秒后span里的内容清空
+                    setTimeout(function () {
+                        window.location.href = "my_wallets.jsp";
+                    }, 1500);
                 } else {
-                    // 登录失败，弹窗显示错误消息
-                    showModal(response.message);
+                    // 添加失败
+                    span = document.getElementById('alertInfo');
+                    span.innerHTML = response.message;
+                    span.style.color = "red";
+                    setTimeout(function (){
+                        span.innerHTML = "";
+                    },1500);//1500毫秒后span里的内容清空
                 }
             },
             error: function () {

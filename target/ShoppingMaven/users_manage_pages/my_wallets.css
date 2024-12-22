@@ -118,7 +118,7 @@ body {
     display: flex;
     align-items: center; /* 垂直居中对齐 */
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .payment-select {
@@ -127,6 +127,7 @@ body {
     font-size: 18px;
     border-radius: 8px; /* 使四角变圆滑 */
     border: 1px solid #000; /* 可选的边框颜色 */
+    font-weight: 600;
 }
 
 .payment-options label {

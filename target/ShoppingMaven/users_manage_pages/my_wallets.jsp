@@ -23,6 +23,7 @@
             <option value="Applepay">苹果</option>
         </select>
     </div>
+    <span id="alertInfo"></span>
     <div class="buttons">
         <button class="confirm" onclick="closeModal(true)">确定</button>
         <button class="cancel" onclick="closeModal(false)">取消</button>
@@ -49,6 +50,7 @@
 <script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
     var uid = "<%= userid %>";
+    var span;
     // 点击返回按钮
     document.getElementById("backHomeButton").onclick = function() {
         location.href = '../personal_pages/user_personal.jsp';
@@ -140,12 +142,57 @@
 
     function closeModal(isConfirm) {
         if (isConfirm) {
+            addPaymentMethod();
+            /*
             window.location.href = './product_add.jsp';
+            */
         }
         else {
             modal.style.display = "none";
             overlay.style.display = "none";
         }
+    }
+
+    function addPaymentMethod(){
+        var selectElement = document.getElementById("paymentMethod"); // 获取 <select> 元素
+        var selectedValue = selectElement.value; // 获取选中的值
+        // 使用 Ajax 提交表单数据到 Servlet
+        $.ajax({
+            url: "../wallet_adding", // Servlet 的 URL
+            type: "POST",
+            data: {
+                userid: uid,
+                sources: selectedValue
+            },
+            dataType: "json", // 指定返回数据的类型为 JSON
+            success: function (response) {
+                // 根据服务器返回的数据进行处理
+                if (response.success) {
+                    // 添加成功
+                    span = document.getElementById('alertInfo');
+                    span.innerHTML = response.message;
+                    span.style.color = "green";
+                    setTimeout(function (){
+                        span.innerHTML = "";
+                    },1500);//1500毫秒后span里的内容清空
+                    setTimeout(function () {
+                        window.location.href = "my_wallets.jsp";
+                    }, 1500);
+                } else {
+                    // 添加失败
+                    span = document.getElementById('alertInfo');
+                    span.innerHTML = response.message;
+                    span.style.color = "red";
+                    setTimeout(function (){
+                        span.innerHTML = "";
+                    },1500);//1500毫秒后span里的内容清空
+                }
+            },
+            error: function () {
+                // 网络或服务器错误
+                showModal("An error occurred. Please try again.");
+            }
+        });
     }
 
     // 阻止遮罩层的点击事件冒泡到弹窗

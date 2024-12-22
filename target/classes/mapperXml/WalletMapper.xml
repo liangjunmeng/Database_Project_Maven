@@ -11,7 +11,7 @@
     </select>
 
     <!-- 插入钱包 -->
-    <insert id="insertProduct" parameterType="com.xxxx.bean.Wallet">
+    <insert id="insertWallet" parameterType="com.xxxx.bean.Wallet">
         INSERT INTO Wallets (userid, sources, balance, isPrior)
         VALUES (#{userid}, #{sources}, #{balance}, #{isPrior})
     </insert>
