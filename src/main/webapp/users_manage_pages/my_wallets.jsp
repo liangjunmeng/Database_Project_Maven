@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>商品管理</title>
+    <title>我的钱包</title>
 <body>
 <%-- 引用css文件，避免代码太长 --%>
 <link rel="stylesheet" href="my_wallets.css">
