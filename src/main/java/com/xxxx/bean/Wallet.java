@@ -4,6 +4,7 @@ public class Wallet {
     private String sources;
     private int balance;
     private int userid;
+    private boolean isPrior;//钱包的优先级，便于退订时的资金回退
 
     public String getSources() {
         return sources;
