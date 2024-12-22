@@ -14,7 +14,15 @@
 <button id="backHomeButton">返回</button>
 <div class="modal-overlay" id="modalOverlay"></div>
 <div class="modal" id="confirmModal">
-    <div class="message">您确定要添加商品吗？</div>
+    <div class="message">
+        支付方式
+        <select id="paymentMethod" class="payment-select">
+            <option value="Wechat">微信</option>
+            <option value="Alipay">支付宝</option>
+            <option value="Localbank">银行卡</option>
+            <option value="Applepay">苹果</option>
+        </select>
+    </div>
     <div class="buttons">
         <button class="confirm" onclick="closeModal(true)">确定</button>
         <button class="cancel" onclick="closeModal(false)">取消</button>
