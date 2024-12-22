@@ -154,3 +154,58 @@ input[readonly] {
 .modal .close:hover {
     color: red;
 }
+
+.buy-modal {
+    display: none;  /* 初始不显示 */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    max-width: 400px; /* 弹窗最大宽度 */
+    width: 90%; /* 宽度为视口宽度的90% */
+}
+
+.buy-modal-overlay {
+    display: none;  /* 初始不显示 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);  /* 半透明背景 */
+    z-index: 999;  /* 遮罩层置于内容上方 */
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.modal-buttons #confirmBuy {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    cursor: pointer;
+}
+
+.modal-buttons #cancelBuy {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    cursor: pointer;
+}
+
+.modal-buttons button:hover {
+    background-color: #45a049;
+}

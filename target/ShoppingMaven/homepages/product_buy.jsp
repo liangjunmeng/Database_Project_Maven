@@ -32,10 +32,28 @@
 <!-- 弹窗遮罩层 -->
 <div id="modalOverlay" class="modal-overlay"></div>
 
-<!-- 弹窗 -->
+<!-- 提示弹窗 -->
 <div id="errorModal" class="modal">
     <div class="message" id="errorMessage"></div>
     <button class="close" onclick="closeModal()">&times;</button>  <!-- HTML 实体符号 -->
+</div>
+
+<!-- 购买弹窗遮罩层 -->
+<div id="buyModalOverlay" class="buy-modal-overlay"></div>
+
+<!-- 购买弹窗 -->
+<div id="buyModal" class="buy-modal">
+    <div class="message">
+        <label for="buyQuantity">购买数量：</label>
+        <input type="number" id="buyQuantity" name="buyQuantity" min="1" value="1">
+        <br><br>
+        <label for="totalPrice">总金额（￥）：</label>
+        <input type="text" id="totalPrice" name="totalPrice" readonly>
+    </div>
+    <div class="modal-buttons">
+        <button type="button" id="confirmBuy">确定</button>
+        <button type="button" id="cancelBuy" onclick="closeBuyModal()">取消</button>
+    </div>
 </div>
 
 </body>
@@ -79,6 +97,22 @@
         $("#modalOverlay").hide();  // 隐藏遮罩层
     }
 
+    // 显示购买弹窗
+    function showBuyModal() {
+        $("#buyModal").show();
+        $("#buyModalOverlay").show();
+        // 初始化购买数量为1
+        $("#buyQuantity").val(1);
+        // 计算并显示总金额
+        updateTotalPrice();
+    }
+
+    // 关闭购买弹窗
+    function closeBuyModal() {
+        $("#buyModal").hide();
+        $("#buyModalOverlay").hide();
+    }
+
     $("#addbtn").click(function (event) {
         // 阻止表单的默认提交行为
         event.preventDefault();
@@ -86,23 +120,8 @@
         var pname = $("#productName").val();
         var pamount = $("#productQuantity").val();
         var pprice = $("#productPrice").val();
-        // 判断商品名是否为空
-        if (isEmpty(pname)) {
-            showModal("商品名不能为空！");
-            return;  // 结束函数，避免继续执行提交
-        }
+        showBuyModal();
 
-        // 判断商品数量是否为空
-        if (isEmpty(pamount)) {
-            showModal("商品数量不能为空！");
-            return;  // 结束函数，避免继续执行提交
-        }
-
-        // 判断商品价格是否为空
-        if (isEmpty(pprice)) {
-            showModal("商品单价不为空！");
-            return;  // 结束函数，避免继续执行提交
-        }
 
         // 使用 Ajax 提交表单数据到 Servlet
         $.ajax({
