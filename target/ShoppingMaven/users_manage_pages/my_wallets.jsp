@@ -79,11 +79,12 @@
                 productList.innerHTML = ``; // 清空现有内容
                 data.forEach(wallet => {
                     const productModule = document.createElement('div');
+                    var prior = "";
                     if(wallet.isPrior){
-                        var prior = "高";
+                        prior = "高";
                     }
                     else{
-                        var prior = "低";
+                        prior = "低";
                     }
                     var source = "";
                     switch (wallet.sources) {
