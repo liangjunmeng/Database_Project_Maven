@@ -1,9 +1,7 @@
 <%--
-  Created by IntelliJ IDEA.
-  User: CHINA
-  Date: 2024/12/22
-  Time: 21:24
-  To change this template use File | Settings | File Templates.
+  更新钱包状态，包括充值（增加余额）、提现（减少余额）、
+  提高优先级（查看其他钱包里有没有优先级高的钱包，有则降低其优
+  先级，因为只允许一种钱包优先级为高）、注销钱包（直接删除）
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
