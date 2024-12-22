@@ -69,8 +69,6 @@
     var productAmount;
     var productPrice;
     var userid = "<%= userid %>";
-    var username = "<%= username %>";
-    var password = "<%= password %>";
     //获得上一个页面里被点击模块的信息
     window.onload = function() {
         lastPage = localStorage.getItem('lastPage');
@@ -154,12 +152,34 @@
             },1500);//1500毫秒后span里的内容清空
             return;
         }
+        if(Number(buyingAmount) > Number(productAmount)){
+            span = document.getElementById('alertInfo');
+            span.innerHTML = "商品库存不足！";
+            span.style.color = "red";
+            setTimeout(function (){
+                span.innerHTML = "";
+            },1500);//1500毫秒后span里的内容清空
+            return;
+        }
+        //以下七行为测试代码，后续需删除
+        span = document.getElementById('alertInfo');
+        span.innerHTML = "购买成功！";
+        span.style.color = "green";
+        setTimeout(function (){
+            span.innerHTML = "";
+        },1500);//1500毫秒后span里的内容清空
+        return;
+        var uid = userid;
+        var pid = productId;
+        var bAt = buyingAmount;
         // 使用 Ajax 提交表单数据到 Servlet
         $.ajax({
-            url: "../product_updating", // Servlet 的 URL
+            url: "../product_buying", // Servlet 的 URL
             type: "POST",
             data: {
-                productId: pid
+                userid: uid,
+                productId: pid,
+                buyingAmount: bAt
             },
             dataType: "json", // 指定返回数据的类型为 JSON
             success: function (response) {
