@@ -167,8 +167,12 @@ input[readonly] {
     border: 1px solid rgba(0, 0, 0, 0.2);
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
     z-index: 1000;
-    max-width: 300px; /* 弹窗最大宽度 */
+    max-width: 250px; /* 弹窗最大宽度 */
     width: 90%; /* 宽度为视口宽度的90% */
+}
+
+.buy-modal input {
+    width: 60%;
 }
 
 .buy-modal-overlay {
