@@ -47,6 +47,7 @@
         <label for="buyQuantity">购买数量：</label>
         <input type="text" id="buyQuantity" name="buyQuantity">
     </div>
+    <span id="alertInfo"></span>
     <div class="modal-buttons">
         <button type="button" id="confirmBuy">确定</button>
         <button type="button" id="cancelBuy" onclick="closeBuyModal()">取消</button>
@@ -62,6 +63,7 @@
 <script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript">
     var lastPage;
+    var span;
     var productId;
     var productName;
     var productAmount;
@@ -126,15 +128,30 @@
         var buyingAmount = $("#buyQuantity").val();
 
         if(isEmpty(buyingAmount)){
-            showModal("购买数量不能为空！")
+            span = document.getElementById('alertInfo');
+            span.innerHTML = "购买数量不能为空！";
+            span.style.color = "red";
+            setTimeout(function (){
+                span.innerHTML = "";
+            },1500);//1500毫秒后span里的内容清空
             return;
         }
         if(buyingAmount == "0"){
-            showModal("购买数量不能为0！");
+            span = document.getElementById('alertInfo');
+            span.innerHTML = "购买数量不能为0！";
+            span.style.color = "red";
+            setTimeout(function (){
+                span.innerHTML = "";
+            },1500);//1500毫秒后span里的内容清空
             return;
         }
         if (!isPositiveInt(buyingAmount)) {
-            showModal("购买数量应为正整数！");
+            span = document.getElementById('alertInfo');
+            span.innerHTML = "购买数量应为正整数！";
+            span.style.color = "red";
+            setTimeout(function (){
+                span.innerHTML = "";
+            },1500);//1500毫秒后span里的内容清空
             return;
         }
         // 使用 Ajax 提交表单数据到 Servlet
