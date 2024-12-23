@@ -76,6 +76,7 @@
     var userid = "<%= userid %>";
     //进入页面后自动执行
     window.onload = function() {
+        console.log("79");
         lastPage = localStorage.getItem('lastPage');
         sources = localStorage.getItem('sources');
         balance = localStorage.getItem('balance');

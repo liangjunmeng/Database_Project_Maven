@@ -283,3 +283,42 @@ input[readonly] {
     background-color: #f8f8f8;
     transform: scale(1.1); /* 鼠标悬浮时放大按钮 */
 }
+
+
+#recharge, #cashOut, #increasePriority, #logOff {
+    position: fixed;
+    right: 20px;
+    width: 140px; /* 确保两个按钮宽度一致 */
+    height: 60px; /* 确保两个按钮高度一致 */
+    padding: 0; /* 去除多余的内边距，保持大小一致 */
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px; /* 字体大小一致 */
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 居中对齐文本 */
+}
+
+#recharge {
+    top: 20px; /* 距顶部的距离 */
+}
+
+#cashOut {
+    top: 90px;
+}
+#increasePriority {
+    top: 160px;
+}
+#logOff {
+    top: 230px;
+}
+#recharge:hover, #cashOut:hover, #increasePriority:hover, #logOff:hover {
+    background-color: #f8f8f8;
+    transform: scale(1.1); /* 鼠标悬浮时放大按钮 */
+}
