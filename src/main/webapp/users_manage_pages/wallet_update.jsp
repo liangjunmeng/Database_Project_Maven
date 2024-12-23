@@ -67,6 +67,7 @@
 %>
 <script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript">
+    let moneyin = false;//判断是充值还是提现
     var lastPage;
     var span;
     var sources;
@@ -123,6 +124,11 @@
     }
 
     $("#recharge").click(function (event) {
+        moneyin = true;
+        showBuyModal();
+    });
+    $("#cashOut").click(function (event) {
+        moneyin = false;
         showBuyModal();
     });
 
@@ -131,38 +137,38 @@
         // 阻止表单的默认提交行为
         event.preventDefault();
         showBuyModal();
-        var buyingAmount = $("#buyQuantity").val();
+        var money = $("#buyQuantity").val();
 
-        if(isEmpty(buyingAmount)){
+        if(isEmpty(money)){
             span = document.getElementById('alertInfo');
-            span.innerHTML = "购买数量不能为空！";
+            span.innerHTML = "金额不能为空！";
             span.style.color = "red";
             setTimeout(function (){
                 span.innerHTML = "";
             },1500);//1500毫秒后span里的内容清空
             return;
         }
-        if(buyingAmount == "0"){
+        if(money == "0"){
             span = document.getElementById('alertInfo');
-            span.innerHTML = "购买数量不能为0！";
+            span.innerHTML = "金额不能为0！";
             span.style.color = "red";
             setTimeout(function (){
                 span.innerHTML = "";
             },1500);//1500毫秒后span里的内容清空
             return;
         }
-        if (!isPositiveInt(buyingAmount)) {
+        if (!isPositiveInt(money)) {
             span = document.getElementById('alertInfo');
-            span.innerHTML = "购买数量应为正整数！";
+            span.innerHTML = "金额应为正整数！";
             span.style.color = "red";
             setTimeout(function (){
                 span.innerHTML = "";
             },1500);//1500毫秒后span里的内容清空
             return;
         }
-        if(Number(buyingAmount) > Number(productAmount)){
+        if(!moneyin && Number(money) > Number(balance)){
             span = document.getElementById('alertInfo');
-            span.innerHTML = "商品库存不足！";
+            span.innerHTML = "提现金额不能超过余额！";
             span.style.color = "red";
             setTimeout(function (){
                 span.innerHTML = "";
@@ -171,7 +177,7 @@
         }
         //以下七行为测试代码，后续需删除
         span = document.getElementById('alertInfo');
-        span.innerHTML = "购买成功！";
+        span.innerHTML = "成功！";
         span.style.color = "green";
         setTimeout(function (){
             span.innerHTML = "";
