@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="my_orders.css">
 <button id="removeButton">取消订单</button>
 <button id="backHomeButton">返回</button>
-<button id="searchButton">查询订单</button>
+
 <button id="deleteButton" disabled>删除</button>
 
 <div class="modal-overlay" id="modalOverlay"></div>
@@ -55,10 +55,7 @@
         location.href = '../personal_pages/user_personal.jsp';
     }
 
-    // 点击搜索按钮，来到搜索页面
-    document.getElementById("searchButton").onclick = function() {
-        location.href = './order_search.jsp';
-    }
+
 
     // 显示弹窗
     function showCustomModal(message) {
@@ -139,8 +136,14 @@
                 const modalOverlay = document.getElementById('modalOverlay');
                 if (data.success) {
                     showCustomModal("取消成功！");
+                    setTimeout(function (){
+                        closeCustomModal();
+                    },1500);
                 } else {
                     showCustomModal("取消失败！");
+                    setTimeout(function (){
+                        closeCustomModal();
+                    },1500);
                 }
 
                 // 刷新商品列表
@@ -150,6 +153,9 @@
                 console.error('Error deleting products:', error);
                 // 错误时显示提示框
                 showCustomModal("取消过程中发生错误！");
+                setTimeout(function (){
+                    closeCustomModal();
+                },1500);
             });
     }
 

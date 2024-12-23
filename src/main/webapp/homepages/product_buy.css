@@ -194,7 +194,7 @@ input[readonly] {
 
 .payment-select {
     margin-top:21px;
-    margin-right: px;
+    margin-right: 0px;
     padding: 5px;
     font-size: 24px;
     border-radius: 8px; /* 使四角变圆滑 */
@@ -268,4 +268,33 @@ input[readonly] {
 
 #cancelBuy:hover{
     background-color: #bbb; /* 鼠标悬停时的背景颜色 */
+}
+
+#backHomeButton {
+    position: fixed;
+    left: 20px;
+    width: 120px;
+    height: 60px;
+    padding: 0;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 居中对齐文本 */
+}
+
+#backHomeButton {
+    top: 20px; /* 确保与加号按钮同一行 */
+}
+
+#backHomeButton:hover {
+    background-color: #f8f8f8;
+    transform: scale(1.1); /* 鼠标悬浮时放大按钮 */
 }

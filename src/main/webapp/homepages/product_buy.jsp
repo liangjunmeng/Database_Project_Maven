@@ -28,7 +28,7 @@
         <button type="button" id="addbtn">购买</button>
     </form>
 </div>
-
+<button id="backHomeButton">返回</button>
 <!-- 弹窗遮罩层 -->
 <div id="modalOverlay" class="modal-overlay"></div>
 
@@ -97,7 +97,10 @@
             document.getElementById('productPrice').value = productPrice;
         }
     };
-
+    // 点击返回按钮
+    document.getElementById("backHomeButton").onclick = function() {
+        location.href = 'home.jsp';
+    }
     // 显示弹窗
     function showModal(message) {
         $("#errorMessage").text(message);
