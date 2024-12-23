@@ -47,8 +47,8 @@
         <label for="buyQuantity">购买数量：</label>
         <input type="text" id="buyQuantity" name="buyQuantity">
     </div>
-    <div class="message">
-        支付方式
+    <div class="payment-method">
+        <span>支付方式：</span>
         <select id="paymentMethod" class="payment-select">
             <option value="Wechat">微信</option>
             <option value="Alipay">支付宝</option>

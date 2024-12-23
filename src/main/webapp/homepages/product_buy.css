@@ -187,23 +187,19 @@ input[readonly] {
     width: 100%; /* 使输入组宽度为100% */
 }
 
+.payment-method span {
+    font-size: 21px;
+    font-weight: 500;
+}
+
 .payment-select {
-    margin-left: 10px;
+    margin-top:21px;
+    margin-right: px;
     padding: 5px;
-    font-size: 18px;
+    font-size: 24px;
     border-radius: 8px; /* 使四角变圆滑 */
-    border: 1px solid #000; /* 可选的边框颜色 */
+    border: 1px solid #666; /* 可选的边框颜色 */
     font-weight: 600;
-}
-
-.payment-options label {
-    display: inline-block;
-    margin-right: 15px;
-    font-size: 16px;
-}
-
-.payment-options input {
-    margin-right: 5px;
 }
 
 .buy-modal label {
@@ -216,7 +212,7 @@ input[readonly] {
     font-size: 25px;
     width: 60%;
     padding: 5px; /* 添加一些内边距 */
-    border: 1px solid #ccc; /* 添加边框 */
+    border: 1px solid #666; /* 添加边框 */
     border-radius: 4px; /* 边框圆角 */
     box-sizing: border-box; /* 边框和内边距包含在宽度内 */
 }
