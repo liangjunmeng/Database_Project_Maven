@@ -47,6 +47,15 @@
         <label for="buyQuantity">购买数量：</label>
         <input type="text" id="buyQuantity" name="buyQuantity">
     </div>
+    <div class="message">
+        支付方式
+        <select id="paymentMethod" class="payment-select">
+            <option value="Wechat">微信</option>
+            <option value="Alipay">支付宝</option>
+            <option value="Localbank">银行卡</option>
+            <option value="Applepay">苹果</option>
+        </select>
+    </div>
     <span id="alertInfo"></span>
     <div class="modal-buttons">
         <button type="button" id="confirmBuy">确定</button>

@@ -2,11 +2,16 @@ package com.xxxx.service;
 
 import com.xxxx.bean.Order;
 import com.xxxx.bean.Product;
+import com.xxxx.bean.Wallet;
 import com.xxxx.bean.vo.MessageModel;
+import com.xxxx.mapper.OrderMapper;
 import com.xxxx.mapper.ProductMapper;
+import com.xxxx.mapper.WalletMapper;
 import com.xxxx.util.GetSqlSession;
 import com.xxxx.util.StringUtil;
 import org.apache.ibatis.session.SqlSession;
+
+import java.util.List;
 
 public class OrderService {
     //增加订单，其中bAt表示buyingAmount（购买数量），bPr表示buyingPrice（某订单总价）
@@ -28,15 +33,20 @@ public class OrderService {
         }
 
         SqlSession session = GetSqlSession.createSqlSession();
+        OrderMapper orderMapper = session.getMapper(OrderMapper.class);
         ProductMapper productMapper = session.getMapper(ProductMapper.class);
-        Product product = productMapper.queryProductByName(pname);
+        WalletMapper walletMapper = session.getMapper(WalletMapper.class);
 
-
-        if(product != null){
-            messageModel.setCode(0);
-            messageModel.setMsg("商品名已存在！");
-            return messageModel;
+        List<Wallet> wallets = walletMapper.selectAll(Integer.valueOf(uid));
+        if(wallets.size() == 0){
+            {
+                messageModel.setCode(0);
+                messageModel.setMsg("您未添加任何支付方式！");
+                return messageModel;
+            }
         }
+
+
 
         else{
             messageModel.setMsg("商品添加成功！");
@@ -47,14 +57,13 @@ public class OrderService {
             else{
                 productId = productMapper.maxProductId() + 1;
             }
-            p.setProductId(productId);
-            productMapper.insertProduct(p);
+
             session.commit(); //提交事务，让数据库得以更新
 
 
         }
 
-        messageModel.setObject(product);
+        messageModel.setObject(o);
         return messageModel;
     }
 }

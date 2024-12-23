@@ -47,6 +47,15 @@
         <label for="buyQuantity">购买数量：</label>
         <input type="text" id="buyQuantity" name="buyQuantity">
     </div>
+    <div class="message">
+        支付方式
+        <select id="paymentMethod" class="payment-select">
+            <option value="Wechat">微信</option>
+            <option value="Alipay">支付宝</option>
+            <option value="Localbank">银行卡</option>
+            <option value="Applepay">苹果</option>
+        </select>
+    </div>
     <span id="alertInfo"></span>
     <div class="modal-buttons">
         <button type="button" id="confirmBuy">确定</button>
@@ -161,25 +170,19 @@
             },1500);//1500毫秒后span里的内容清空
             return;
         }
-        //以下七行为测试代码，后续需删除
-        span = document.getElementById('alertInfo');
-        span.innerHTML = "购买成功！";
-        span.style.color = "green";
-        setTimeout(function (){
-            span.innerHTML = "";
-        },1500);//1500毫秒后span里的内容清空
-        return;
         var uid = userid;
         var pid = productId;
         var bAt = buyingAmount;
+        var bPr = Number(buyingAmount) * Number(productPrice);
         // 使用 Ajax 提交表单数据到 Servlet
         $.ajax({
-            url: "../product_buying", // Servlet 的 URL
+            url: "../order_adding", // Servlet 的 URL
             type: "POST",
             data: {
                 userid: uid,
                 productId: pid,
-                buyingAmount: bAt
+                buyingAmount: bAt,
+                buyingPrice: bPr
             },
             dataType: "json", // 指定返回数据的类型为 JSON
             success: function (response) {
