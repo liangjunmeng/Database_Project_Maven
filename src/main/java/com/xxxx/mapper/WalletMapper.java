@@ -8,4 +8,5 @@ public interface WalletMapper {
     public void insertWallet(Wallet wallet);
     //通过主码查询钱包是否存在
     public Wallet queryWalletByPri(Wallet wallet);
+    public void moneyChange(Wallet wallet);
 }

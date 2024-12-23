@@ -23,6 +23,14 @@
         WHERE userid = #{userid} and sources = #{sources}
     </select>
 
+    <!-- 更新商品 -->
+    <update id="moneyChange" parameterType="com.xxxx.bean.Wallet">
+        UPDATE Wallets
+        SET balance = balance + #{balance}
+        WHERE userid = #{userid} and sources = #{sources}
+    </update>
+
+
     <!-- 使用like查询商品
     <select id="searchProductByLike" parameterType="String" resultType="com.xxxx.bean.Product">
         SELECT *
@@ -49,14 +57,7 @@
         select max(productId) from ProductInfo
     </select>
     -->
-    <!-- 更新商品
-    <update id="updateProductById" parameterType="com.xxxx.bean.Product">
-        UPDATE ProductInfo
-        SET productName = #{productName}, productAmount = #{productAmount},
-            productPrice = #{productPrice}
-        WHERE productId = #{productId}
-    </update>
-    -->
+
     <!-- 删除商品
     <delete id="deleteProductById" parameterType="Integer">
         DELETE FROM ProductInfo WHERE productId = #{productId}
