@@ -45,13 +45,13 @@
     <button class="close" onclick="closeModal()">&times;</button>  <!-- HTML 实体符号 -->
 </div>
 
-<!-- 购买弹窗遮罩层 -->
+<!-- 金额操作弹窗遮罩层 -->
 <div id="buyModalOverlay" class="buy-modal-overlay"></div>
 
-<!-- 购买弹窗 -->
+<!-- 金额操作弹窗 -->
 <div id="buyModal" class="buy-modal">
     <div class="message">
-        <label for="buyQuantity">金额：</label>
+        <label for="buyQuantity">金额（￥）：</label>
         <input type="text" id="buyQuantity" name="buyQuantity">
     </div>
     <span id="alertInfo"></span>
@@ -201,7 +201,7 @@
                     span = document.getElementById('alertInfo');
                     span.innerHTML = response.message;
                     span.style.color = "green";
-                    var newBalance = balance + mny;
+                    var newBalance = Number(balance) + mny;
                     localStorage.setItem("balance",newBalance);
                     setTimeout(function (){
                         span.innerHTML = "";
