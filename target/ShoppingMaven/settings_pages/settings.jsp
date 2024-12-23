@@ -100,7 +100,7 @@
 </body>
 <script>
     function quit() {
-        localStorage.setItem("doesLogin","");
+        localStorage.clear();
         // 可选：关闭当前标签页
         window.close();
         // 在新标签页打开 index.jsp

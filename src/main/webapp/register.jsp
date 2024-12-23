@@ -59,12 +59,18 @@
         // 判断用户名是否为空
         if (isEmpty(uname)) {
             showModal("Username can't be empty");
+            setTimeout(function () {
+                closeModal();
+            }, 1500);
             return;  // 结束函数，避免继续执行提交
         }
 
         // 判断密码是否为空
         if (isEmpty(upwd)) {
             showModal("Please enter a password.");
+            setTimeout(function () {
+                closeModal();
+            }, 1500);
             return;  // 结束函数，避免继续执行提交
         }
 
@@ -80,7 +86,7 @@
             success: function (response) {
                 // 根据服务器返回的数据进行处理
                 if (response.success) {
-                    // 登录成功，弹窗显示成功消息
+                    // 注册成功，弹窗显示成功消息
                     showModal(response.message);
                     //判断是否为管理员
                     if(!response.isManager) {
@@ -88,8 +94,14 @@
                         setTimeout(function () {
                             //关闭弹窗并清除输入框里的内容
                             closeModal();
+                            //判断用户是否已经通过注册方式登录了,若有则跳转到登陆页面
+                            if (localStorage.getItem("doesLogin") == "yes"){
+                                window.location.href = "login.jsp";
+                                return;
+                            }
                             document.getElementById('username').value = "";
                             document.getElementById('password').value = "";
+                            localStorage.setItem("doesLogin","yes");
                             //同一标签页中打开，这里不再采用
                             //window.location.href = "homepages/home.jsp";
                             //重新打开一个标签页，方便之后的退出操作
@@ -99,20 +111,30 @@
                     else{
                         setTimeout(function () {
                             closeModal();
+                            if (localStorage.getItem("doesLogin") == "yes"){
+                                window.location.href = "login.jsp";
+                                return;
+                            }
                             document.getElementById('username').value = "";
                             document.getElementById('password').value = "";
-                            //window.location.href = "personal_pages/manager_personal.jsp";
+                            localStorage.setItem("doesLogin","yes");
                             window.open("personal_pages/manager_personal.jsp", "_blank");
                         }, 1500);
                     }
                 } else {
-                    // 登录失败，弹窗显示错误消息
+                    // 注册失败，弹窗显示错误消息
                     showModal(response.message);
+                    setTimeout(function () {
+                        closeModal();
+                    }, 1500);
                 }
             },
             error: function () {
                 // 网络或服务器错误
                 showModal("An error occurred. Please try again.");
+                setTimeout(function () {
+                    closeModal();
+                }, 1500);
             }
         });
     });

@@ -231,17 +231,26 @@
         // 判断用户名是否为空
         if (isEmpty(uname)) {
             showModal("Username is required.");
+            setTimeout(function () {
+                closeModal();
+            }, 1500);
             return;  // 结束函数，避免继续执行提交
         }
 
         // 判断密码是否为空
         if (isEmpty(upwd)) {
             showModal("Password is required.");
+            setTimeout(function () {
+                closeModal();
+            }, 1500);
             return;  // 结束函数，避免继续执行提交
         }
         //判断用户是否已经登录了
         if (localStorage.getItem("doesLogin") == "yes"){
             showModal("You have already logined.");
+            setTimeout(function () {
+                closeModal();
+            }, 1500);
             return;
         }
         /*
@@ -288,11 +297,17 @@
                 } else {
                     // 登录失败，弹窗显示错误消息
                     showModal(response.message);
+                    setTimeout(function () {
+                        closeModal();
+                    }, 1500);
                 }
             },
             error: function () {
                 // 网络或服务器错误
                 showModal("An error occurred. Please try again.");
+                setTimeout(function () {
+                    closeModal();
+                }, 1500);
             }
         });
     });
