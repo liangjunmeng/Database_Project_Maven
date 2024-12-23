@@ -184,16 +184,19 @@
         },1500);//1500毫秒后span里的内容清空
         return;
         var uid = userid;
-        var pid = productId;
-        var bAt = buyingAmount;
+        var sos = sources;
+        if(!moneyin) {
+            var mny = Number(money) * (-1);
+        }
+        var mny = Number(money);
         // 使用 Ajax 提交表单数据到 Servlet
         $.ajax({
             url: "../product_buying", // Servlet 的 URL
             type: "POST",
             data: {
                 userid: uid,
-                productId: pid,
-                buyingAmount: bAt
+                sources: sos,
+                money: mny
             },
             dataType: "json", // 指定返回数据的类型为 JSON
             success: function (response) {
