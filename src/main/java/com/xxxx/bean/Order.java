@@ -4,6 +4,7 @@ public class Order {
     private int orderId;
     private int userid;
     private int productId;
+    private String productName;
     private int buyingAmount;
     private int buyingPrice;
 
@@ -45,5 +46,13 @@ public class Order {
 
     public void setBuyingPrice(int buyingPrice) {
         this.buyingPrice = buyingPrice;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 }

@@ -176,10 +176,10 @@
                     productModule.className = 'product-module';
                     productModule.innerHTML = `
                     <div class="delete-checkbox" data-id="\${order.orderId}" onclick="toggleCheckbox(\${product.productId})"></div>
-                    <h3>\${product.productName}</h3>
+                    <h3>\${order.productName}</h3>
                     <p>已买数量:\${order.buyingAmount}</p>
                     <p>总价:￥\${order.buyingPrice}</p>
-                    <button onclick="saveToLocalStorage(\${product.productId}, '\${product.productName}', \${product.productAmount}, \${product.productPrice})">点击更新</button>
+                    <button onclick="saveToLocalStorage(\${order.orderId}, '\${order.productName}', \${order.buyingAmount}, \${order.buyingPrice})">点击更新</button>
                     `;
                     productList.appendChild(productModule);
                 });

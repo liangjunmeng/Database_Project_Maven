@@ -15,8 +15,10 @@
 
     <!-- 插入订单 -->
     <insert id="insertOrder" parameterType="com.xxxx.bean.Order">
-        INSERT INTO Orders (orderId, userid, productId, buyingAmount, buyingPrice)
-        VALUES (#{orderId}, #{userid}, #{productId}, #{buyingAmount}, #{buyingPrice})
+        INSERT INTO Orders (orderId, userid, productId, productName,
+                            buyingAmount, buyingPrice)
+        VALUES (#{orderId}, #{userid}, #{productId}, #{productName},
+                #{buyingAmount}, #{buyingPrice})
     </insert>
 
 </mapper>

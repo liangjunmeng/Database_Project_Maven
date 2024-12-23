@@ -76,6 +76,7 @@ public class OrderService {
         //购买后商品数量减少
         product.setProductAmount(product.getProductAmount()-Integer.valueOf(bAt));
         productMapper.updateProductById(product);
+        o.setProductName(product.getProductName());
         //插入订单
         orderMapper.insertOrder(o);
         messageModel.setMsg("商品购买成功！");
