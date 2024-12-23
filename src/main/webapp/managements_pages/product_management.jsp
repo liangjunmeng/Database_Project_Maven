@@ -206,6 +206,11 @@
     overlay.addEventListener('click', function(event) {
         event.stopPropagation();
     });
+
+    window.onbeforeunload = function() {
+        // 在标签页关闭之前清空 localStorage
+        localStorage.clear();
+    };
 </script>
 </body>
 </html>

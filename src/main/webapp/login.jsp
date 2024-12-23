@@ -178,7 +178,6 @@
     </style>
 </head>
 <body>
-
 <div class="login-container">
     <div class="login-title">Login</div>
     <form id="loginform">
@@ -205,8 +204,8 @@
     <div class="message" id="errorMessage"></div>
     <button class="close" onclick="closeModal()">&times;</button>  <!-- HTML 实体符号 -->
 </div>
-
 </body>
+
 <script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript">
     // 显示弹窗
@@ -221,6 +220,7 @@
         $("#errorModal").hide();  // 隐藏弹窗
         $("#modalOverlay").hide();  // 隐藏遮罩层
     }
+
 
     $("#loginbtn").click(function (event) {
         // 阻止表单的默认提交行为
@@ -238,6 +238,11 @@
         if (isEmpty(upwd)) {
             showModal("Password is required.");
             return;  // 结束函数，避免继续执行提交
+        }
+        //判断用户是否已经登录了
+        if (localStorage.getItem("doesLogin") == "yes"){
+            showModal("You have already logined.");
+            return;
         }
         /*
         该方法是传统表单提交方式，这里不再采用，取而代之用Ajax提交和JSON响应，更灵活方便
@@ -265,9 +270,9 @@
                             closeModal();
                             document.getElementById('username').value = "";
                             document.getElementById('password').value = "";
+                            localStorage.setItem("doesLogin","yes");
                             //同一标签页中打开，这里不再采用
                             //window.location.href = "homepages/home.jsp";
-                            //重新打开一个标签页，方便之后的退出操作
                             window.open("homepages/home.jsp", "_blank");
                         }, 1500);
                     }
@@ -276,7 +281,7 @@
                             closeModal();
                             document.getElementById('username').value = "";
                             document.getElementById('password').value = "";
-                            //window.location.href = "personal_pages/manager_personal.jsp";
+                            localStorage.setItem("doesLogin","yes");
                             window.open("personal_pages/manager_personal.jsp", "_blank");
                         }, 1500);
                     }

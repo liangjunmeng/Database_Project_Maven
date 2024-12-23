@@ -92,7 +92,6 @@
     </style>
 </head>
 <body>
-
 <div class="login-container">
     <button class="button" onclick="location.href='login.jsp'">Login</button>
     <button class="button" onclick="location.href='register.jsp'">Register</button>

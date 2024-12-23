@@ -44,7 +44,7 @@
     <div id="productList"></div>
 </div>
 <%
-    User user = (User) request.getSession().getAttribute("user");
+    User user = (User) session.getAttribute("user");
     int userid = user.getUserid();
 %>
 <script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -199,6 +199,11 @@
     overlay.addEventListener('click', function(event) {
         event.stopPropagation();
     });
+
+    window.onbeforeunload = function() {
+        // 在标签页关闭之前清空 localStorage
+        localStorage.clear();
+    };
 </script>
 </body>
 </html>

@@ -32,6 +32,10 @@
 </div>
 
 <button id="backHomeButton">返回</button>
+<button id="recharge">充值</button>
+<button id="cashOut">提现</button>
+<button id="increasePriority">提高优先级</button>
+<button id="logOff">注销</button>
 
 <!-- 弹窗遮罩层 -->
 <div id="modalOverlay" class="modal-overlay"></div>
@@ -218,6 +222,10 @@
         });
     });
 
+    window.onbeforeunload = function() {
+        // 在标签页关闭之前清空 localStorage
+        localStorage.clear();
+    };
     // 判断字符串是否为空，空则返回 true，否则返回 false
     function isEmpty(str) {
         if (str == null || str.trim() == "") {
