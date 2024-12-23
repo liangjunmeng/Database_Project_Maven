@@ -48,7 +48,7 @@
 <script>
     let deleteMode = false; // 控制勾选框的显示状态
     let deleteBtn = false; // 控制删除按钮的显示状态
-    let selectedProductIds = []; // 存储被选中的商品ID
+    let selectedProductIds = []; // 存储被选中的订单ID
     var uid = "<%= userid %>";
     // 点击返回按钮
     document.getElementById("backHomeButton").onclick = function() {
@@ -90,12 +90,12 @@
         deleteButton.style.display = deleteBtn ? 'block' : 'none';
     }
     // 切换勾选框选中状态
-    function toggleCheckbox(productId) {
-        const checkbox = document.querySelector(`.delete-checkbox[data-id="\${productId}"]`);
+    function toggleCheckbox(orderId) {
+        const checkbox = document.querySelector(`.delete-checkbox[data-id="\${orderId}"]`);
         checkbox.classList.toggle('selected'); // 切换选中状态
-        const index = selectedProductIds.indexOf(productId);
+        const index = selectedProductIds.indexOf(orderId);
         if (index === -1) {
-            selectedProductIds.push(productId); // 添加到选中列表
+            selectedProductIds.push(orderId); // 添加到选中列表
         } else {
             selectedProductIds.splice(index, 1); // 从选中列表移除
         }
@@ -123,13 +123,13 @@
     }
 
     // 从后端删除选中的商品
-    function deleteSelectedProducts(productIds) {
-        fetch("../product_deleting", {
+    function deleteSelectedProducts(orderIds) {
+        fetch("../order_deleting", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ productIds: productIds })
+            body: JSON.stringify({ orderIds: orderIds })
         })
             .then(response => response.json())
             .then(data => {
@@ -138,18 +138,18 @@
                 const resultMessage = document.getElementById('resultMessage');
                 const modalOverlay = document.getElementById('modalOverlay');
                 if (data.success) {
-                    showCustomModal("删除成功！");
+                    showCustomModal("取消成功！");
                 } else {
-                    showCustomModal("删除失败！");
+                    showCustomModal("取消失败！");
                 }
 
                 // 刷新商品列表
-                fetchProducts();
+                fetchOrders();
             })
             .catch(error => {
                 console.error('Error deleting products:', error);
                 // 错误时显示提示框
-                showCustomModal("删除过程中发生错误！");
+                showCustomModal("取消过程中发生错误！");
             });
     }
 
@@ -175,28 +175,16 @@
                     const productModule = document.createElement('div');
                     productModule.className = 'product-module';
                     productModule.innerHTML = `
-                    <div class="delete-checkbox" data-id="\${order.orderId}" onclick="toggleCheckbox(\${order.productId})"></div>
+                    <div class="delete-checkbox" data-id="\${order.orderId}" onclick="toggleCheckbox(\${order.orderId})"></div>
                     <h3>\${order.productName}</h3>
                     <p>已买数量:\${order.buyingAmount}</p>
                     <p>总价:￥\${order.buyingPrice}</p>
-                    <button onclick="saveToLocalStorage(\${order.orderId}, '\${order.productName}', \${order.buyingAmount}, \${order.buyingPrice})">点击更新</button>
                     `;
                     productList.appendChild(productModule);
                 });
             })
             .catch(error => console.error('Error fetching products:', error));
     }
-
-    //使得点击模块后跳转到的页面能够取得被点击模块的信息
-    function saveToLocalStorage(orderId, orderName, buyingAmount, buyingPrice) {
-        localStorage.setItem('lastPage', "product_management");
-        localStorage.setItem('orderId', orderId);
-        localStorage.setItem('orderName', orderName);
-        localStorage.setItem('buyingAmount', buyingAmount);
-        localStorage.setItem('buyingPrice', buyingPrice);
-        location.href = './product_update.jsp';
-    }
-
 
     function closeModal(isConfirm) {
         if (isConfirm) {

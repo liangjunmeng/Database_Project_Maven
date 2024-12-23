@@ -27,4 +27,15 @@
                 #{buyingAmount}, #{buyingPrice})
     </insert>
 
+    <!-- 删除商品 -->
+    <delete id="deleteOrderById" parameterType="Integer">
+        DELETE FROM Orders WHERE orderId = #{orderId}
+    </delete>
+
+    <!-- 根据 id 查询订单 -->
+    <select id="queryOrderById" parameterType="int" resultType="com.xxxx.bean.Order">
+        SELECT *
+        FROM Orders
+        WHERE orderId = #{orderId}
+    </select>
 </mapper>

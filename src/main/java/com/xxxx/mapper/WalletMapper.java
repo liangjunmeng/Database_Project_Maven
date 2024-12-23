@@ -10,5 +10,6 @@ public interface WalletMapper {
     public void moneyChange(Wallet wallet);
     public void priorChange(Wallet wallet);
     public int queryHighPrior(int userid);//查询高优先级的钱包数
+    public Wallet highPriorWallet(int userid);//查询高优先级的钱包对象
     public void deleteWallet(Wallet wallet);//查询高优先级的钱包数
 }

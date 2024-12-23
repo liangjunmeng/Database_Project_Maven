@@ -44,6 +44,12 @@
         WHERE userid = #{userid} and isPrior = 1
     </select>
 
+    <!-- 查询高优先级钱包对象 -->
+    <select id="highPriorWallet" parameterType="int" resultType="com.xxxx.bean.Wallet">
+        SELECT *
+        FROM Wallets
+        WHERE userid = #{userid} and isPrior = 1
+    </select>
     <!-- 删除支付方式 -->
     <delete id="deleteWallet" parameterType="com.xxxx.bean.Wallet">
         DELETE FROM Wallets

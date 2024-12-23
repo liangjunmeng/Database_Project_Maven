@@ -94,4 +94,36 @@ public class OrderService {
         OrderMapper orderMapper = session.getMapper(OrderMapper.class);
         return orderMapper.selectAll(userid);
     }
+    //删除订单
+    public void orderDeleting(List<Integer> orderIds) {
+        SqlSession session = GetSqlSession.createSqlSession();
+        ProductMapper productMapper = session.getMapper(ProductMapper.class);
+        WalletMapper walletMapper = session.getMapper(WalletMapper.class);
+        OrderMapper orderMapper = session.getMapper(OrderMapper.class);
+
+        for (Integer id : orderIds) {
+            Order order = orderMapper.queryOrderById(id);
+            Product product = productMapper.queryProductById(order.getProductId());
+            Wallet wallet = walletMapper.highPriorWallet(order.getUserid());
+            List<Wallet> wallets = walletMapper.selectAll(order.getUserid());
+            //退订后商品库存增加
+            if(product != null){
+                product.setProductAmount(product.getProductAmount()+order.getBuyingAmount());
+            }
+            //退订后钱包余额增加
+            //高优先级的钱包余额先增加
+            if(wallet != null){
+                wallet.setBalance(order.getBuyingPrice());
+                walletMapper.moneyChange(wallet);
+            }
+            //再查看有没有钱包,有则挑选出第一个钱包进行加钱
+            else if(!wallets.isEmpty()){
+                Wallet wallet2 = wallets.get(0);
+                wallet2.setBalance(order.getBuyingPrice());
+                walletMapper.moneyChange(wallet2);
+            }
+            orderMapper.deleteOrderById(id);
+        }
+        session.commit(); //提交事务，让数据库得以更新
+    }
 }
