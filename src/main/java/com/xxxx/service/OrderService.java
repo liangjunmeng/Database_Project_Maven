@@ -11,6 +11,8 @@ import com.xxxx.util.GetSqlSession;
 import com.xxxx.util.StringUtil;
 import org.apache.ibatis.session.SqlSession;
 
+import java.util.List;
+
 
 public class OrderService {
     //增加订单，其中bAt表示buyingAmount（购买数量），bPr表示buyingPrice（某订单总价）
@@ -84,5 +86,12 @@ public class OrderService {
 
         messageModel.setObject(o);
         return messageModel;
+    }
+    //根据用户id遍历所有订单
+    public List<Order> orderGetting(int uid) {
+        int userid = uid;
+        SqlSession session = GetSqlSession.createSqlSession();
+        OrderMapper orderMapper = session.getMapper(OrderMapper.class);
+        return orderMapper.selectAll(userid);
     }
 }

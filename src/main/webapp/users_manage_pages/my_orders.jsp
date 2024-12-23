@@ -175,7 +175,7 @@
                     const productModule = document.createElement('div');
                     productModule.className = 'product-module';
                     productModule.innerHTML = `
-                    <div class="delete-checkbox" data-id="\${order.orderId}" onclick="toggleCheckbox(\${product.productId})"></div>
+                    <div class="delete-checkbox" data-id="\${order.orderId}" onclick="toggleCheckbox(\${order.productId})"></div>
                     <h3>\${order.productName}</h3>
                     <p>已买数量:\${order.buyingAmount}</p>
                     <p>总价:￥\${order.buyingPrice}</p>
@@ -188,20 +188,15 @@
     }
 
     //使得点击模块后跳转到的页面能够取得被点击模块的信息
-    function saveToLocalStorage(productId, productName, productAmount, productPrice) {
+    function saveToLocalStorage(orderId, orderName, buyingAmount, buyingPrice) {
         localStorage.setItem('lastPage', "product_management");
-        localStorage.setItem('productId', productId);
-        localStorage.setItem('productName', productName);
-        localStorage.setItem('productAmount', productAmount);
-        localStorage.setItem('productPrice', productPrice);
+        localStorage.setItem('orderId', orderId);
+        localStorage.setItem('orderName', orderName);
+        localStorage.setItem('buyingAmount', buyingAmount);
+        localStorage.setItem('buyingPrice', buyingPrice);
         location.href = './product_update.jsp';
     }
 
-    // 点击加号按钮
-    document.getElementById("addButton").onclick = function() {
-        modal.style.display = "block";
-        overlay.style.display = "block";
-    }
 
     function closeModal(isConfirm) {
         if (isConfirm) {
