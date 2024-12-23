@@ -109,6 +109,7 @@ public class OrderService {
             //退订后商品库存增加
             if(product != null){
                 product.setProductAmount(product.getProductAmount()+order.getBuyingAmount());
+                productMapper.updateProductById(product);
             }
             //退订后钱包余额增加
             //高优先级的钱包余额先增加
