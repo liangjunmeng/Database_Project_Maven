@@ -1,8 +1,12 @@
 package com.xxxx.service;
 
+import com.xxxx.bean.Order;
 import com.xxxx.bean.Product;
+import com.xxxx.bean.Wallet;
 import com.xxxx.bean.vo.MessageModel;
+import com.xxxx.mapper.OrderMapper;
 import com.xxxx.mapper.ProductMapper;
+import com.xxxx.mapper.WalletMapper;
 import com.xxxx.util.GetSqlSession;
 import com.xxxx.util.StringUtil;
 import org.apache.ibatis.session.SqlSession;
@@ -83,8 +87,33 @@ public class ProductService {
 
         SqlSession session = GetSqlSession.createSqlSession();
         ProductMapper productMapper = session.getMapper(ProductMapper.class);
-        for (Integer id : ids) {
-            productMapper.deleteProductById(id);
+        WalletMapper walletMapper = session.getMapper(WalletMapper.class);
+        OrderMapper orderMapper = session.getMapper(OrderMapper.class);
+
+        for (Integer productId : ids) {
+            List<Order> orders = orderMapper.queryByProductId(productId);
+            if(orders.isEmpty()) {
+                productMapper.deleteProductById(productId);
+                break;
+            }
+            for(Order order : orders){
+                Wallet wallet = walletMapper.highPriorWallet(order.getUserid());
+                List<Wallet> wallets = walletMapper.selectAll(order.getUserid());
+                //退订后钱包余额增加
+                //高优先级的钱包余额先增加
+                if(wallet != null){
+                    wallet.setBalance(order.getBuyingPrice());
+                    walletMapper.moneyChange(wallet);
+                }
+                //再查看有没有钱包,有则挑选出第一个钱包进行加钱
+                else if(!wallets.isEmpty()){
+                    Wallet wallet2 = wallets.get(0);
+                    wallet2.setBalance(order.getBuyingPrice());
+                    walletMapper.moneyChange(wallet2);
+                }
+                orderMapper.deleteOrderById(order.getOrderId());
+            }
+            productMapper.deleteProductById(productId);
         }
         session.commit(); //提交事务，让数据库得以更新
     }

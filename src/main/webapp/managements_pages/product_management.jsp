@@ -134,8 +134,14 @@
                 const modalOverlay = document.getElementById('modalOverlay');
                 if (data.success) {
                     showCustomModal("删除成功！");
+                    setTimeout(function (){
+                        closeCustomModal();
+                    },1500);
                 } else {
                     showCustomModal("删除失败！");
+                    setTimeout(function (){
+                        closeCustomModal();
+                    },1500);
                 }
 
                 // 刷新商品列表
@@ -145,6 +151,9 @@
                 console.error('Error deleting products:', error);
                 // 错误时显示提示框
                 showCustomModal("删除过程中发生错误！");
+                setTimeout(function (){
+                    closeCustomModal();
+                },1500);
             });
     }
 

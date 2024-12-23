@@ -38,4 +38,11 @@
         FROM Orders
         WHERE orderId = #{orderId}
     </select>
+
+    <!-- 根据 id 查询订单 -->
+    <select id="queryByProductId" parameterType="int" resultType="com.xxxx.bean.Order">
+        SELECT *
+        FROM Orders
+        WHERE productId = #{productId}
+    </select>
 </mapper>
