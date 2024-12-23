@@ -27,7 +27,6 @@
             <label for="productPrice">优先级</label>
             <input type="text" id="productPrice" name="productPrice" readonly>
         </div>
-        <button type="button" id="addbtn">充值</button>
     </form>
 </div>
 
@@ -52,7 +51,7 @@
 <!-- 购买弹窗 -->
 <div id="buyModal" class="buy-modal">
     <div class="message">
-        <label for="buyQuantity">购买数量：</label>
+        <label for="buyQuantity">金额：</label>
         <input type="text" id="buyQuantity" name="buyQuantity">
     </div>
     <span id="alertInfo"></span>
@@ -123,10 +122,10 @@
         $("#buyModalOverlay").hide();
     }
 
-    $("#addbtn").click(function (event) {
-        // 阻止表单的默认提交行为
+    $("#recharge").click(function (event) {
         showBuyModal();
     });
+
 
     $("#confirmBuy").click(function (event) {
         // 阻止表单的默认提交行为

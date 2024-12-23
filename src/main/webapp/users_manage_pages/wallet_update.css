@@ -67,22 +67,6 @@ input[readonly] {
     border: 1px solid #ddd; /* 设置边框颜色 */
 }
 
-.product-form-container button {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 5px;
-    background-image: linear-gradient(45deg, #3abff8, #f83abf);
-    color: white;
-    cursor: pointer;
-    font-size: 18px;
-    background-size: 200% 200%;
-    animation: gradientButton 6s ease infinite;
-}
-
-.product-form-container button:hover {
-    animation: gradientButtonHover 0.5s ease forwards;
-}
 
 @keyframes gradientButton {
     0% {
