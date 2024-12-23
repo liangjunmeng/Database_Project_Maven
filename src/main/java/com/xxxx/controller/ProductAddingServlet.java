@@ -20,7 +20,7 @@ public class ProductAddingServlet extends HttpServlet {
         String pamount = request.getParameter("productAmount");
         String pprice = request.getParameter("productPrice");
 
-        // 调用业务层方法验证用户
+        // 调用业务层方法验证商品
         MessageModel messageModel = productService.productAdding(pname,pamount,pprice);
 
         // 设置响应内容类型为 JSON

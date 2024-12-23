@@ -36,6 +36,13 @@
         WHERE productName = #{productName}
     </select>
 
+    <!-- 根据 id 查询商品 -->
+    <select id="queryProductById" parameterType="int" resultType="com.xxxx.bean.Product">
+        SELECT *
+        FROM ProductInfo
+        WHERE productId = #{productId}
+    </select>
+
     <!-- 插入商品 -->
     <insert id="insertProduct" parameterType="com.xxxx.bean.Product">
         INSERT INTO ProductInfo (productId, productName, productPrice, productAmount)

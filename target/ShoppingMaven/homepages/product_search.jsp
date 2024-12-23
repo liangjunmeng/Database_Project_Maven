@@ -49,7 +49,7 @@
     window.onload = function() {
         var managerInputFromStorage = localStorage.getItem('managerInput');
         var lastPage = localStorage.getItem('lastPage');
-        if (managerInputFromStorage != null && lastPage == "product_update") {
+        if (managerInputFromStorage != null && lastPage == "product_buy") {
             localStorage.setItem('lastPage', "product_search");
             userEnter = managerInputFromStorage;
             clickSearchSourceIsnotHand = true;

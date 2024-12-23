@@ -174,6 +174,8 @@
         var pid = productId;
         var bAt = buyingAmount;
         var bPr = Number(buyingAmount) * Number(productPrice);
+        var selectElement = document.getElementById("paymentMethod"); // 获取 <select> 元素
+        var selectedValue = selectElement.value; // 获取选中的值
         // 使用 Ajax 提交表单数据到 Servlet
         $.ajax({
             url: "../order_adding", // Servlet 的 URL
@@ -182,36 +184,50 @@
                 userid: uid,
                 productId: pid,
                 buyingAmount: bAt,
-                buyingPrice: bPr
+                buyingPrice: bPr,
+                sources: selectedValue
             },
             dataType: "json", // 指定返回数据的类型为 JSON
             success: function (response) {
                 // 根据服务器返回的数据进行处理
                 if (response.success) {
                     // 添加成功，弹窗显示成功消息
-                    showModal(response.message);
-
+                    span = document.getElementById('alertInfo');
+                    span.innerHTML = response.message;
+                    span.style.color = "green";
                     // 1.5秒后重定向到首页
-                    if(lastPage == "product_management") {
+                    if(lastPage == "home") {
                         setTimeout(function () {
-                            location.href = './product_management.jsp';
+                            span.innerHTML = "";
+                            location.href = 'home.jsp';
                         }, 1500);
                     }
                     else if(lastPage == "product_search") {
-                        localStorage.setItem('lastPage',"product_update");
+                        localStorage.setItem('lastPage',"product_buy");
                         localStorage.setItem('managerInput',localStorage.getItem('managerInput'));
                         setTimeout(function () {
-                            location.href = './product_search.jsp';
+                            span.innerHTML = "";
+                            location.href = 'product_search.jsp';
                         }, 1500);
                     }
                 } else {
                     // 添加失败，弹窗显示错误消息
-                    showModal(response.message);
+                    span = document.getElementById('alertInfo');
+                    span.innerHTML = response.message;
+                    span.style.color = "red";
+                    setTimeout(function (){
+                        span.innerHTML = "";
+                    },1500);
                 }
             },
             error: function () {
                 // 网络或服务器错误
-                showModal("发生了错误，请稍后再尝试！");
+                span = document.getElementById('alertInfo');
+                span.innerHTML = "发生了错误，请稍后再尝试！";
+                span.style.color = "red";
+                setTimeout(function (){
+                    span.innerHTML = "";
+                },1500);
             }
         });
     });

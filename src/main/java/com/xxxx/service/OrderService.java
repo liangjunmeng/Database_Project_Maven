@@ -11,22 +11,23 @@ import com.xxxx.util.GetSqlSession;
 import com.xxxx.util.StringUtil;
 import org.apache.ibatis.session.SqlSession;
 
-import java.util.List;
 
 public class OrderService {
     //增加订单，其中bAt表示buyingAmount（购买数量），bPr表示buyingPrice（某订单总价）
-    public MessageModel orderAdding(String uid, String pid, String bAt, String bPr) {
+    public MessageModel orderAdding(String uid, String pid, String bAt, String bPr, String selectedValue) {
         MessageModel messageModel = new MessageModel();
         Order o = new Order();
         o.setUserid(Integer.valueOf(uid));
         o.setProductId(Integer.valueOf(pid));
         o.setBuyingAmount(Integer.valueOf(bAt));
         o.setBuyingPrice(Integer.valueOf(bPr));
-
-        messageModel.setObject(o);
+        Wallet w =new Wallet();
+        w.setUserid(Integer.valueOf(uid));
+        w.setBalance(0);
+        w.setSources(selectedValue);
 
         if(StringUtil.isEmpty(uid) || StringUtil.isEmpty(pid) || StringUtil.isEmpty(bAt)
-          || StringUtil.isEmpty(bPr)){
+          || StringUtil.isEmpty(bPr) || StringUtil.isEmpty(selectedValue)){
             messageModel.setCode(0);
             messageModel.setMsg("出现空值！");
             return messageModel;
@@ -37,31 +38,48 @@ public class OrderService {
         ProductMapper productMapper = session.getMapper(ProductMapper.class);
         WalletMapper walletMapper = session.getMapper(WalletMapper.class);
 
-        List<Wallet> wallets = walletMapper.selectAll(Integer.valueOf(uid));
-        if(wallets.size() == 0){
-            {
-                messageModel.setCode(0);
-                messageModel.setMsg("您未添加任何支付方式！");
-                return messageModel;
-            }
+        Wallet wallet = walletMapper.queryWalletByPri(w);
+        if(wallet == null){
+            messageModel.setCode(0);
+            messageModel.setMsg("未添加该支付方式！");
+            return messageModel;
         }
 
-
-
-        else{
-            messageModel.setMsg("商品添加成功！");
-            int productId;
-            if(productMapper.selectAmount() == 0){
-                productId = 1;
-            }
-            else{
-                productId = productMapper.maxProductId() + 1;
-            }
-
-            session.commit(); //提交事务，让数据库得以更新
-
-
+        if(wallet.getBalance() < Integer.valueOf(bPr)){
+            messageModel.setCode(0);
+            messageModel.setMsg("余额不足！");
+            return messageModel;
         }
+
+        int orderId;
+        if(orderMapper.selectAmount() == 0){
+            orderId = 1;
+        }
+        else {
+            orderId = orderMapper.maxOrderId() + 1;
+        }
+        o.setOrderId(orderId);
+        Product product = productMapper.queryProductById(Integer.valueOf(pid));
+        if(product == null){
+            messageModel.setCode(0);
+            messageModel.setMsg("商品已下架！");
+            return messageModel;
+        }
+        if(product.getProductAmount() < Integer.valueOf(bAt)){
+            messageModel.setCode(0);
+            messageModel.setMsg("商品库存不足！");
+            return messageModel;
+        }
+        //购买后钱包余额减少
+        wallet.setBalance(0-Integer.valueOf(bPr));
+        walletMapper.moneyChange(wallet);
+        //购买后商品数量减少
+        product.setProductAmount(product.getProductAmount()-Integer.valueOf(bAt));
+        productMapper.updateProductById(product);
+        //插入订单
+        orderMapper.insertOrder(o);
+        messageModel.setMsg("商品购买成功！");
+        session.commit(); //提交事务，让数据库得以更新
 
         messageModel.setObject(o);
         return messageModel;

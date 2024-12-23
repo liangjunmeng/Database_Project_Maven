@@ -10,6 +10,7 @@ public interface ProductMapper {
     public List<Product> selectAll();
     public List<Product> searchProductByLike(String str);
     public Product queryProductByName(String productName);
+    public Product queryProductById(int productId);
     public void insertProduct(Product product);
     public int maxProductId();
     public void deleteProductById(Integer productId);

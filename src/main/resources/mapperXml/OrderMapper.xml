@@ -2,6 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.xxxx.mapper.OrderMapper">
+    <!-- 查询所有订单数量 -->
+    <select id="selectAmount" resultType="int">
+        SELECT count(*)
+        FROM Orders
+    </select>
 
+    <!-- 查找最大id，便于给新订单分配id -->
+    <select id="maxOrderId">
+        select max(orderId) from Orders
+    </select>
+
+    <!-- 插入订单 -->
+    <insert id="insertOrder" parameterType="com.xxxx.bean.Order">
+        INSERT INTO Orders (orderId, userid, productId, buyingAmount, buyingPrice)
+        VALUES (#{orderId}, #{userid}, #{productId}, #{buyingAmount}, #{buyingPrice})
+    </insert>
 
 </mapper>
