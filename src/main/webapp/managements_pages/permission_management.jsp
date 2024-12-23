@@ -9,10 +9,4 @@
 <body>
 <h1>欢迎来到权限管理页面，该功能未开放，还请谅解！</h1>
 </body>
-<script>
-    window.onbeforeunload = function() {
-        // 在标签页关闭之前清空 localStorage
-        localStorage.clear();
-    };
-</script>
 </html>

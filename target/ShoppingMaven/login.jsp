@@ -245,14 +245,6 @@
             }, 1500);
             return;  // 结束函数，避免继续执行提交
         }
-        //判断用户是否已经登录了
-        if (localStorage.getItem("doesLogin") == "yes"){
-            showModal("You have already logined.");
-            setTimeout(function () {
-                closeModal();
-            }, 1500);
-            return;
-        }
         /*
         该方法是传统表单提交方式，这里不再采用，取而代之用Ajax提交和JSON响应，更灵活方便
         $("#loginform").submit();
@@ -279,7 +271,6 @@
                             closeModal();
                             document.getElementById('username').value = "";
                             document.getElementById('password').value = "";
-                            localStorage.setItem("doesLogin","yes");
                             //同一标签页中打开，这里不再采用
                             //window.location.href = "homepages/home.jsp";
                             window.open("homepages/home.jsp", "_blank");
@@ -290,7 +281,6 @@
                             closeModal();
                             document.getElementById('username').value = "";
                             document.getElementById('password').value = "";
-                            localStorage.setItem("doesLogin","yes");
                             window.open("personal_pages/manager_personal.jsp", "_blank");
                         }, 1500);
                     }

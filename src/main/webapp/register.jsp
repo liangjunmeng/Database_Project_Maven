@@ -94,11 +94,6 @@
                         setTimeout(function () {
                             //关闭弹窗并清除输入框里的内容
                             closeModal();
-                            //判断用户是否已经通过注册方式登录了,若有则跳转到登陆页面
-                            if (localStorage.getItem("doesLogin") == "yes"){
-                                window.location.href = "login.jsp";
-                                return;
-                            }
                             document.getElementById('username').value = "";
                             document.getElementById('password').value = "";
                             localStorage.setItem("doesLogin","yes");
@@ -111,10 +106,6 @@
                     else{
                         setTimeout(function () {
                             closeModal();
-                            if (localStorage.getItem("doesLogin") == "yes"){
-                                window.location.href = "login.jsp";
-                                return;
-                            }
                             document.getElementById('username').value = "";
                             document.getElementById('password').value = "";
                             localStorage.setItem("doesLogin","yes");

@@ -91,11 +91,6 @@
         window.location.href = "../personal_pages/user_personal.jsp";
     }
 
-    window.onbeforeunload = function() {
-        // 在标签页关闭之前清空 localStorage
-        localStorage.clear();
-    };
-
 </script>
 </body>
 </html>

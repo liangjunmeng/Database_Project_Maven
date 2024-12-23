@@ -228,11 +228,6 @@
         location.href = './product_update.jsp';
     }
 
-    window.onbeforeunload = function() {
-        // 在标签页关闭之前清空 localStorage
-        localStorage.clear();
-    };
-
     // 判断字符串是否为空，空则返回 true，否则返回 false
     function isEmpty(str) {
         if (str == null || str.trim() == "") {

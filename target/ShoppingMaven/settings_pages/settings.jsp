@@ -100,15 +100,11 @@
 </body>
 <script>
     function quit() {
-        localStorage.clear();
         // 可选：关闭当前标签页
         window.close();
         // 在新标签页打开 index.jsp
         //window.open("../index.jsp", "_blank");
     }
-    window.onbeforeunload = function() {
-        // 在标签页关闭之前清空 localStorage
-        localStorage.clear();
-    };
+
 </script>
 </html>

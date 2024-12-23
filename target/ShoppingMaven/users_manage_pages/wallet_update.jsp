@@ -76,7 +76,6 @@
     var userid = "<%= userid %>";
     //进入页面后自动执行
     window.onload = function() {
-        console.log("79");
         lastPage = localStorage.getItem('lastPage');
         sources = localStorage.getItem('sources');
         balance = localStorage.getItem('balance');
@@ -223,10 +222,6 @@
         });
     });
 
-    window.onbeforeunload = function() {
-        // 在标签页关闭之前清空 localStorage
-        localStorage.clear();
-    };
     // 判断字符串是否为空，空则返回 true，否则返回 false
     function isEmpty(str) {
         if (str == null || str.trim() == "") {
