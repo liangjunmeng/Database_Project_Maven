@@ -269,7 +269,7 @@ input[readonly] {
 }
 
 
-#recharge, #cashOut, #increasePriority, #logOff {
+#recharge, #cashOut, #increasePriority, #decreasePriority, #logOff {
     position: fixed;
     right: 20px;
     width: 140px; /* 确保两个按钮宽度一致 */
@@ -299,10 +299,14 @@ input[readonly] {
 #increasePriority {
     top: 160px;
 }
-#logOff {
+#decreasePriority {
     top: 230px;
 }
-#recharge:hover, #cashOut:hover, #increasePriority:hover, #logOff:hover {
+#logOff {
+    top: 300px;
+}
+#recharge:hover, #cashOut:hover, #increasePriority:hover,
+#decreasePriority:hover, #logOff:hover {
     background-color: #f8f8f8;
     transform: scale(1.1); /* 鼠标悬浮时放大按钮 */
 }

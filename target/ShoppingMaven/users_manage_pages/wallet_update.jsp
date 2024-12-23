@@ -34,6 +34,7 @@
 <button id="recharge">充值</button>
 <button id="cashOut">提现</button>
 <button id="increasePriority">提高优先级</button>
+<button id="decreasePriority">降低优先级</button>
 <button id="logOff">注销</button>
 
 <!-- 弹窗遮罩层 -->
@@ -60,6 +61,7 @@
         <button type="button" id="cancelBuy" onclick="closeBuyModal()">取消</button>
     </div>
 </div>
+
 </body>
 <%
     User user = (User) request.getSession().getAttribute("user");
@@ -229,6 +231,69 @@
         });
     });
 
+    $("#increasePriority").click(function (event) {
+        event.preventDefault();
+        if(isPrior=="1"){
+            showModal("优先级已最高，无法更改！");
+            return;
+        }
+        var newPrior = "1";
+        changePrior(newPrior);
+    });
+    $("#decreasePriority").click(function (event) {
+        event.preventDefault();
+        if(isPrior=="0"){
+            showModal("优先级已最低，无法更改！");
+            return;
+        }
+        var newPrior = "0";
+        changePrior(newPrior);
+    });
+    $("#logOff").click(function (event) {
+        event.preventDefault();
+    });
+
+    //修改优先级
+    function changePrior(newPrior){
+        var uid = userid;
+        var sos = sources;
+        var isPr = newPrior;
+        $.ajax({
+            url: "../prior_changing", // Servlet 的 URL
+            type: "POST",
+            data: {
+                userid: uid,
+                sources: sos,
+                isPrior: isPr
+            },
+            dataType: "json", // 指定返回数据的类型为 JSON
+            success: function (response) {
+                // 根据服务器返回的数据进行处理
+                if (response.success) {
+                    // 更新成功，弹窗显示成功消息
+                    showModal(response.message);
+                    localStorage.setItem("isPrior",newPrior);
+                    setTimeout(function (){
+                        closeModal();
+                        location.href = 'wallet_update.jsp';
+                    },1500);
+                } else {
+                    // 添加失败，弹窗显示错误消息
+                    showModal(response.message);
+                    setTimeout(function (){
+                        closeModal();
+                    },1500);
+                }
+            },
+            error: function () {
+                // 网络或服务器错误
+                showModal("发生了错误，请稍后再尝试！");
+                setTimeout(function (){
+                    closeModal();
+                },1500);
+            }
+        });
+    }
     // 判断字符串是否为空，空则返回 true，否则返回 false
     function isEmpty(str) {
         if (str == null || str.trim() == "") {

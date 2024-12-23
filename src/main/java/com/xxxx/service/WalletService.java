@@ -49,7 +49,7 @@ public class WalletService {
         messageModel.setObject(wallet);
         return messageModel;
     }
-    //
+    //更新金额
     public MessageModel moneyUpdate(String uid, String sos, String mny) {
         MessageModel messageModel = new MessageModel();
         Wallet w = new Wallet();
@@ -81,6 +81,51 @@ public class WalletService {
         else{
             messageModel.setMsg("金额更新成功！");
             walletMapper.moneyChange(w);
+            session.commit(); //提交事务，让数据库得以更新
+        }
+
+        return messageModel;
+    }
+
+    //更新优先级
+    public MessageModel changePrior(String uid, String sos, String isPr) {
+        MessageModel messageModel = new MessageModel();
+        Wallet w = new Wallet();
+        w.setUserid(Integer.valueOf(uid));
+        w.setSources(sos);
+        w.setBalance(0);
+        w.setIsPrior(Integer.valueOf(isPr));
+        /*
+        将字符串转化为数字，因为前端ajax将这些数据转换为var，即字符串形式再传给后端，
+        因为前端需要通过检验字符串是否为空判断用户输入的合法性
+        */
+        messageModel.setObject(w);
+
+        if(StringUtil.isEmpty(sos) || StringUtil.isEmpty(isPr)){
+            messageModel.setCode(0);
+            messageModel.setMsg("存在空值！");
+            return messageModel;
+        }
+
+        SqlSession session = GetSqlSession.createSqlSession();
+        WalletMapper walletMapper = session.getMapper(WalletMapper.class);
+        Wallet wallet = walletMapper.queryWalletByPri(w);
+
+        if(isPr.equals("1") && walletMapper.queryHighPrior(Integer.valueOf(uid)) > 0){
+            messageModel.setCode(0);
+            messageModel.setMsg("高优先级支付方式只允许有一个！");
+            return messageModel;
+        }
+
+        if(wallet == null){
+            messageModel.setCode(0);
+            messageModel.setMsg("该钱包不存在！");
+            return messageModel;
+        }
+
+        else{
+            messageModel.setMsg("优先级更新成功！");
+            walletMapper.priorChange(w);
             session.commit(); //提交事务，让数据库得以更新
         }
 

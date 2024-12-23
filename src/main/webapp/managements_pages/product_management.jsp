@@ -206,7 +206,6 @@
     overlay.addEventListener('click', function(event) {
         event.stopPropagation();
     });
-
 </script>
 </body>
 </html>

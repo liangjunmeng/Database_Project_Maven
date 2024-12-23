@@ -23,12 +23,26 @@
         WHERE userid = #{userid} and sources = #{sources}
     </select>
 
-    <!-- 更新商品 -->
+    <!-- 更新钱包金额 -->
     <update id="moneyChange" parameterType="com.xxxx.bean.Wallet">
         UPDATE Wallets
         SET balance = balance + #{balance}
         WHERE userid = #{userid} and sources = #{sources}
     </update>
+
+    <!-- 更新钱包优先级 -->
+    <update id="priorChange" parameterType="com.xxxx.bean.Wallet">
+        UPDATE Wallets
+        SET isPrior = #{isPrior}
+        WHERE userid = #{userid} and sources = #{sources}
+    </update>
+
+    <!-- 查询高优先级钱包数量 -->
+    <select id="queryHighPrior" parameterType="int" resultType="int">
+        SELECT count(*)
+        FROM Wallets
+        WHERE userid = #{userid} and isPrior = 1
+    </select>
 
 
     <!-- 使用like查询商品
@@ -38,8 +52,9 @@
         WHERE productName like #{str}
     </select>
     -->
+
     <!-- 查询商品数量
-    <select id="selectAmount" resultType="int">
+    <select id="queryHighPrior" resultType="int">
         SELECT count(*)
         FROM ProductInfo
     </select>
