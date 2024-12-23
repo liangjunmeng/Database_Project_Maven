@@ -44,6 +44,11 @@
         WHERE userid = #{userid} and isPrior = 1
     </select>
 
+    <!-- 删除支付方式 -->
+    <delete id="deleteWallet" parameterType="com.xxxx.bean.Wallet">
+        DELETE FROM Wallets
+        WHERE userid = #{userid} and sources = #{sources}
+    </delete>
 
     <!-- 使用like查询商品
     <select id="searchProductByLike" parameterType="String" resultType="com.xxxx.bean.Product">
@@ -73,9 +78,4 @@
     </select>
     -->
 
-    <!-- 删除商品
-    <delete id="deleteProductById" parameterType="Integer">
-        DELETE FROM ProductInfo WHERE productId = #{productId}
-    </delete>
-    -->
 </mapper>

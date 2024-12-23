@@ -251,6 +251,41 @@
     });
     $("#logOff").click(function (event) {
         event.preventDefault();
+        var uid = userid;
+        var sos = sources;
+        $.ajax({
+            url: "../wallet_deleting", // Servlet 的 URL
+            type: "POST",
+            data: {
+                userid: uid,
+                sources: sos
+            },
+            dataType: "json", // 指定返回数据的类型为 JSON
+            success: function (response) {
+                // 根据服务器返回的数据进行处理
+                if (response.success) {
+                    // 更新成功，弹窗显示成功消息
+                    showModal(response.message);
+                    setTimeout(function (){
+                        closeModal();
+                        location.href = 'my_wallets.jsp';
+                    },1500);
+                } else {
+                    // 添加失败，弹窗显示错误消息
+                    showModal(response.message);
+                    setTimeout(function (){
+                        closeModal();
+                    },1500);
+                }
+            },
+            error: function () {
+                // 网络或服务器错误
+                showModal("发生了错误，请稍后再尝试！");
+                setTimeout(function (){
+                    closeModal();
+                },1500);
+            }
+        });
     });
 
     //修改优先级

@@ -131,4 +131,39 @@ public class WalletService {
 
         return messageModel;
     }
+
+    //根据主码（userid、sources）删除钱包
+    public MessageModel deleteWallet(String uid, String sos) {
+        MessageModel messageModel = new MessageModel();
+        Wallet w = new Wallet();
+        w.setUserid(Integer.valueOf(uid));
+        w.setSources(sos);
+        w.setBalance(0);
+
+        messageModel.setObject(w);
+
+        if(StringUtil.isEmpty(sos) || StringUtil.isEmpty(uid)){
+            messageModel.setCode(0);
+            messageModel.setMsg("存在空值！");
+            return messageModel;
+        }
+
+        SqlSession session = GetSqlSession.createSqlSession();
+        WalletMapper walletMapper = session.getMapper(WalletMapper.class);
+        Wallet wallet = walletMapper.queryWalletByPri(w);
+
+        if(wallet == null){
+            messageModel.setCode(0);
+            messageModel.setMsg("该钱包不存在！");
+            return messageModel;
+        }
+
+        else{
+            messageModel.setMsg("支付方式已注销！");
+            walletMapper.deleteWallet(w);
+            session.commit(); //提交事务，让数据库得以更新
+        }
+
+        return messageModel;
+    }
 }
