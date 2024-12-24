@@ -1,13 +1,19 @@
 package com.xxxx.service;
 
+import com.xxxx.bean.Order;
 import com.xxxx.bean.Product;
 import com.xxxx.bean.User;
+import com.xxxx.bean.Wallet;
 import com.xxxx.bean.vo.MessageModel;
+import com.xxxx.mapper.OrderMapper;
 import com.xxxx.mapper.ProductMapper;
 import com.xxxx.mapper.UserMapper;
+import com.xxxx.mapper.WalletMapper;
 import com.xxxx.util.GetSqlSession;
 import com.xxxx.util.StringUtil;
 import org.apache.ibatis.session.SqlSession;
+
+import java.util.List;
 
 
 /*
@@ -160,6 +166,9 @@ public class UserService {
 
         SqlSession session = GetSqlSession.createSqlSession();
         UserMapper userMapper = session.getMapper(UserMapper.class);
+        ProductMapper productMapper = session.getMapper(ProductMapper.class);
+        WalletMapper walletMapper = session.getMapper(WalletMapper.class);
+        OrderMapper orderMapper = session.getMapper(OrderMapper.class);
 
         Integer userid = Integer.valueOf(uid);
         User user = userMapper.selectById(userid);
@@ -167,6 +176,22 @@ public class UserService {
             messageModel.setMsg("该用户不存在");
             messageModel.setCode(0);
             return messageModel;
+        }
+        List<Order> orders = orderMapper.selectAll(Integer.valueOf(uid));
+        List<Wallet> wallets = walletMapper.selectAll(Integer.valueOf(uid));
+        //注销后订单退回，商品数量增加
+        for(Order order : orders){
+            Product product = productMapper.queryProductById(order.getProductId());
+            //退订后商品库存增加
+            if(product != null){
+                product.setProductAmount(product.getProductAmount()+order.getBuyingAmount());
+                productMapper.updateProductById(product);
+            }
+            orderMapper.deleteOrderById(order.getOrderId());
+        }
+        //钱包删除
+        for(Wallet wallet : wallets){
+            walletMapper.deleteWallet(wallet);
         }
 
         userMapper.deleteUser(userid);
